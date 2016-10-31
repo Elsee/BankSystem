@@ -16,13 +16,13 @@ public class Main extends Application {
         source.setUser("postgres");
         source.setPassword("123456");
         source.setMaxConnections(10);
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Bank System");
         primaryStage.setScene(new Scene(root, 450, 550));
         primaryStage.show();
-        //asdgsdfhg
     }
     public static void main(String[] args) {
         launch(args);
+        System.out.println("lol");
     }
 }
