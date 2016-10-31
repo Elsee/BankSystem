@@ -20,6 +20,7 @@ public class Main extends Application {
         primaryStage.setTitle("Bank System");
         primaryStage.setScene(new Scene(root, 450, 550));
         primaryStage.show();
+        //asdgsdfhg
     }
     public static void main(String[] args) {
         launch(args);
