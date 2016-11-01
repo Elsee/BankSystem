@@ -17,7 +17,7 @@ public class Main extends Application {
     static {
         SCREENS.put("screen1", "screens/Login.fxml");
         SCREENS.put("screen2", "screens/UserMain.fxml");
-        SCREENS.put("accountDetail", "screens/AccountDetail.fxml");
+        SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Main extends Application {
         data.put("test", "application works");
 
         Screens screens = new Screens(SCREENS, primaryStage, data);
-        Scene scene = new Scene(screens, 600, 400);
+        Scene scene = new Scene(screens, 600, 600);
 
 //        primaryStage.setScene(new Scene(root, 360, 275));
         primaryStage.setScene(scene);

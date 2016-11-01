@@ -1105,22 +1105,23 @@ a.badge:hover, a.badge:focused {
 .nav {
 	-fx-width: 100%;
 	-fx-fill-width: true;
-	-fx-background-color: #f8f8f8;
-	-fx-border-bottom-width: 1px;
+	-fx-border-width: 0 0 1 0;
 	-fx-border-color: #ccc;
 }
 
 .nav-item {
-	-fx-padding: 20px;
+	-fx-padding: 15px;
 	-fx-text-fill: #555;
-	-fx-background-color: #000;
+	-fx-background-color: transparent;
+	-fx-font-size: 18px;
 }
 
-.nav-item:focused {
-	
+.menu-button {
+	-fx-padding: 8px 10px;
 }
 
-.nav-item:hover {
+
+.nav-item:hover, .nav-item:focused, .nav-item.focused {
 	-fx-text-fill: #333;
 }
 
@@ -1128,10 +1129,17 @@ a.badge:hover, a.badge:focused {
 	-fx-background-color: #e7e7e7;
 }
 
-.nav-item:pressed {
+.nav-item:active {
 	-fx-background-color: #e7e7e7;
 }
 
+.nav-item:pressed, .nav-item.pressed, .nav-item:collapsed {
+	-fx-background-color: #e7e7e7;
+}
+
+.menu-item {
+	padding: 15px;
+}
 
 .titled-pane 
 {

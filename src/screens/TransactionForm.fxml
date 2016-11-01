@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minWidth="600.0" prefHeight="378.0" prefWidth="512.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TransactionFormController">
+   <children>
+      <HBox layoutY="10.0" prefHeight="58.0" prefWidth="600.0" styleClass="nav" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="70.0" styleClass="nav-item" text="Main" onAction="#mainScreen" />
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions" />
+            <MenuButton mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" styleClass="nav-item" text="Personal">
+               <items>
+                  <MenuItem mnemonicParsing="false" styleClass=".menu-item" text="Spendings" />
+                  <MenuItem mnemonicParsing="false" text="Templates" />
+                  <MenuItem mnemonicParsing="false" onAction="#back" text="Logout" />
+               </items>
+            </MenuButton>
+         </children>
+      </HBox>
+      <GridPane alignment="TOP_LEFT" hgap="10.0" layoutX="8.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="585.0" stylesheets="@bootstrap.css" vgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create transaction" />
+            <Label text="From account" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="cb" prefWidth="150.0" GridPane.rowIndex="2" />
+            <Label text="To account" GridPane.rowIndex="3" />
+            <TextField prefWidth="565.0" styleClass="form-control" GridPane.rowIndex="4" />
+            <Label text="Amount" GridPane.rowIndex="5" />
+            <TextField styleClass="form-control" GridPane.rowIndex="6" />
+            <Button mnemonicParsing="false" text="Create" GridPane.rowIndex="7">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
+               </styleClass>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="15.0" />
+         </padding>
+      </GridPane>
+   </children>
+</AnchorPane>

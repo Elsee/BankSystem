@@ -17,8 +17,8 @@ public class UserMainController extends ViewController {
 	}
 
 	@FXML
-	public void history() {
-		transitionTo("accountDetail");
+	void transactionForm() {
+		transitionTo("transactionForm");
 	}
 
 //	@Override
