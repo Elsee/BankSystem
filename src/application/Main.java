@@ -13,8 +13,9 @@ public class Main extends Application {
     private static final String START_SCREEN = "screen1";
 
     static {
-        SCREENS.put("screen1", "screens/Screen1.fxml");
-        SCREENS.put("screen2", "screens/Screen2.fxml");
+        SCREENS.put("screen1", "screens/Login.fxml");
+        SCREENS.put("screen2", "screens/UserMain.fxml");
+        SCREENS.put("accountDetail", "screens/AccountDetail.fxml");
     }
 
     @Override
@@ -27,16 +28,16 @@ public class Main extends Application {
         source.setUser("postgres");
         source.setPassword("pass");
         source.setMaxConnections(10);
-        //Parent root = FXMLLoader.load(getClass().getResource("Screen1.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Bank System (Login)");
 
         HashMap<String, Object> data = new HashMap<>();
         data.put("test", "application works");
 
         Screens screens = new Screens(SCREENS, primaryStage, data);
-        Scene scene = new Scene(screens);
+        Scene scene = new Scene(screens, 500, 400);
 
-        //primaryStage.setScene(new Scene(root, 360, 275));
+//        primaryStage.setScene(new Scene(root, 360, 275));
         primaryStage.setScene(scene);
         primaryStage.show();
         screens.transitionTo(START_SCREEN);

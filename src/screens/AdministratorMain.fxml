@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.UserMainController">
+   <styleClass>
+      <String fx:value="panel" />
+      <String fx:value="panel-default" />
+   </styleClass>
+   <bottom>
+      <GridPane hgap="10.0" prefHeight="225.0" prefWidth="618.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="233.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="222.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="114.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField prefHeight="38.0" prefWidth="372.0" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
+            <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
+               </styleClass>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Button>
+            <TextField layoutX="296.0" layoutY="97.0" prefHeight="38.0" prefWidth="221.0" styleClass="form-control" GridPane.rowIndex="2" />
+            <Label text="Firstname" GridPane.rowIndex="1" />
+            <Label text="Lastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

@@ -42,8 +42,6 @@ public class Screens extends StackPane {
 	public Screens(HashMap<String, String> screens, Stage stage, HashMap<String, Object> data) {
 		this.data = data;
 		this.stage = stage;
-		// Black background looks better.
-		setStyle("-fx-background-color:rgb(42, 42, 42)");
 		screens.forEach(this::load);
 	}
 
