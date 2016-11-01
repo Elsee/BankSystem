@@ -30,7 +30,7 @@ public class Main extends Application {
         data.put("test", "application works");
 
         Screens screens = new Screens(SCREENS, primaryStage, data);
-        Scene scene = new Scene(screens, 500, 400);
+        Scene scene = new Scene(screens, 600, 400);
 
 //        primaryStage.setScene(new Scene(root, 360, 275));
         primaryStage.setScene(scene);
