@@ -12,7 +12,7 @@ public abstract class DataSource {
         source.setServerName("localhost");
         source.setDatabaseName("bankdb");
         source.setUser("postgres");
-        source.setPassword("123456");
+        source.setPassword("pass");
         source.setMaxConnections(10);
         return source;
     }
