@@ -16,12 +16,13 @@ public class Main extends Application {
     static {
         SCREENS.put("screen1", "screens/Login.fxml");
         SCREENS.put("screen2", "screens/UserMain.fxml");
-        SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
+//        SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         DataSource source = DataAccess.setSource();
+        //Parent root = FXMLLoader.load(getClass().getResource("Screen1.fxml"));
         DataAccess dataAccess = new DataAccess(source);
         primaryStage.setTitle("Bank System (Login)");
 

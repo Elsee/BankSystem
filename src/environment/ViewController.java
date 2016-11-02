@@ -1,10 +1,8 @@
 package environment;
 
 import environment.Screens.ScreenTransition;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
 
 /**
  * Abstract superclass for FXML Controllers to be used with the Screens framework. Contains all life-cycle methods that may be

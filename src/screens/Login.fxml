@@ -23,7 +23,7 @@
    
        <PasswordField fx:id="passwordField" styleClass="form-control" GridPane.rowIndex="4" />
        <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Button onAction="#handleSubmitButtonAction" text="Sign In" GridPane.rowIndex="5">
+        <Button onAction="#transition" text="Sign In" GridPane.rowIndex="5">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-primary" />
