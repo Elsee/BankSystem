@@ -26,13 +26,13 @@ public class Main extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("Screen1.fxml"));
         primaryStage.setTitle("Bank System (Login)");
 
+        Screens screens = new Screens(SCREENS, primaryStage, dataAccess);
         HashMap<String, Object> data = new HashMap<>();
         data.put("test", "application works");
 
         Screens screens = new Screens(SCREENS, primaryStage, data);
         Scene scene = new Scene(screens, 600, 600);
 
-//        primaryStage.setScene(new Scene(root, 360, 275));
         primaryStage.setScene(scene);
         primaryStage.show();
         screens.transitionTo(START_SCREEN);

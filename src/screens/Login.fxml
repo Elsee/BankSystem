@@ -17,7 +17,7 @@
    
        <Label text="Login:" GridPane.rowIndex="1" />
    
-       <TextField minWidth="250.0" styleClass="form-control" GridPane.rowIndex="2" />
+       <TextField fx:id="loginField" minWidth="250.0" styleClass="form-control" GridPane.rowIndex="2" />
    
        <Label text="Password:" GridPane.rowIndex="3" />
    
@@ -44,4 +44,6 @@
       <RowConstraints />
       <RowConstraints />
    </rowConstraints>
+    <Text fx:id="actiontarget"
+          GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 </GridPane>
