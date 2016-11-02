@@ -60,7 +60,7 @@ public class DataAccess {
         PGPoolingDataSource source = new PGPoolingDataSource();
         source.setDataSourceName("LOL");
         source.setServerName("localhost");
-        source.setDatabaseName("bs");
+        source.setDatabaseName("bankdb");
         source.setUser("postgres");
         source.setPassword("123456");
         source.setMaxConnections(10);
