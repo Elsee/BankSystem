@@ -31,7 +31,7 @@ public class LoginController extends ViewController{
              *  в случае если логин/пароль не вырны,
              *  раскоментить её, поправть верстку
               */
-            //actiontarget.setText("Login or password incorrect");
+            actiontarget.setText("Login or password incorrect");
         }
     }
     @FXML

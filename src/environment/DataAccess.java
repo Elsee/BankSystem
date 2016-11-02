@@ -43,7 +43,7 @@ public class DataAccess {
         source.setServerName("localhost");
         source.setDatabaseName("bankdb");
         source.setUser("postgres");
-        source.setPassword("pass");
+        source.setPassword("123456");
         source.setMaxConnections(10);
         return source;
     }
