@@ -1,11 +1,10 @@
 package application;
 
-import environment.DataAccessController;
+import environment.DataAccess;
 import environment.Screens;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.postgresql.ds.PGPoolingDataSource;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -22,17 +21,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        DataSource source = DataAccessController.setSource();
-        //Parent root = FXMLLoader.load(getClass().getResource("Screen1.fxml"));
+        DataSource source = DataAccess.setSource();
+        DataAccess dataAccess = new DataAccess(source);
         primaryStage.setTitle("Bank System (Login)");
 
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("test", "application works");
-
-        Screens screens = new Screens(SCREENS, primaryStage, data);
+        Screens screens = new Screens(SCREENS, primaryStage, dataAccess);
         Scene scene = new Scene(screens, 600, 400);
 
-//        primaryStage.setScene(new Scene(root, 360, 275));
         primaryStage.setScene(scene);
         primaryStage.show();
         screens.transitionTo(START_SCREEN);
