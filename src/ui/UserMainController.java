@@ -21,7 +21,13 @@ public class UserMainController extends ViewController {
 		transitionTo("transactionForm");
 	}
 
-//	@Override
+	@Override
+	protected void init() {
+		super.init();
+		System.out.println("UserMainController");
+	}
+
+	//	@Override
 //	protected void willAppear(ScreenTransition transition) {
 //		backButton.setTranslateY(-stage.getHeight());
 //		transition.proceed();
