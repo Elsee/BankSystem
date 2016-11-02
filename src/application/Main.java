@@ -21,7 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        DataSource source = DataAccess.setSource();
+        DataSource source = environment.DataSource.setSource();
         DataAccess dataAccess = new DataAccess(source);
         primaryStage.setTitle("Bank System (Login)");
 

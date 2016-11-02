@@ -22,16 +22,6 @@ public class DataAccess {
         return dataSource.getConnection();
     }
 
-    public static DataSource setSource(){
-        PGPoolingDataSource source = new PGPoolingDataSource();
-        source.setDataSourceName("LOL");
-        source.setServerName("localhost");
-        source.setDatabaseName("bankdb");
-        source.setUser("postgres");
-        source.setPassword("pass");
-        source.setMaxConnections(10);
-        return source;
-    }
 
     public Boolean checkLogin(String inputLogin, String inputPass) throws SQLException {
         Boolean result = false;
