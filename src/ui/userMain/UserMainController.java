@@ -46,8 +46,8 @@ public class UserMainController extends ViewController {
 			for (int i = 0; i < accountsCollection.size(); i++) {
 				String accountTitle;
 				accountTitle = accounts.get(i).getNumString() + " " + accounts.get(i).getBalance();
-				AnchorPane accounContent = new AnchorPane();
-				tps[i] = new TitledPane(accountTitle, accounContent);
+				AnchorPane accountContent = new AnchorPane();
+				tps[i] = new TitledPane(accountTitle, accountContent);
 			}
 			accountsAccordion.getPanes().addAll(tps);
 			accountsAccordion.setExpandedPane(tps[0]);
