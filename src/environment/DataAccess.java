@@ -47,7 +47,7 @@ public class DataAccess {
              ResultSet rs = stmt.executeQuery("SELECT * FROM bs_account")) {
             while (rs.next()) {
                 long num = rs.getLong("account_id");
-                float balance = rs.getFloat("balance");
+                String balance = rs.getString("balance");
                 result.add(new Account(num, balance));
             }
             rs.close();
