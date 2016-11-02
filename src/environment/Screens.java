@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 
 public class Screens extends StackPane {
@@ -14,7 +15,8 @@ public class Screens extends StackPane {
 
 	private HashMap<String, Node> screens = new HashMap<>();
 	private HashMap<String, ViewController> controllers = new HashMap<>();
-	private HashMap<String, Object> data = new HashMap<>();
+	//private HashMap<String, Object> data = new HashMap<>();
+	private DataAccess data = null;
 
 	private String activeScreen;
 
@@ -30,7 +32,8 @@ public class Screens extends StackPane {
 	 * @param stage The primary stage.
 	 */
 	public Screens(HashMap<String, String> screens, Stage stage) {
-		this(screens, stage, new HashMap<>());
+		//this(screens, stage, new HashMap<>());
+		this(screens, stage, null);
 	}
 
 	/**
@@ -39,7 +42,8 @@ public class Screens extends StackPane {
 	 * @param screens Map of <id:fxmlPath> screens.
 	 * @param stage The primary stage.
 	 */
-	public Screens(HashMap<String, String> screens, Stage stage, HashMap<String, Object> data) {
+	//public Screens(HashMap<String, String> screens, Stage stage, HashMap<String, Object> data) {
+	public Screens(HashMap<String, String> screens, Stage stage, DataAccess data) {
 		this.data = data;
 		this.stage = stage;
 		screens.forEach(this::load);

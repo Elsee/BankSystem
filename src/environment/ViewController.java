@@ -3,6 +3,7 @@ package environment;
 import environment.Screens.ScreenTransition;
 import javafx.stage.Stage;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 
 /**
@@ -19,7 +20,8 @@ public abstract class ViewController {
 	/**
 	 * The custom data passed to {@link Screens}.
 	 */
-	protected HashMap<String, Object> data;
+	//protected HashMap<String, Object> data;
+	protected DataAccess data;
 
 	private Screens screens;
 
@@ -129,7 +131,11 @@ public abstract class ViewController {
 	 *
 	 * @param data
 	 */
-	void setData(HashMap<String, Object> data) {
+/*	void setData(HashMap<String, Object> data) {
+		this.data = data;
+	}
+*/
+	void setData(DataAccess data) {
 		this.data = data;
 	}
 }
