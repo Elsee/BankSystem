@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -25,6 +26,7 @@ public class UserMainController extends ViewController {
 
 //	private @FXML Button backButton;
 	private ObservableList<Account> accountsCollection;
+	private ObservableList<Transaction> transactionsCollection;
 
 	@FXML
 	Accordion accountsAccordion;
@@ -43,10 +45,21 @@ public class UserMainController extends ViewController {
 			List<Account> accounts = data.getAllAccounts();
 			accountsCollection = FXCollections.observableArrayList(accounts);
 			TitledPane[] tps = new TitledPane[accountsCollection.size()];
+			List<Transaction> transactions = data.getAllTransactions();
+			transactionsCollection = FXCollections.observableArrayList(transactions);
+
 			for (int i = 0; i < accountsCollection.size(); i++) {
 				String accountTitle;
-				accountTitle = accounts.get(i).getNumString() + " " + accounts.get(i).getBalance();
+				accountTitle = accounts.get(i).getNumString() + " 	  " + accounts.get(i).getBalance();
 				AnchorPane accountContent = new AnchorPane();
+				System.out.println(transactionsCollection.size());
+				for (int j=0; j < transactionsCollection.size(); j++) {
+					HBox box = new HBox();
+					Text tTime = new Text();
+					tTime.setText(transactions.get(j).getTime());
+					box.getChildren().setAll(tTime);
+					accountContent.getChildren().add(box);
+				}
 				tps[i] = new TitledPane(accountTitle, accountContent);
 			}
 			accountsAccordion.getPanes().addAll(tps);

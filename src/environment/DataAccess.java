@@ -2,6 +2,7 @@ package environment;
 
 import org.postgresql.ds.PGPoolingDataSource;
 import ui.userMain.Account;
+import ui.userMain.Transaction;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -49,6 +50,24 @@ public class DataAccess {
                 long num = rs.getLong("account_id");
                 String balance = rs.getString("balance");
                 result.add(new Account(num, balance));
+            }
+            rs.close();
+            stmt.close();
+        }
+        return result;
+    }
+
+    public List<Transaction> getAllTransactions() throws SQLException {
+        List<Transaction> result = new ArrayList();
+        try (Connection connection = getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM bs_transaction")) {
+            while (rs.next()) {
+                String time = rs.getString(5);
+                Long from = rs.getLong("id_account_from");
+                Long to = rs.getLong("id_account_to");
+                String amount = rs.getString("amount");
+                result.add(new Transaction(time, from, to, amount));
             }
             rs.close();
             stmt.close();
