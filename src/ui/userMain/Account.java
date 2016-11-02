@@ -7,8 +7,8 @@ import javafx.beans.property.*;
  */
 public class Account {
     private final SimpleLongProperty num = new SimpleLongProperty();
-    private final SimpleFloatProperty balance = new SimpleFloatProperty();
-    public Account(long num, Float balance) {
+    private final SimpleStringProperty balance = new SimpleStringProperty();
+    public Account(long num, String balance) {
         setNum(num);
         setBalance(balance);
     }
@@ -22,10 +22,10 @@ public class Account {
     public String getNumString(){
         return ""+num.get();
     }
-    public Float getBalance() {
+    public String getBalance() {
         return balance.get();
     }
-    public void setBalance(float pBalance) {
+    public void setBalance(String pBalance) {
         balance.set(pBalance);
     }
 }
