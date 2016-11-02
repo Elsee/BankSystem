@@ -1,6 +1,4 @@
 package environment;
-
-import org.postgresql.ds.PGPoolingDataSource;
 import ui.userMain.Account;
 import ui.userMain.Transaction;
 
@@ -47,9 +45,14 @@ public class DataAccess {
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM bs_account")) {
             while (rs.next()) {
-                long num = rs.getLong("account_id");
+                long account_id = rs.getLong("account_id");
+                long id_customer = rs.getLong("id_customer");
+                String open_date = rs.getString("open_date");
+                String close_date = rs.getString("close_date");
+                Boolean active = rs.getBoolean("active");
+                String  last_activity = rs.getString("last_activity");
                 String balance = rs.getString("balance");
-                result.add(new Account(num, balance));
+                result.add(new Account(account_id, id_customer, open_date, close_date, active, last_activity, balance));
             }
             rs.close();
             stmt.close();

@@ -50,9 +50,13 @@ public class UserMainController extends ViewController {
 
 			for (int i = 0; i < accountsCollection.size(); i++) {
 				String accountTitle;
-				accountTitle = accounts.get(i).getNumString() + " 	  " + accounts.get(i).getBalance();
+				String accountNum = accounts.get(i).getAccount_id()+"";
+
+				accountTitle = accountNum.substring(0,4)+" "+
+						accountNum.substring(4,8)+" "+
+						accountNum.substring(8,12)+" "+
+						accountNum.substring(12,15) +"		" + accounts.get(i).getBalance();
 				AnchorPane accountContent = new AnchorPane();
-				System.out.println(transactionsCollection.size());
 				for (int j=0; j < transactionsCollection.size(); j++) {
 					HBox box = new HBox();
 					Text tTime = new Text();
