@@ -27,33 +27,6 @@
             <Text layoutX="14.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Accounts" AnchorPane.topAnchor="0.0" />
             <Accordion layoutY="53.0" prefHeight="120.0" prefWidth="600.0" fx:id="accountsAccordion">
               <panes>
-                <TitledPane animated="false" prefHeight="120.0" prefWidth="632.0" text="RUB account  ****1234  5000p" fx:id="account_pane">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="574.0">
-                           <children>
-                              <HBox prefHeight="37.0" prefWidth="591.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="22.10.2016 10:33" wrappingWidth="134.77734375" fx:id="transaction_date">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bahetle" wrappingWidth="263.17236328125" fx:id="transaction_description">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="365" wrappingWidth="129.17236328125" fx:id="transaction_sum">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </TitledPane>
               </panes>
             </Accordion>
          </children>
