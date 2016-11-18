@@ -1,4 +1,5 @@
 package environment;
+import ui.Administrator.CustomerI;
 import ui.userMain.Account;
 import ui.userMain.Transaction;
 
@@ -39,6 +40,22 @@ public class DataAccess {
         return result;
     }
 
+    public Boolean isCustomer(String inputLogin) throws SQLException {
+        Boolean result = false;
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement("SELECT user_id FROM bs_user u, bs_individual i WHERE u.user_login = ? AND u.user_id = i.id_customer"))
+        {
+            stmt.setString(1,inputLogin);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
+            rs.close();
+            stmt.close();
+            }
+        return result;
+    }
+
     public List<Account> getAllAccounts() throws SQLException {
         List<Account> result = new ArrayList();
         try (Connection connection = getConnection();
@@ -75,6 +92,27 @@ public class DataAccess {
             rs.close();
             stmt.close();
         }
+        return result;
+    }
+
+    public List<CustomerI> searchCustomers(String inputFname, String inputLname) throws SQLException {
+        List<CustomerI> result = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement("SELECT fname, lname, passport_number FROM bs_person WHERE fname = ? AND lname = ?"))
+        {
+            stmt.setString(1,inputFname);
+            stmt.setString(2,inputLname);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String firstname = rs.getString(1);
+                String lastname = rs.getString(2);
+                Long pass = rs.getLong(3);
+                result.add(new CustomerI(firstname, lastname, pass));
+            }
+            rs.close();
+            stmt.close();
+        }
+
         return result;
     }
 }

@@ -15,6 +15,4 @@ public class AccountDetailController extends ViewController {
         transitionTo("screen1");
     }
 
-
-
 }

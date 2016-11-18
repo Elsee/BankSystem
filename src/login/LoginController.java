@@ -26,17 +26,17 @@ public class LoginController extends ViewController{
         }
         else {
             System.out.println("Login or password incorrect");
-            /** TODO:
-             *  Строчка ниже выводит сообщение
-             *  в случае если логин/пароль не вырны,
-             *  раскоментить её, поправть верстку
-              */
             actiontarget.setText("Login or password incorrect");
         }
     }
     @FXML
-    public void transition() {
-        transitionTo("screen2");
+    public void transition()  throws SQLException {
+        if (this.data.isCustomer(loginField.getText()))  {
+            transitionTo("screen2");
+        }
+        else {
+            transitionTo("employeeMain");
+        }
     }
 
 

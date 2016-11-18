@@ -16,7 +16,9 @@ public class Main extends Application {
     static {
         SCREENS.put("screen1", "screens/Login.fxml");
         SCREENS.put("screen2", "screens/UserMain.fxml");
+        SCREENS.put("employeeMain", "screens/AdministratorMain.fxml");
         SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
+        SCREENS.put("peopleSearch", "screens/AdministratorSearchPeople.fxml");
     }
 
     @Override
@@ -26,7 +28,7 @@ public class Main extends Application {
         primaryStage.setTitle("Bank System (Login)");
 
         Screens screens = new Screens(SCREENS, primaryStage, dataAccess);
-        Scene scene = new Scene(screens, 600, 600);
+        Scene scene = new Scene(screens, 1024, 768);
 
         primaryStage.setScene(scene);
         primaryStage.show();
