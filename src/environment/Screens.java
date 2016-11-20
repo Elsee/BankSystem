@@ -1,5 +1,6 @@
 package environment;
 
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -108,6 +109,35 @@ public class Screens extends StackPane {
 
 		handler.newController = controllers.get(screenId);
 		handler.newController.init();
+		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
+
+		// Start the transition.
+		handler.proceed();
+
+		activeScreen = screenId;
+
+	}
+
+	public void transitionTo(String screenId, ObservableList param) {
+
+		// Two transitions at the same time are not possible.
+		if (handler != null) {
+			return;
+		}
+
+		if (!screens.containsKey(screenId)) {
+			System.err.println("The screen with the id " + screenId + " is not loaded!");
+			return;
+		}
+
+		handler = new ScreenTransitionHandler();
+
+		handler.newScreenRoot = screens.get(screenId);
+		handler.oldScreenRoot = activeScreen == null ? null : screens.get(activeScreen);
+
+		handler.newController = controllers.get(screenId);
+		handler.newController.init();
+		handler.newController.eatParam(param);
 		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
 
 		// Start the transition.

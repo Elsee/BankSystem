@@ -1,6 +1,7 @@
 package environment;
 
 import environment.Screens.ScreenTransition;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
@@ -22,7 +23,7 @@ public abstract class ViewController {
 	protected DataAccess data;
 
 	private Screens screens;
-
+	private ObservableList param;
 
 	/**
 	 * Will be called when the initialization is done. You can access the @FXML injected values here for the first time.
@@ -135,5 +136,9 @@ public abstract class ViewController {
 */
 	void setData(DataAccess data) {
 		this.data = data;
+	}
+
+	void eatParam(ObservableList param){
+		this.param = param;
 	}
 }
