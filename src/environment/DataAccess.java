@@ -1,4 +1,5 @@
 package environment;
+import login.Login;
 import ui.Administrator.CustomerI;
 import ui.userMain.Account;
 import ui.userMain.Transaction;
@@ -22,6 +23,19 @@ public class DataAccess {
         return dataSource.getConnection();
     }
 
+    public void test() throws SQLException {
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call returnbylogin( ? ) } ");
+        String value = "admin";
+        statement.setString(1, value);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            System.out.println(rs.getInt("uid"));
+            System.out.println(rs.getString("uogin"));
+            System.out.println(rs.getString("upass"));
+        }
+        statement.close();
+    }
 
     public Boolean checkLogin(String inputLogin, String inputPass) throws SQLException {
         Boolean result = false;

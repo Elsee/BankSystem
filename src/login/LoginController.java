@@ -20,6 +20,7 @@ public class LoginController extends ViewController{
     @FXML
     private Text actiontarget;
     public void handleSubmitButtonAction(ActionEvent actionEvent) throws SQLException {
+        //this.data.test();
         if(this.data.checkLogin(loginField.getText(), passwordField.getText())){
             System.out.println("Logged in");
             this.transition();
