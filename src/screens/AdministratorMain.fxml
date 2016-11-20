@@ -10,6 +10,24 @@
       <String fx:value="panel" />
       <String fx:value="panel-default" />
    </styleClass>
+    <top>
+        <AnchorPane prefWidth="598.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button alignment="CENTER" layoutX="520.0" mnemonicParsing="false" onAction="#back" text="Logout" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-default" />
+                    </styleClass>
+                </Button>
+                <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Reports">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                    </styleClass>
+                </Button>
+            </children>
+        </AnchorPane>
+    </top>
    <center>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -17,11 +35,11 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <GridPane alignment="TOP_LEFT" hgap="10.0" prefHeight="225.0" prefWidth="618.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
+                        <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="600.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="233.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="222.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="114.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="114.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
@@ -53,7 +71,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane alignment="TOP_LEFT" hgap="10.0" prefHeight="225.0" prefWidth="618.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
+                        <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="600.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
                            <children>
                               <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
                               <Label text="Org. num" GridPane.rowIndex="1" />
@@ -71,7 +89,7 @@
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="233.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="222.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="114.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="114.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
@@ -85,16 +103,4 @@
         </tabs>
       </TabPane>
    </center>
-   <top>
-      <AnchorPane prefWidth="598.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button alignment="CENTER" layoutX="520.0" mnemonicParsing="false" onAction="#back" text="Logout" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-               <styleClass>
-                  <String fx:value="btn" />
-                  <String fx:value="btn-default" />
-               </styleClass>
-            </Button>
-         </children>
-      </AnchorPane>
-   </top>
 </BorderPane>
