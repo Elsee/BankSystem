@@ -77,6 +77,26 @@ public class DataAccess {
         return result;
     }
 
+    public List<Account> getCustomerAccounts(int user_id) throws SQLException {
+        String id_user = user_id+"";
+        List<Account> result = new ArrayList();
+        try (Connection connection = getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT account_id AS acid, balance AS bal FROM bs_account AS ac\n" +
+                     "LEFT JOIN bs_individual AS ind ON  ac.id_customer = ind.id_customer" +
+                     "WHERE ind.id_person = "+id_user)) {
+            while (rs.next()) {
+                long account_id = rs.getLong("account_id");
+                Boolean active = rs.getBoolean("active");
+                String balance = rs.getString("balance");
+                result.add(new Account(account_id, active, balance));
+            }
+            rs.close();
+            stmt.close();
+        }
+        return result;
+    }
+
     public List<Transaction> getAllTransactions() throws SQLException {
         List<Transaction> result = new ArrayList();
         try (Connection connection = getConnection();

@@ -24,6 +24,12 @@ public class Account {
         setBalance(balance);
     }
 
+    public Account(long account_id, Boolean active, String balance) {
+        setAccount_id(account_id);
+        setActive(active);
+        setBalance(balance);
+    }
+
     public long getAccount_id() {
         return account_id.get();
     }

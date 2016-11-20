@@ -107,6 +107,7 @@ public class Screens extends StackPane {
 		handler.oldScreenRoot = activeScreen == null ? null : screens.get(activeScreen);
 
 		handler.newController = controllers.get(screenId);
+		handler.newController.init();
 		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
 
 		// Start the transition.
