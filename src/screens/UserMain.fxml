@@ -28,7 +28,7 @@
             <AnchorPane layoutY="76.0" AnchorPane.topAnchor="76.0">
                <children>
                   <Text layoutX="14.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Accounts" AnchorPane.topAnchor="0.0" />
-                  <Accordion fx:id="accountsAccordion" layoutY="53.0" prefHeight="120.0" prefWidth="1024.0">
+                  <Accordion fx:id="accountsAccordion" layoutY="53.0" prefWidth="1024.0">
                     <panes>
               </panes>
                   </Accordion>

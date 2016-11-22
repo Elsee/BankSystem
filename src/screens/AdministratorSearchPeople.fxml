@@ -75,7 +75,7 @@
       </ScrollPane>
        <HBox alignment="bottom_right" layoutX="14.0" layoutY="720.0" prefHeight="40.0" prefWidth="1010.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
           <children>
-              <Button onAction="#deletePerson" text="Edit">
+              <Button  text="Edit">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
