@@ -110,7 +110,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <ScrollPane layoutY="291.0" prefHeight="428.0" prefWidth="1024.0">
+            <ScrollPane layoutY="286.0" prefHeight="428.0" prefWidth="1024.0">
                <content>
                   <GridPane hgap="10.0" prefWidth="1022.0" vgap="10.0">
                     <columnConstraints>
@@ -162,9 +162,19 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <ToolBar layoutY="660.0" prefHeight="48.0" prefWidth="1024.0">
+            <ToolBar layoutY="660.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="1024.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
+                <Button mnemonicParsing="false" text="Edit">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-default" />
+                     </styleClass></Button>
+                  <Button mnemonicParsing="false" text="View accounts" onAction="#viewAccounts">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-default" />
+                     </styleClass>
+                  </Button>
               </items>
             </ToolBar>
          </children>

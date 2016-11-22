@@ -87,4 +87,8 @@ public class EmployeeMainController extends ViewController{
     public void personCreate(ActionEvent actionEvent) {
         transitionTo("createIndividual");
     }
+
+    public void viewAccounts(ActionEvent actionEvent) {
+        transitionTo("viewCustomerAccounts");
+    }
 }

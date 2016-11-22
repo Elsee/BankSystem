@@ -46,13 +46,13 @@
             <TextField id="moneyField" styleClass="form-control" GridPane.rowIndex="8" />
             <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <TextField id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" onAction="#updateBusiness" text="Update" GridPane.rowIndex="10">
+            <Button mnemonicParsing="false" text="Update" GridPane.rowIndex="10">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-success" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#back"  text="Cancel" translateX="100.0" GridPane.rowIndex="10">
+            <Button mnemonicParsing="false" text="Cancel" translateX="100.0" GridPane.rowIndex="10">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-default" />
