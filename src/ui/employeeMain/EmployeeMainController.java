@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeMainController extends ViewController{
+    static private ArrayList individualsList;
 
     private ObservableList<CustomerI> customerIndividCollection;
 
@@ -48,11 +49,13 @@ public class EmployeeMainController extends ViewController{
     void personSearch() throws SQLException {
         try{
             ArrayList arrayList = this.data.searchIndividuals(getFirstnameField().getText(), getLastnameField().getText());
+            individualsList = arrayList;
         }
         catch (SQLException sqle){
             String errmes = this.data.getErrorMessage(sqle);
             System.out.println(errmes);
             actiontarget.setText(errmes);
+            System.out.println(errmes);
         }
     }
 }

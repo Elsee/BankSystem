@@ -11,7 +11,8 @@ import java.util.HashMap;
 
 public class Main extends Application {
     private static final HashMap<String, String> SCREENS = new HashMap<>();
-    private static final String START_SCREEN = "login";
+    //private static final String START_SCREEN = "login";
+    private static final String START_SCREEN = "employeeMain";
 
     static {
         SCREENS.put("login", "screens/Login.fxml");

@@ -8,6 +8,8 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by cubazis on 01.11.16.
@@ -31,8 +33,7 @@ public class DataAccess {
         statement.setString(2, lname);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            System.out.println(rs.getInt("cid")+ rs.getString("firstname")+ rs.getString("lastname")+ rs.getString("passport"));
-            customers.add(new CustomerI(rs.getInt("cid"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("passport")));
+           customers.add(new CustomerI(rs.getInt("cid"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("passnum")));
         }
         rs.close();
         statement.close();
@@ -56,7 +57,10 @@ public class DataAccess {
 
     public String getErrorMessage(SQLException error) throws SQLException {
         String errno = error.toString();
-        errno = errno.split(" ")[2];
+        Pattern p = Pattern.compile("E[0-9]{4}");
+        Matcher m = p.matcher(errno);
+        m.find();
+        errno = errno.substring(m.start(), m.end());
         String errmes = "";
         Connection connection = getConnection();
         CallableStatement errorSt = connection.prepareCall(" { call select_db_error_message(?) } ");
