@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.employeeMain.EmployeeMainController">
    <styleClass>
       <String fx:value="panel" />
@@ -33,7 +34,7 @@
    <center>
       <AnchorPane>
          <children>
-            <TabPane prefHeight="232.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab text="Person">
                   <content>
@@ -49,6 +50,7 @@
                                   <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
                                   <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                   <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
@@ -65,6 +67,7 @@
                                              <Insets />
                                          </GridPane.margin>
                                      </Button>
+                                    <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
                            </children>
@@ -107,7 +110,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <ScrollPane layoutY="232.0" prefHeight="428.0" prefWidth="1024.0">
+            <ScrollPane layoutY="291.0" prefHeight="428.0" prefWidth="1024.0">
                <content>
                   <GridPane hgap="10.0" prefWidth="1022.0" vgap="10.0">
                     <columnConstraints>
@@ -116,7 +119,6 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                     </rowConstraints>
@@ -129,26 +131,26 @@
                               <String fx:value="btn-success" />
                            </styleClass>
                         </Button>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1" fx:id="customerSearchTable">
+                        <TableView fx:id="customerSearchTable" prefHeight="60.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
                             <columns>
-                                <TableColumn text="Id" prefWidth="30" editable="false">
+                                <TableColumn prefWidth="88.0" text="Id">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="cid"/>
+                                        <PropertyValueFactory property="cid" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="140">
+                                <TableColumn fx:id="firstNameColumn" prefWidth="216.0" text="First Name">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="firstname"/>
+                                        <PropertyValueFactory property="firstname" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="140">
+                                <TableColumn fx:id="lastNameColumn" prefWidth="191.0" text="Last Name">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="lastname"/>
+                                        <PropertyValueFactory property="lastname" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="passportColumn" text="Passport" prefWidth="120">
+                                <TableColumn fx:id="passportColumn" prefWidth="170.0" text="Passport">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="passport"/>
+                                        <PropertyValueFactory property="passport" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>

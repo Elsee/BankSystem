@@ -30,16 +30,20 @@ public class CustomerI {
         this.passport.set(pass);
     }
 
-    public SimpleStringProperty getFirstname() {
-        return firstname;
+    public String getFirstname() {
+        return firstname.get();
     }
 
-    public SimpleStringProperty getLastname() {
-        return lastname;
+    public String getLastname() {
+        return lastname.get();
     }
 
-    public SimpleStringProperty getPassport() {
-        return passport;
+    public String getPassport() {
+        return passport.get();
+    }
+
+    public Integer getCid() {
+        return cid.get();
     }
 
     public void setId(int id) { this.cid.set(id); }
