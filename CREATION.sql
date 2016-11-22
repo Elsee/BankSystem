@@ -476,19 +476,6 @@ BEGIN
 END;
 $BODY$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION select_individuals(VARCHAR, VARCHAR)
-  RETURNS TABLE(cid INT, firstname VARCHAR(30), lastname VARCHAR(30), passnum VARCHAR(10)) AS $function$
-BEGIN
-  IF EXISTS (SELECT first_name, last_name FROM bs_person WHERE first_name = $1 AND last_name = $2) THEN
-    RETURN QUERY
-    SELECT customer_id, first_name, last_name, passport_number
-    FROM bs_customer NATURAL JOIN bs_individual NATURAL JOIN bs_person
-    WHERE first_name = $1 AND last_name = $2;
-  ELSE RAISE EXCEPTION 'E0014';
-  END IF;
-END;
-$function$ LANGUAGE plpgsql;
-
 /*Generator for accounts*/
 CREATE OR REPLACE FUNCTION random_account_num_creator()
   RETURNS char(16) AS $$
@@ -533,5 +520,20 @@ BEGIN
   VALUES ((random_account_num_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $14);
   INSERT INTO bs_phone(customer_id, phone_num)
   VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $15);
+END;
+$function$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION select_individuals(VARCHAR, VARCHAR)
+  RETURNS TABLE(cid INT, reg VARCHAR(20), ci VARCHAR(20), str VARCHAR(20), hou VARCHAR(20), apart VARCHAR(20), custy customer_type, pid INT, fname VARCHAR(30), lname VARCHAR(30), passnum VARCHAR(10), sekas person_sex, bdate DATE, pvatin VARCHAR(12)) AS $function$
+BEGIN
+  IF EXISTS (SELECT bsp.first_name, bsp.last_name
+             FROM bs_person AS bsp
+             WHERE bsp.first_name = $1 AND bsp.last_name = $2) THEN
+    RETURN QUERY
+    SELECT bsc.customer_id AS cid, bsa.region AS reg, bsa.city AS ci, bsa.street AS str, bsa.house AS hou, bsa.apartment AS apart, bsc.type_customer AS custy, bsp.person_id AS pid, bsp.first_name AS fname, bsp.last_name AS lname, bsp.passport_number AS passnum, bsp.sex AS sekas, bsp.birth_date AS bdate, bsp.person_vatin AS pvatin
+    FROM bs_customer AS bsc NATURAL JOIN bs_individual AS bsi NATURAL JOIN bs_person AS bsp NATURAL JOIN bs_address AS bsa
+    WHERE bsp.first_name = $1 AND bsp.last_name = $2;
+  ELSE RAISE EXCEPTION 'E0014';
+  END IF;
 END;
 $function$ LANGUAGE plpgsql;
