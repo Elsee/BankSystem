@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * Abstract superclass for FXML Controllers to be used with the Screens framework. Contains all life-cycle methods that may be
  * overridden.
@@ -23,7 +25,7 @@ public abstract class ViewController {
 	protected DataAccess data;
 
 	private Screens screens;
-	private ObservableList param;
+	private ArrayList param;
 
 	/**
 	 * Will be called when the initialization is done. You can access the @FXML injected values here for the first time.
@@ -107,6 +109,9 @@ public abstract class ViewController {
 		screens.transitionTo(targetScreenId);
 	}
 
+	protected void transitionTo(String targetScreenId, ArrayList arrayList) {
+		screens.transitionTo(targetScreenId, arrayList);
+	}
 	/**
 	 * Injector for {@link Screens}.
 	 *
@@ -138,7 +143,12 @@ public abstract class ViewController {
 		this.data = data;
 	}
 
-	void eatParam(ObservableList param){
+
+	public void setParam(ArrayList param) {
 		this.param = param;
+	}
+
+	public ArrayList getParam() {
+		return param;
 	}
 }

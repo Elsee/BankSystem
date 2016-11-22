@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.employeeMain.EditIndividual">
    <content>
       <GridPane hgap="10.0" prefWidth="1014.0" vgap="10.0">
         <columnConstraints>
@@ -68,13 +68,13 @@
             <TextField id="moneyField" styleClass="form-control" GridPane.rowIndex="14" />
             <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="13" />
             <TextField id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-            <Button mnemonicParsing="false" text="Update" GridPane.rowIndex="16">
+            <Button mnemonicParsing="false" onAction="#updateIndividual" text="Update" GridPane.rowIndex="16">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-success" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" text="Cancel" translateX="100.0" GridPane.rowIndex="16">
+            <Button mnemonicParsing="false" onAction="#back"  text="Cancel" translateX="100.0" GridPane.rowIndex="16">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-default" />

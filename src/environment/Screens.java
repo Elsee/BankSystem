@@ -7,13 +7,16 @@ import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Screens extends StackPane {
 
 	private Stage stage;
 
 	private HashMap<String, Node> screens = new HashMap<>();
+    private HashMap<String, String> pathsToScreens = new HashMap<>();
 	private HashMap<String, ViewController> controllers = new HashMap<>();
 	//private HashMap<String, Object> data = new HashMap<>();
 	private DataAccess data = null;
@@ -46,6 +49,7 @@ public class Screens extends StackPane {
 	public Screens(HashMap<String, String> screens, Stage stage, DataAccess data) {
 		this.data = data;
 		this.stage = stage;
+        this.pathsToScreens = screens;
 		screens.forEach(this::load);
 	}
 
@@ -86,7 +90,7 @@ public class Screens extends StackPane {
 	}
 
 	/**
-	 * For javadoc see {@link ViewController#switchTo}.
+	 * For javadoc see {@link ViewController}.
 	 *
 	 * @param screenId
 	 */
@@ -118,7 +122,7 @@ public class Screens extends StackPane {
 
 	}
 
-	public void transitionTo(String screenId, ObservableList param) {
+	public void transitionTo(String screenId, ArrayList param) {
 
 		// Two transitions at the same time are not possible.
 		if (handler != null) {
@@ -136,8 +140,8 @@ public class Screens extends StackPane {
 		handler.oldScreenRoot = activeScreen == null ? null : screens.get(activeScreen);
 
 		handler.newController = controllers.get(screenId);
+        handler.newController.setParam(param);
 		handler.newController.init();
-		handler.newController.eatParam(param);
 		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
 
 		// Start the transition.

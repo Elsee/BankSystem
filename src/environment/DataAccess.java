@@ -40,6 +40,8 @@ public class DataAccess {
         return customers;
     }
 
+
+
     public ArrayList login(String inputLogin, String inputPass) throws SQLException {
         ArrayList<Login> logins = new ArrayList<>();
         Connection connection = getConnection();
@@ -85,5 +87,42 @@ public class DataAccess {
         ArrayList<Transaction> result = new ArrayList<>();
 
         return result;
+    }
+
+    public boolean createIndividual(String firstNameField,
+                                 String lastNameField,
+                                 String passportField,
+                                 String sexField,
+                                 String bdateField,
+                                 String vatinField,
+                                 String regionField,
+                                 String cityField,
+                                 String streetField,
+                                 String houseField,
+                                 String apartmentField,
+                                 String loginField,
+                                 String passField,
+                                 String moneyField,
+                                 String phoneField) throws SQLException {
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call customer_individual_creator(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ");
+        statement.setString(1, firstNameField);
+        statement.setString(2, lastNameField);
+        statement.setString(3, passportField);
+        statement.setString(4, sexField);
+        statement.setString(5, bdateField);
+        statement.setString(6, vatinField);
+        statement.setString(7, regionField);
+        statement.setString(8, cityField);
+        statement.setString(9, streetField);
+        statement.setString(10, houseField);
+        statement.setString(11, apartmentField);
+        statement.setString(12, loginField);
+        statement.setString(13, passField);
+        statement.setString(14, moneyField);
+        statement.setString(15, phoneField);
+        Boolean rs = statement.execute();
+        statement.close();
+        return rs;
     }
 }

@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Main extends Application {
     private static final HashMap<String, String> SCREENS = new HashMap<>();
     //private static final String START_SCREEN = "login";
-    private static final String START_SCREEN = "employeeMain";
+    private static final String START_SCREEN = "createIndividual";
 
     static {
         SCREENS.put("login", "screens/Login.fxml");
@@ -20,6 +20,9 @@ public class Main extends Application {
         SCREENS.put("employeeMain", "screens/EmployeeMain.fxml");
         SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
         SCREENS.put("createIndividual", "screens/CreateIndividual.fxml");
+        SCREENS.put("editIndividual", "screens/EditIndividual.fxml");
+        SCREENS.put("createBusiness", "screens/CreateBusiness.fxml");
+        SCREENS.put("editBusiness", "screens/EditBusiness.fxml");
     }
 
     @Override

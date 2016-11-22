@@ -40,35 +40,35 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new individual" GridPane.columnSpan="2" />
             <Label text="Firstname" GridPane.rowIndex="1" />
-            <TextField id="firstNameField" styleClass="form-control" GridPane.rowIndex="2" />
+            <TextField fx:id="firstNameField" styleClass="form-control" GridPane.rowIndex="2" />
             <Label text="Lastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField id="lastNameField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="lastNameField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Passport number" GridPane.rowIndex="5" />
-            <TextField id="passportField" styleClass="form-control" GridPane.rowIndex="6" />
+            <TextField fx:id="passportField" styleClass="form-control" GridPane.rowIndex="6" />
             <Label text="Sex" GridPane.rowIndex="3" />
-            <TextField id="sexField" styleClass="form-control" GridPane.rowIndex="4" />
+            <TextField fx:id="sexField" styleClass="form-control" GridPane.rowIndex="4" />
             <Label text="Birth date" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField id="bdateField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="bdateField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Vatin" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField id="vatinField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="vatinField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Region" GridPane.rowIndex="7" />
             <Label text="City" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Street" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <TextField id="regionField" styleClass="form-control" GridPane.rowIndex="8" />
-            <TextField id="cityField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField id="streetField" styleClass="form-control" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <TextField fx:id="regionField" styleClass="form-control" GridPane.rowIndex="8" />
+            <TextField fx:id="cityField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="streetField" styleClass="form-control" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <Label text="House" GridPane.rowIndex="9" />
             <Label text="Apartment" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <TextField id="houseField" styleClass="form-control" GridPane.rowIndex="10" />
-            <TextField id="apartmentField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <TextField fx:id="houseField" styleClass="form-control" GridPane.rowIndex="10" />
+            <TextField fx:id="apartmentField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <Label text="Login" GridPane.rowIndex="11" />
             <Label text="Password" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-            <TextField id="loginField" styleClass="form-control" GridPane.rowIndex="12" />
-            <TextField id="passField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <TextField fx:id="loginField" styleClass="form-control" GridPane.rowIndex="12" />
+            <TextField fx:id="passField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="12" />
             <Label text="Amount of money" GridPane.rowIndex="13" />
-            <TextField id="moneyField" styleClass="form-control" GridPane.rowIndex="14" />
+            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="14" />
             <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-            <TextField id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <TextField fx:id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="14" />
             <Button mnemonicParsing="false" onAction="#createIndividual" text="Create" GridPane.rowIndex="16">
                <styleClass>
                   <String fx:value="btn" />
@@ -81,6 +81,7 @@
                   <String fx:value="btn-default" />
                </styleClass>
             </Button>
+             <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="3" GridPane.rowIndex="17" />
          </children>
       </GridPane>
    </content>

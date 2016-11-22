@@ -505,11 +505,11 @@ END;
 $BODY$ LANGUAGE plpgsql VOLATILE;
 
 /*Creates customers (people)*/
-CREATE OR REPLACE FUNCTION customer_individual_creator(fname VARCHAR(30), lname VARCHAR(30), paspnum VARCHAR(10), s person_sex, bdate DATE, vatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20), log VARCHAR(20), pass VARCHAR(30), amount NUMERIC, phone NUMERIC)
+CREATE OR REPLACE FUNCTION customer_individual_creator(fname VARCHAR(30), lname VARCHAR(30), paspnum VARCHAR(10), s VARCHAR(1), bdate VARCHAR, vatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20), log VARCHAR(20), pass VARCHAR(30), amount VARCHAR, phone VARCHAR(20))
   RETURNS void AS $function$
 BEGIN
   INSERT INTO bs_person (first_name, last_name, passport_number, sex, birth_date, person_vatin)
-  VALUES ($1, $2, $3, $4, $5, $6);
+  VALUES ($1, $2, $3, $4::person_sex, $5::DATE, $6);
   INSERT INTO bs_customer(type_customer, address_id)
   VALUES ('I', (SELECT address_creator FROM address_creator($7, $8, $9, $10, $11)));
   INSERT INTO bs_individual(customer_id, person_id)
@@ -517,9 +517,11 @@ BEGIN
   INSERT INTO bs_user(person_id, user_login, user_pass, type_user)
   VALUES ((SELECT currval(pg_get_serial_sequence('bs_person','person_id'))), $12, $13, 'C');
   INSERT INTO bs_account(account_num, customer_id, open_date, close_date, active, balance)
-  VALUES ((random_account_num_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $14);
+  VALUES ((random_account_num_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $14::NUMERIC);
   INSERT INTO bs_phone(customer_id, phone_num)
   VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $15);
+  exception when others then
+    RAISE EXCEPTION 'E0015';
 END;
 $function$ LANGUAGE plpgsql;
 
@@ -537,3 +539,5 @@ BEGIN
   END IF;
 END;
 $function$ LANGUAGE plpgsql;
+
+

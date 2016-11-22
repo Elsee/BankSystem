@@ -18,6 +18,19 @@ import java.util.List;
 public class EmployeeMainController extends ViewController{
     static private ArrayList individualsList;
 
+    @FXML
+    protected void init() {
+        if(this.getParam() != null){
+            for (Object o: (ArrayList)this.getParam()) {
+                System.out.println(o.toString());
+            }
+        }
+        else {
+            System.out.println("null");
+        }
+
+    }
+
     private ObservableList<CustomerI> customerIndividCollection;
 
     @FXML
@@ -60,14 +73,13 @@ public class EmployeeMainController extends ViewController{
     @FXML
     void personSearch() throws SQLException {
         try{
-            ArrayList arrayList = this.data.searchIndividuals(getFirstnameField().getText(), getLastnameField().getText());
+            ArrayList arrayList = this.data.searchIndividuals(firstnameField.getText(), lastnameField.getText());
             individualsList = arrayList;
             ObservableList searchedInd = FXCollections.observableArrayList(arrayList);
             customerSearchTable.setItems(searchedInd);
         }
         catch (SQLException sqle){
             String errmes = this.data.getErrorMessage(sqle);
-            System.out.println(errmes);
             actiontarget.setText(errmes);
         }
     }
