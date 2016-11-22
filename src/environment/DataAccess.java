@@ -97,11 +97,13 @@ public class DataAccess {
         statement.setInt(1, cid);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-//            accounts.add(new CustomerAccounts(rs.getInt("cid"), rs.getString("fname"), rs.getString("lname"), rs.getString("passnum")));
+            accounts.add(new CustomerAccounts(rs.getInt("aid"), rs.getString("accnum"), rs.getInt("cust_id"), rs.getString("opendate"), rs.getString("closedate"), rs.getBoolean("act"), rs.getString("bal")));
         }
         rs.close();
         statement.close();
-        return accounts;}
+        return accounts;
+    }
+
     public boolean createIndividual(String firstNameField,
                                  String lastNameField,
                                  String passportField,

@@ -542,9 +542,9 @@ $function$ LANGUAGE plpgsql;
 
 /*Get customers account*/
 CREATE OR REPLACE FUNCTION select_customer_accounts(cid INT)
-    RETURNS TABLE(accnum VARCHAR(16), opendate DATE, closedate DATE, act BOOLEAN, bal NUMERIC) AS $$
+    RETURNS TABLE(aid INTEGER, accnum VARCHAR(16), cust_id INTEGER, opendate DATE, closedate DATE, act BOOLEAN, bal NUMERIC) AS $$
 BEGIN
-    RETURN QUERY SELECT account_num, open_date, close_date, active, balance
+    RETURN QUERY SELECT account_id, account_num, customer_id, open_date, close_date, active, balance
                  FROM bs_account
                  WHERE customer_id = $1;
 END;

@@ -101,6 +101,10 @@ public class EmployeeMainController extends ViewController{
     }
 
     public void viewAccounts(ActionEvent actionEvent) {
-        transitionTo("viewCustomerAccounts");
+        int ix = customerSearchTable.getSelectionModel().getSelectedIndex();
+        CustomerI selesctedCustomer = (CustomerI) individualsList.get(ix);
+        ArrayList<Integer> selectedCustomerId = new ArrayList<>();
+        selectedCustomerId.add(selesctedCustomer.getCid());
+        transitionTo("viewCustomerAccounts", selectedCustomerId);
     }
 }
