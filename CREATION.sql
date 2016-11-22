@@ -141,7 +141,7 @@ CREATE TABLE bs_address(
   city VARCHAR(20) NOT NULL,
   street VARCHAR(20) NOT NULL,
   house VARCHAR(20) NOT NULL,
-  apartment VARCHAR(20) DEFAULT NULL,
+  apartment VARCHAR(20) NOT NULL DEFAULT 0,
   UNIQUE (region, city, street, house, apartment)
 );
 

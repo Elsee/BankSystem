@@ -44,7 +44,7 @@ INSERT INTO bs_address VALUES (DEFAULT, 'Tatarstan', 'Innopolis', 'Sportivnaya S
 
 INSERT INTO bs_customer VALUES (DEFAULT, 'S', 1),
   (DEFAULT, 'I', 2);
-INSERT INTO bs_individual VALUES (2,16);
+INSERT INTO bs_individual VALUES (2,1);
 INSERT INTO bs_account VALUES (DEFAULT, '4526365745298642', 1, '2016-11-21', NULL, TRUE, 2000),
   (DEFAULT, '4526365745298643', 1, '2016-11-21', NULL, TRUE, 3000);
 
