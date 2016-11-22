@@ -40,7 +40,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0">
                            <children>
-                              <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="600.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
+                              <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="1024.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="233.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="222.0" />
@@ -51,6 +51,8 @@
                                   <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                   <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
@@ -68,6 +70,74 @@
                                          </GridPane.margin>
                                      </Button>
                                     <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                                    <ScrollPane prefHeight="355.0" prefWidth="994.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                                       <content>
+                                          <GridPane hgap="10.0" prefHeight="133.0" prefWidth="992.0" vgap="10.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Search results" />
+                                                <Button mnemonicParsing="false" onAction="#personCreate" text="+ new client" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                                   <styleClass>
+                                                      <String fx:value="btn" />
+                                                      <String fx:value="btn-lg" />
+                                                      <String fx:value="btn-success" />
+                                                   </styleClass>
+                                                </Button>
+                                                <TableView fx:id="customerSearchTable" prefHeight="60.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                                                    <columns>
+                                                        <TableColumn prefWidth="88.0" text="Id">
+                                                            <cellValueFactory>
+                                                                <PropertyValueFactory property="cid" />
+                                                            </cellValueFactory>
+                                                        </TableColumn>
+                                                        <TableColumn fx:id="firstNameColumn" prefWidth="216.0" text="First Name">
+                                                            <cellValueFactory>
+                                                                <PropertyValueFactory property="firstname" />
+                                                            </cellValueFactory>
+                                                        </TableColumn>
+                                                        <TableColumn fx:id="lastNameColumn" prefWidth="191.0" text="Last Name">
+                                                            <cellValueFactory>
+                                                                <PropertyValueFactory property="lastname" />
+                                                            </cellValueFactory>
+                                                        </TableColumn>
+                                                        <TableColumn fx:id="passportColumn" prefWidth="170.0" text="Passport">
+                                                            <cellValueFactory>
+                                                                <PropertyValueFactory property="passport" />
+                                                            </cellValueFactory>
+                                                        </TableColumn>
+                                                    </columns>
+                                                </TableView>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="1024.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                                      <items>
+                                        <Button mnemonicParsing="false" text="Edit">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="btn-default" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#viewAccounts" text="View accounts">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="btn-default" />
+                                             </styleClass>
+                                          </Button>
+                                      </items>
+                                    </ToolBar>
                                  </children>
                               </GridPane>
                            </children>
@@ -78,7 +148,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="600.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
+                              <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="1024.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
                                  <children>
                                     <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
                                     <Label text="Org. num" GridPane.rowIndex="1" />
@@ -110,73 +180,6 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <ScrollPane layoutY="286.0" prefHeight="428.0" prefWidth="1024.0">
-               <content>
-                  <GridPane hgap="10.0" prefWidth="1022.0" vgap="10.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Search results" />
-                        <Button mnemonicParsing="false" onAction="#personCreate" text="+ new client" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
-                           <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="btn-lg" />
-                              <String fx:value="btn-success" />
-                           </styleClass>
-                        </Button>
-                        <TableView fx:id="customerSearchTable" prefHeight="60.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
-                            <columns>
-                                <TableColumn prefWidth="88.0" text="Id">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="cid" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn fx:id="firstNameColumn" prefWidth="216.0" text="First Name">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="firstname" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn fx:id="lastNameColumn" prefWidth="191.0" text="Last Name">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="lastname" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn fx:id="passportColumn" prefWidth="170.0" text="Passport">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="passport" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                            </columns>
-                        </TableView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </content>
-            </ScrollPane>
-            <ToolBar layoutY="660.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="1024.0">
-              <items>
-                <Button mnemonicParsing="false" text="Edit">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn-default" />
-                     </styleClass></Button>
-                  <Button mnemonicParsing="false" text="View accounts" onAction="#viewAccounts">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn-default" />
-                     </styleClass>
-                  </Button>
-              </items>
-            </ToolBar>
          </children>
       </AnchorPane>
    </center>
