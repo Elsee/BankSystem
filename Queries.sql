@@ -112,7 +112,7 @@ DECLARE
 BEGIN
     RETURN QUERY SELECT address_id
         		 FROM bs_address
-        		 WHERE bs_address.region = $1 AND bs_address.city = $2 AND bs_address.street = $3 AND bs_address.house = $4 AND (bs_address.apartment = $5 OR bs_address.apartment IS NULL);
+        		 WHERE bs_address.region = $1 AND bs_address.city = $2 AND bs_address.street = $3 AND bs_address.house = $4 AND bs_address.apartment = $5;
     IF NOT FOUND THEN
         RETURN QUERY INSERT INTO bs_address(region, city, street, house, apartment)
         VALUES ($1, $2, $3, $4, $5) RETURNING address_id;
