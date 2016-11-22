@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <GridPane hgap="10.0" prefWidth="1014.0" vgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="308.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="297.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new individual" GridPane.columnSpan="2" />
+            <Label text="Firstname" GridPane.rowIndex="1" />
+            <TextField id="firstNameField" styleClass="form-control" GridPane.rowIndex="2" />
+            <Label text="Lastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField id="lastNameField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Passport number" GridPane.rowIndex="5" />
+            <TextField id="passportField" styleClass="form-control" GridPane.rowIndex="6" />
+            <Label text="Sex" GridPane.rowIndex="3" />
+            <TextField id="sexField" styleClass="form-control" GridPane.rowIndex="4" />
+            <Label text="Birth date" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField id="bdateField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Vatin" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField id="vatinField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Region" GridPane.rowIndex="7" />
+            <Label text="City" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="Street" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <TextField id="regionField" styleClass="form-control" GridPane.rowIndex="8" />
+            <TextField id="cityField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField id="streetField" styleClass="form-control" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Label text="House" GridPane.rowIndex="9" />
+            <Label text="Apartment" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <TextField id="houseField" styleClass="form-control" GridPane.rowIndex="10" />
+            <TextField id="apartmentField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label text="Login" GridPane.rowIndex="11" />
+            <Label text="Password" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <TextField id="loginField" styleClass="form-control" GridPane.rowIndex="12" />
+            <TextField id="passField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <Label text="Amount of money" GridPane.rowIndex="13" />
+            <TextField id="moneyField" styleClass="form-control" GridPane.rowIndex="14" />
+            <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <TextField id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <Button mnemonicParsing="false" text="Create" GridPane.rowIndex="16">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-success" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" text="Cancel" translateX="100.0" GridPane.rowIndex="16">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-default" />
+               </styleClass>
+            </Button>
+         </children>
+      </GridPane>
+   </content>
+</ScrollPane>
