@@ -31,8 +31,7 @@ public class DataAccess {
         statement.setString(2, lname);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            System.out.println(rs.getInt("cid")+ rs.getString("firstname")+ rs.getString("lastname")+ rs.getString("passport"));
-            customers.add(new CustomerI(rs.getInt("cid"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("passport")));
+            customers.add(new CustomerI(rs.getInt("cid"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("passnum")));
         }
         rs.close();
         statement.close();

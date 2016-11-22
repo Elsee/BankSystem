@@ -6,6 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.employeeMain.EmployeeMainController">
    <styleClass>
       <String fx:value="panel" />
@@ -128,11 +129,29 @@
                               <String fx:value="btn-success" />
                            </styleClass>
                         </Button>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
+                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1" fx:id="customerSearchTable">
+                            <columns>
+                                <TableColumn text="Id" prefWidth="30" editable="false">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="cid"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="140">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="firstname"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="140">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="lastname"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn fx:id="passportColumn" text="Passport" prefWidth="120">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="passport"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                            </columns>
                         </TableView>
                      </children>
                      <padding>
