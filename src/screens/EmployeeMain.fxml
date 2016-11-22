@@ -122,7 +122,7 @@
                     </rowConstraints>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Search results" />
-                        <Button mnemonicParsing="false" text="+ new client" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                        <Button mnemonicParsing="false" onAction="#personCreate" text="+ new client" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="btn-lg" />

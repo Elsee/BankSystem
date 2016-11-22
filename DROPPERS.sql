@@ -1,4 +1,7 @@
 /* DROPPERS START */
+DROP FUNCTION customer_individual_creator(fname VARCHAR(30), lname VARCHAR(30), paspnum VARCHAR(10), s person_sex, bdate DATE, vatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20), log VARCHAR(20), pass VARCHAR(30), amount NUMERIC, phone NUMERIC);
+DROP FUNCTION address_creator(region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20));
+DROP FUNCTION random_account_num_creator();
 DROP FUNCTION select_individuals(VARCHAR, VARCHAR);
 DROP FUNCTION make_login(VARCHAR, VARCHAR);
 DROP TABLE bs_template;

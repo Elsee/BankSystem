@@ -58,3 +58,5 @@ INSERT INTO bs_db_errors VALUES ('E0012', 'Incorrect login'),
   ('E0013', 'Incorrect pass');
 
 INSERT INTO bs_db_errors VALUES ('E0014', 'No such person');
+
+SELECT (customer_individual_creator('kek', 'kek', '1111111111', 'F', '1992-01-01', '111111111111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'kek', 'kek', '2000', '1111111111'));

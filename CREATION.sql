@@ -308,7 +308,7 @@ EXECUTE PROCEDURE business_checker();
 CREATE TABLE bs_phone(
   phone_id serial PRIMARY KEY,
   customer_id int REFERENCES bs_customer(customer_id),
-  phone_num NUMERIC UNIQUE NOT NULL
+  phone_num VARCHAR(20) UNIQUE NOT NULL
 );
 
 /* Trigger function for Phone table */
@@ -486,5 +486,52 @@ BEGIN
     WHERE first_name = $1 AND last_name = $2;
   ELSE RAISE EXCEPTION 'E0014';
   END IF;
+END;
+$function$ LANGUAGE plpgsql;
+
+/*Generator for accounts*/
+CREATE OR REPLACE FUNCTION random_account_num_creator()
+  RETURNS char(16) AS $$
+DECLARE _serial char(16); _i int; _chars char(10) = '0123456789';
+BEGIN
+  _serial = '';
+  FOR _i in 1 .. 16 LOOP
+    _serial = _serial || substr(_chars, int4(floor(random() * length(_chars))) + 1, 1);
+  END LOOP;
+  RETURN _serial;
+END;
+$$ LANGUAGE plpgsql VOLATILE;
+
+/*Address creator. Returns id*/
+CREATE OR REPLACE FUNCTION address_creator(region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20))
+  RETURNS SETOF int AS $BODY$
+DECLARE
+BEGIN
+  RETURN QUERY SELECT address_id
+               FROM bs_address
+               WHERE bs_address.region = $1 AND bs_address.city = $2 AND bs_address.street = $3 AND bs_address.house = $4 AND bs_address.apartment = $5;
+  IF NOT FOUND THEN
+    RETURN QUERY INSERT INTO bs_address(region, city, street, house, apartment)
+    VALUES ($1, $2, $3, $4, $5) RETURNING address_id;
+  END IF;
+END;
+$BODY$ LANGUAGE plpgsql VOLATILE;
+
+/*Creates customers (people)*/
+CREATE OR REPLACE FUNCTION customer_individual_creator(fname VARCHAR(30), lname VARCHAR(30), paspnum VARCHAR(10), s person_sex, bdate DATE, vatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20), log VARCHAR(20), pass VARCHAR(30), amount NUMERIC, phone NUMERIC)
+  RETURNS void AS $function$
+BEGIN
+  INSERT INTO bs_person (first_name, last_name, passport_number, sex, birth_date, person_vatin)
+  VALUES ($1, $2, $3, $4, $5, $6);
+  INSERT INTO bs_customer(type_customer, address_id)
+  VALUES ('I', (SELECT address_creator FROM address_creator($7, $8, $9, $10, $11)));
+  INSERT INTO bs_individual(customer_id, person_id)
+  VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))),(SELECT currval(pg_get_serial_sequence('bs_person','person_id'))));
+  INSERT INTO bs_user(person_id, user_login, user_pass, type_user)
+  VALUES ((SELECT currval(pg_get_serial_sequence('bs_person','person_id'))), $12, $13, 'C');
+  INSERT INTO bs_account(account_num, customer_id, open_date, close_date, active, balance)
+  VALUES ((random_account_num_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $14);
+  INSERT INTO bs_phone(customer_id, phone_num)
+  VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $15);
 END;
 $function$ LANGUAGE plpgsql;
