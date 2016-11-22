@@ -9,22 +9,22 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AdministratorMainController extends ViewController{
+public class EmployeeMainController extends ViewController{
 
-    private static AdministratorMainController instance;
+    private static EmployeeMainController instance;
     private ObservableList<CustomerI> customerIndividCollection;
 
-    public AdministratorMainController() {};
+    public EmployeeMainController() {};
 
-    public static AdministratorMainController getInstance() {
-        if (AdministratorMainController.instance == null) {
-            synchronized (AdministratorMainController.class) {
-                if (AdministratorMainController.instance == null) {
-                    AdministratorMainController.instance = new AdministratorMainController();
+    public static EmployeeMainController getInstance() {
+        if (EmployeeMainController.instance == null) {
+            synchronized (EmployeeMainController.class) {
+                if (EmployeeMainController.instance == null) {
+                    EmployeeMainController.instance = new EmployeeMainController();
                 }
             }
         }
-        return AdministratorMainController.instance;
+        return EmployeeMainController.instance;
     }
 
     @FXML

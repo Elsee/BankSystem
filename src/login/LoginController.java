@@ -29,7 +29,7 @@ public class LoginController extends ViewController{
                 transitionTo("employeeMain");
             }
             else {
-                transitionTo("screen2");
+                transitionTo("customerMain");
             }
         }
         catch (SQLException sqle){

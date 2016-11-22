@@ -11,12 +11,12 @@ import java.util.HashMap;
 
 public class Main extends Application {
     private static final HashMap<String, String> SCREENS = new HashMap<>();
-    private static final String START_SCREEN = "screen1";
+    private static final String START_SCREEN = "login";
 
     static {
-        SCREENS.put("screen1", "screens/Login.fxml");
-        SCREENS.put("screen2", "screens/UserMain.fxml");
-        SCREENS.put("employeeMain", "screens/AdministratorMain.fxml");
+        SCREENS.put("login", "screens/Login.fxml");
+        SCREENS.put("customerMain", "screens/customerMain.fxml");
+        SCREENS.put("employeeMain", "screens/EmployeeMain.fxml");
         SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
         SCREENS.put("peopleSearch", "screens/AdministratorSearchPeople.fxml");
     }

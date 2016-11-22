@@ -455,3 +455,23 @@ CREATE TABLE bs_template(
   amount NUMERIC NOT NULL,
   PRIMARY KEY (customer_id, txn_id)
 );
+
+/* Make Login */
+CREATE FUNCTION make_login(VARCHAR, VARCHAR)
+  RETURNS TABLE (
+    user_id int,
+    person_id int,
+    type_user user_type
+  )
+AS $BODY$
+BEGIN
+  IF EXISTS (SELECT bsu.user_login FROM bs_user AS bsu WHERE bsu.user_login = $1 LIMIT 1) THEN
+    IF EXISTS (SELECT bsu.user_pass FROM bs_user AS bsu WHERE bsu.user_login = $1 AND bsu.user_pass = $2 LIMIT 1) THEN
+      RETURN QUERY
+      SELECT bsu.user_id, bsu.person_id, bsu.type_user FROM bs_user AS bsu WHERE bsu.user_login = $1 AND bsu.user_pass = $2 LIMIT 1;
+    ELSE RAISE EXCEPTION 'E0013';
+    END IF;
+  ELSE RAISE EXCEPTION 'E0012';
+  END IF;
+END;
+$BODY$ LANGUAGE plpgsql;
