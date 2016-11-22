@@ -67,14 +67,15 @@ BEFORE UPDATE ON bs_db_errors FOR each ROW
 EXECUTE PROCEDURE db_errors_checker();
 
 CREATE FUNCTION select_db_error_message(VARCHAR)
-  RETURNS TEXT AS $func$
-DECLARE
-  err_text TEXT;
+  RETURNS TABLE (
+    err_message TEXT
+  )
+AS $BODY$
 BEGIN
-  err_text := (SELECT err.err_message FROM bs_db_errors AS err WHERE err.err_no = $1);
-  RETURN err_text;
+  RETURN QUERY
+  SELECT err.err_message FROM bs_db_errors AS err WHERE err.err_no = $1;
 END;
-$func$  LANGUAGE plpgsql;
+$BODY$ LANGUAGE plpgsql;
 
 /* Male/Female Types creation */
 CREATE TYPE person_sex AS ENUM ('M', 'F');
