@@ -73,6 +73,6 @@ public class EmployeeMainController extends ViewController{
     }
 
     public void personCreate(ActionEvent actionEvent) {
-
+        transitionTo("createIndividual");
     }
 }
