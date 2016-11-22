@@ -1,5 +1,6 @@
 package ui.employeeMain;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -7,11 +8,13 @@ import javafx.beans.property.SimpleStringProperty;
  * Created by svetl on 14.11.2016.
  */
 public class CustomerI {
+    private final SimpleIntegerProperty cid = new SimpleIntegerProperty();
     private final SimpleStringProperty firstname = new SimpleStringProperty();
     private final SimpleStringProperty lastname = new SimpleStringProperty();
-    private final SimpleLongProperty passport = new SimpleLongProperty();
+    private final SimpleStringProperty passport = new SimpleStringProperty();
 
-    public CustomerI(String fname, String lname, Long pass) {
+    public CustomerI(int id, String fname, String lname, String  pass) {
+        setId(id);
         setFirstname(fname);
         setLastname(lname);
         setPassport(pass);
@@ -23,7 +26,7 @@ public class CustomerI {
     public void setLastname(String lname) {
         this.lastname.set(lname);
     }
-    public void setPassport(long pass) {
+    public void setPassport(String  pass) {
         this.passport.set(pass);
     }
 
@@ -35,7 +38,9 @@ public class CustomerI {
         return lastname;
     }
 
-    public SimpleLongProperty getPassport() {
+    public SimpleStringProperty getPassport() {
         return passport;
     }
+
+    public void setId(int id) { this.cid.set(id); }
 }

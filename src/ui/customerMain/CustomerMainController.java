@@ -32,7 +32,7 @@ public class CustomerMainController extends ViewController {
 
 	@FXML
 	protected void init() {
-		try {
+/*		try {
 			List<Account> accounts = data.getAllAccounts();
 			accountsCollection = FXCollections.observableArrayList(accounts);
 			TitledPane[] tps = new TitledPane[accountsCollection.size()];
@@ -61,10 +61,7 @@ public class CustomerMainController extends ViewController {
 			accountsAccordion.setExpandedPane(tps[0]);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-//		firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//		lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//		cityColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		}*/
 	}
 
 	@FXML
@@ -76,31 +73,5 @@ public class CustomerMainController extends ViewController {
 	void transactionForm() {
 		transitionTo("transactionForm");
 	}
-
-//	@Override
-//	protected void willAppear(ScreenTransition transition) {
-//		backButton.setTranslateY(-stage.getHeight());
-//		transition.proceed();
-//	}
-//
-//	@Override
-//	protected void appear(ScreenTransition transition) {
-//
-//		TranslateTransition translate = new TranslateTransition(Duration.seconds(1), backButton);
-//		translate.setToY(20);
-//		translate.setOnFinished(transition::proceed);
-//		translate.play();
-//
-//	}
-//
-//	@Override
-//	protected void disappear(ScreenTransition transition) {
-//
-//		TranslateTransition translate = new TranslateTransition(Duration.seconds(1), backButton);
-//		translate.setToY(-stage.getHeight());
-//		translate.setOnFinished(transition::proceed);
-//		translate.play();
-//
-//	}
 
 }

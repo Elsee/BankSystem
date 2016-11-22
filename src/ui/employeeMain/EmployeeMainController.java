@@ -5,27 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import login.Login;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeMainController extends ViewController{
 
-    private static EmployeeMainController instance;
     private ObservableList<CustomerI> customerIndividCollection;
 
-    public EmployeeMainController() {};
-
-    public static EmployeeMainController getInstance() {
-        if (EmployeeMainController.instance == null) {
-            synchronized (EmployeeMainController.class) {
-                if (EmployeeMainController.instance == null) {
-                    EmployeeMainController.instance = new EmployeeMainController();
-                }
-            }
-        }
-        return EmployeeMainController.instance;
-    }
+    @FXML
+    private Text actiontarget;
 
     @FXML
     TextField firstnameField;
@@ -51,20 +43,16 @@ public class EmployeeMainController extends ViewController{
         transitionTo("login");
     }
 
-    @FXML
-    public ObservableList<CustomerI> exec() {
-        try {
-            List<CustomerI> customerIs = data.searchCustomers(firstnameField.getText(), lastnameField.getText());
-            customerIndividCollection = FXCollections.observableArrayList(customerIs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return customerIndividCollection;
-    }
 
     @FXML
     void personSearch() throws SQLException {
-        AdmSearchPeopleController.getSearchInstance().exec(this.exec());
-        this.transitionTo("peopleSearch");
+        try{
+            ArrayList arrayList = this.data.searchIndividuals(getFirstnameField().getText(), getLastnameField().getText());
+        }
+        catch (SQLException sqle){
+            String errmes = this.data.getErrorMessage(sqle);
+            System.out.println(errmes);
+            actiontarget.setText(errmes);
+        }
     }
 }

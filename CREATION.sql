@@ -475,3 +475,15 @@ BEGIN
   END IF;
 END;
 $BODY$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION select_individuals(VARCHAR, VARCHAR)
+  RETURNS TABLE(cid INT, firstname VARCHAR(30), lastname VARCHAR(30), passnum VARCHAR(10)) AS $$
+BEGIN
+  IF EXISTS (SELECT first_name, last_name FROM bs_person WHERE first_name = $1 AND last_name = $2) THEN
+    RETURN QUERY SELECT customer_id, first_name, last_name, passport_number
+                 FROM bs_customer NATURAL JOIN bs_individual NATURAL JOIN bs_person
+                 WHERE first_name = $1 AND last_name = $2;
+  ELSE RAISE EXCEPTION 'E0014';
+  END IF;
+END;
+$$ LANGUAGE plpgsql;

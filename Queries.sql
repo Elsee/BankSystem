@@ -1,5 +1,5 @@
-/*CUSTOMERS SEARCH*/
-CREATE OR REPLACE FUNCTION findCustomers(fname VARCHAR(30), lname VARCHAR(30))
+/*Individuals SEARCH*/
+CREATE OR REPLACE FUNCTION findIndividuals(VARCHAR, VARCHAR)
     RETURNS TABLE(cid INT, firstname VARCHAR(30), lastname VARCHAR(30), passnum VARCHAR(10)) AS $$
 BEGIN
     RETURN QUERY SELECT customer_id, first_name, last_name, passport_number

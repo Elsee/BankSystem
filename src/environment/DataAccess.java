@@ -23,6 +23,22 @@ public class DataAccess {
         return dataSource.getConnection();
     }
 
+    public ArrayList searchIndividuals(String fname, String lname) throws SQLException{
+        ArrayList<CustomerI> customers = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call select_individuals(?, ?) } ");
+        statement.setString(1, fname);
+        statement.setString(2, lname);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            System.out.println(rs.getInt("cid")+ rs.getString("firstname")+ rs.getString("lastname")+ rs.getString("passport"));
+            customers.add(new CustomerI(rs.getInt("cid"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("passport")));
+        }
+        rs.close();
+        statement.close();
+        return customers;
+    }
+
     public ArrayList login(String inputLogin, String inputPass) throws SQLException {
         ArrayList<Login> logins = new ArrayList<>();
         Connection connection = getConnection();
@@ -55,81 +71,14 @@ public class DataAccess {
     };
 
     public List<Account> getAllAccounts() throws SQLException {
-        List<Account> result = new ArrayList();
-        try (Connection connection = getConnection();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM bs_account")) {
-            while (rs.next()) {
-                long account_id = rs.getLong("account_id");
-                long id_customer = rs.getLong("id_customer");
-                String open_date = rs.getString("open_date");
-                String close_date = rs.getString("close_date");
-                Boolean active = rs.getBoolean("active");
-                String  last_activity = rs.getString("last_activity");
-                String balance = rs.getString("balance");
-                result.add(new Account(account_id, id_customer, open_date, close_date, active, last_activity, balance));
-            }
-            rs.close();
-            stmt.close();
-        }
+        ArrayList<Account> result = new ArrayList<>();
+
         return result;
     }
 
-    public List<Account> getCustomerAccounts(int user_id) throws SQLException {
-        String id_user = user_id+"";
-        List<Account> result = new ArrayList();
-        try (Connection connection = getConnection();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT account_id AS acid, balance AS bal FROM bs_account AS ac\n" +
-                     "LEFT JOIN bs_individual AS ind ON  ac.id_customer = ind.id_customer" +
-                     "WHERE ind.id_person = "+id_user)) {
-            while (rs.next()) {
-                long account_id = rs.getLong("account_id");
-                Boolean active = rs.getBoolean("active");
-                String balance = rs.getString("balance");
-                result.add(new Account(account_id, active, balance));
-            }
-            rs.close();
-            stmt.close();
-        }
-        return result;
-    }
 
     public List<Transaction> getAllTransactions() throws SQLException {
-        List<Transaction> result = new ArrayList();
-        try (Connection connection = getConnection();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM bs_transaction")) {
-            while (rs.next()) {
-                String time = rs.getString(5);
-                Long from = rs.getLong("id_account_from");
-                Long to = rs.getLong("id_account_to");
-                String amount = rs.getString("amount");
-                result.add(new Transaction(time, from, to, amount));
-            }
-            rs.close();
-            stmt.close();
-        }
-        return result;
-    }
-
-    public List<CustomerI> searchCustomers(String inputFname, String inputLname) throws SQLException {
-        List<CustomerI> result = new ArrayList<>();
-        try (Connection connection = getConnection();
-             PreparedStatement stmt = connection.prepareStatement("SELECT fname, lname, passport_number FROM bs_person WHERE fname = ? AND lname = ?"))
-        {
-            stmt.setString(1,inputFname);
-            stmt.setString(2,inputLname);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String firstname = rs.getString(1);
-                String lastname = rs.getString(2);
-                Long pass = rs.getLong(3);
-                result.add(new CustomerI(firstname, lastname, pass));
-            }
-            rs.close();
-            stmt.close();
-        }
+        ArrayList<Transaction> result = new ArrayList<>();
 
         return result;
     }

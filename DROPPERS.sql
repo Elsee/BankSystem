@@ -1,4 +1,5 @@
 /* DROPPERS START */
+DROP FUNCTION select_individuals(VARCHAR, VARCHAR);
 DROP FUNCTION make_login(VARCHAR, VARCHAR);
 DROP TABLE bs_template;
 DROP TABLE bs_customer_transaction_pattern;

@@ -12,7 +12,7 @@ public class AccountDetailController extends ViewController {
 //	private @FXML Button backButton;
     @FXML
     void back() {
-        transitionTo("screen1");
+
     }
 
 }

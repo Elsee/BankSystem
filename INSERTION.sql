@@ -56,3 +56,5 @@ INSERT INTO bs_user VALUES (DEFAULT, 2, 'test', 'test', 'C');
 
 INSERT INTO bs_db_errors VALUES ('E0012', 'Incorrect login'),
   ('E0013', 'Incorrect pass');
+
+INSERT INTO bs_db_errors VALUES ('E0014', 'No such person');
