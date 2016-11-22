@@ -93,7 +93,7 @@ $$ LANGUAGE plpgsql;
 /*SELECT (update_customer_address(17, 'Udmurt Republic', 'Izhevsk', 'Pushkina', '20', '10'));*/
 
 /*Generator for accounts*/
-CREATE OR REPLACE FUNCTION AccountCreator() 
+CREATE OR REPLACE FUNCTION random_account_creator() 
 RETURNS char(16) AS $$
 DECLARE _serial char(16); _i int; _chars char(10) = '0123456789';
 BEGIN
@@ -133,13 +133,13 @@ BEGIN
     INSERT INTO bs_user(person_id, user_login, user_pass, type_user)
     VALUES ((SELECT currval(pg_get_serial_sequence('bs_person','person_id'))), $12, $13, 'C');
     INSERT INTO bs_account(account_num, customer_id, open_date, close_date, active, balance)
-    VALUES ((AccountCreator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $14);
+    VALUES ((random_account_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $14);
 	INSERT INTO bs_phone(customer_id, phone_num)
 	VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $15);
 END;
 $$ LANGUAGE plpgsql;
 
-/*SELECT (CustomerIndCreator('Tester', 'Testirovkin', '4261234565', 'F', '1992-01-01', '123456789111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'qwerty', 'qwerty', '2000', '89501234568'));*/
+/*SELECT (CustomerIndCreator('Tester', 'Testirovkin', '4261234565', 'F', '1992-01-01', '123456789111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'qwerty', 'qwerty', '2000', 89501234568));*/
 
 /*Creates busines customer*/
 CREATE OR REPLACE FUNCTION CustomerBCreator(orgvatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount NUMERIC, phone NUMERIC)
@@ -152,18 +152,18 @@ BEGIN
     INSERT INTO bs_business(customer_id, org_id)
     VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))),(SELECT currval(pg_get_serial_sequence('bs_organization','org_id'))));
     INSERT INTO bs_account(account_num, customer_id, open_date, close_date, active, balance)
-    VALUES ((AccountCreator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $6);
+    VALUES ((random_account_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $6);
 	INSERT INTO bs_phone(customer_id, phone_num)
 	VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $7);
 END;
 $$ LANGUAGE plpgsql;
 
 /*Creates accounts*/
-CREATE OR REPLACE FUNCTION AccountCreator(cid INT, amount NUMERIC)
+CREATE OR REPLACE FUNCTION account_creator(cid INT, amount NUMERIC)
     RETURNS void AS $$
     BEGIN
         INSERT INTO bs_account(account_num, customer_id, open_date, active, balance)
-            VALUES ((AccountCreator()), $1, current_date, TRUE, $2);
+            VALUES ((random_account_creator()), $1, current_date, TRUE, $2);
     END;
 $$ LANGUAGE plpgsql;
 
