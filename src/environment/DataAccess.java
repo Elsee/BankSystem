@@ -1,5 +1,6 @@
 package environment;
 import login.Login;
+import ui.employeeMain.CustomerAccounts;
 import ui.employeeMain.CustomerI;
 import ui.customerMain.Account;
 import ui.customerMain.Transaction;
@@ -89,6 +90,18 @@ public class DataAccess {
         return result;
     }
 
+    public ArrayList getAccounts(int cid) throws SQLException{
+        ArrayList<CustomerAccounts> accounts = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call  select_customer_accounts(?) } ");
+        statement.setInt(1, cid);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+//            accounts.add(new CustomerAccounts(rs.getInt("cid"), rs.getString("fname"), rs.getString("lname"), rs.getString("passnum")));
+        }
+        rs.close();
+        statement.close();
+        return accounts;}
     public boolean createIndividual(String firstNameField,
                                  String lastNameField,
                                  String passportField,

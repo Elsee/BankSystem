@@ -4,6 +4,7 @@ DROP FUNCTION address_creator(region VARCHAR(20), city VARCHAR(20), street VARCH
 DROP FUNCTION random_account_num_creator();
 DROP FUNCTION select_individuals(VARCHAR, VARCHAR);
 DROP FUNCTION make_login(VARCHAR, VARCHAR);
+DROP FUNCTION select_customer_accounts(INT);
 DROP TABLE bs_template;
 DROP TABLE bs_customer_transaction_pattern;
 
