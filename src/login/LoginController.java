@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LoginController extends ViewController{
 
@@ -20,25 +21,21 @@ public class LoginController extends ViewController{
     @FXML
     private Text actiontarget;
     public void handleSubmitButtonAction(ActionEvent actionEvent) throws SQLException {
-        //this.data.test();
-        if(this.data.checkLogin(loginField.getText(), passwordField.getText())){
-            System.out.println("Logged in");
-            this.transition();
-        }
-        else {
-            System.out.println("Login or password incorrect");
-            actiontarget.setText("Login or password incorrect");
-        }
-    }
-    @FXML
-    public void transition()  throws SQLException {
-        if (this.data.isCustomer(loginField.getText()))  {
-            transitionTo("screen2");
-        }
-        else {
-            transitionTo("employeeMain");
-        }
-    }
+        try {
+            ArrayList arrayList = this.data.login(loginField.getText(), passwordField.getText());
+            Login login = (Login) arrayList.get(0);
 
+            if(login.getUser_type().equals("E")){
+                transitionTo("employeeMain");
+            }
+            else {
+                transitionTo("screen2");
+            }
+        }
+        catch (SQLException sqle){
+            String errmes = this.data.getErrorMessage(sqle);
+            actiontarget.setText(errmes);
+        }
 
+    }
 }

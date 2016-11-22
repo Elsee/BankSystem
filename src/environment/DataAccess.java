@@ -23,52 +23,36 @@ public class DataAccess {
         return dataSource.getConnection();
     }
 
-    public void test() throws SQLException {
+    public ArrayList login(String inputLogin, String inputPass) throws SQLException {
+        ArrayList<Login> logins = new ArrayList<>();
         Connection connection = getConnection();
-        CallableStatement statement = connection.prepareCall(" { call returnbylogin( ? ) } ");
-        String value = "admin";
-        statement.setString(1, value);
+        CallableStatement statement = connection.prepareCall(" { call make_login(?, ?) } ");
+        statement.setString(1, inputLogin);
+        statement.setString(2, inputPass);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            System.out.println(rs.getInt("uid"));
-            System.out.println(rs.getString("uogin"));
-            System.out.println(rs.getString("upass"));
+            logins.add(new Login(rs.getInt("user_id"), rs.getInt("person_id"), rs.getString("type_user")));
         }
+        rs.close();
         statement.close();
+        return logins;
     }
 
-    public Boolean checkLogin(String inputLogin, String inputPass) throws SQLException {
-        Boolean result = false;
-        try (Connection connection = getConnection();
-             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM bs_user WHERE user_login = ? AND user_pass = ?"))
-        {
-            stmt.setString(1,inputLogin);
-            stmt.setString(2,inputPass);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
-                result = true;
-            }
-            rs.close();
-            stmt.close();
+    public String getErrorMessage(SQLException error) throws SQLException {
+        String errno = error.toString();
+        errno = errno.split(" ")[2];
+        String errmes = "";
+        Connection connection = getConnection();
+        CallableStatement errorSt = connection.prepareCall(" { call select_db_error_message(?) } ");
+        errorSt.setString(1, errno);
+        ResultSet rs = errorSt.executeQuery();
+        while (rs.next()) {
+            errmes = rs.getString("err_message");
         }
-        return result;
-    }
-
-    public Boolean isCustomer(String inputLogin) throws SQLException {
-        Boolean result = false;
-        try (Connection connection = getConnection();
-             PreparedStatement stmt = connection.prepareStatement("SELECT user_id FROM bs_user u, bs_individual i WHERE u.user_login = ? AND u.user_id = i.id_customer"))
-        {
-            stmt.setString(1,inputLogin);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                result = true;
-            }
-            rs.close();
-            stmt.close();
-            }
-        return result;
-    }
+        rs.close();
+        errorSt.close();
+        return errmes;
+    };
 
     public List<Account> getAllAccounts() throws SQLException {
         List<Account> result = new ArrayList();

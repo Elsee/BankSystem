@@ -8,46 +8,29 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Login {
     private final SimpleIntegerProperty user_id = new SimpleIntegerProperty();
-    private final SimpleStringProperty user_login= new SimpleStringProperty();
-    private final SimpleStringProperty user_pass = new SimpleStringProperty();
+    private final SimpleIntegerProperty user_person_id= new SimpleIntegerProperty();
+    private final SimpleStringProperty user_type = new SimpleStringProperty();
 
-    public Login(int id, String login, String pass){
-        setUser_id(id);
-        setUser_login(login);
-        setUser_pass(pass);
-    }
-
-    public int getUser_id() {
-        return user_id.get();
-    }
-    public void  setUser_id(int id){
-        this.user_id.set(id);
+    public Login(int user_id, int user_person_id, String user_type){
+        setUser_id(user_id);
+        setUser_person_id(user_person_id);
+        setUser_type(user_type);
     }
 
-    public void  setUser_login(String login){
-        this.user_login.set(login);
+    private void setUser_id(int user_id) {
+        this.user_id.set(user_id);
     }
 
-    public void  setUser_pass(String pass){
-        this.user_login.set(pass);
-    }
-    public SimpleIntegerProperty user_idProperty() {
-        return user_id;
+    private void setUser_person_id(int user_person_id) {
+        this.user_person_id.set(user_person_id);
     }
 
-    public String getUser_login() {
-        return user_login.get();
+    private void setUser_type(String  user_type) {
+        this.user_type.set(user_type);
     }
 
-    public SimpleStringProperty user_loginProperty() {
-        return user_login;
+    public String getUser_type(){
+        return this.user_type.get();
     }
 
-    public String getUser_pass() {
-        return user_pass.get();
-    }
-
-    public SimpleStringProperty user_passProperty() {
-        return user_pass;
-    }
 }
