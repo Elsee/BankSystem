@@ -7,10 +7,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
 
-
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <ScrollPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.customerMain.CustomerMainController">
    <content>
-      <AnchorPane minHeight="400.0" minWidth="400.0" prefWidth="1024.0" stylesheets="@bootstrap.css">
+      <AnchorPane minHeight="400.0" minWidth="400.0" prefWidth="1021.0" stylesheets="@bootstrap.css">
          <children>
             <HBox prefHeight="58.0" prefWidth="1024.0" styleClass="nav">
                <children>
@@ -28,12 +28,42 @@
             <AnchorPane layoutY="76.0" AnchorPane.topAnchor="76.0">
                <children>
                   <Text layoutX="14.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Accounts" AnchorPane.topAnchor="0.0" />
-                  <Accordion fx:id="accountsAccordion" layoutY="53.0" prefWidth="1024.0">
-                    <panes>
-              </panes>
-                  </Accordion>
                </children>
             </AnchorPane>
+            <TableView layoutX="9.0" layoutY="131.0" prefWidth="1006.0" fx:id="accountsTable">
+              <columns>
+                <TableColumn prefWidth="212.0" text="Account number">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="accountNum" />
+                    </cellValueFactory>
+                </TableColumn>
+                  <TableColumn prefWidth="162.0" text="Balance">
+                      <cellValueFactory>
+                          <PropertyValueFactory property="balance" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="207.0" text="Open date">
+                      <cellValueFactory>
+                          <PropertyValueFactory property="openDate" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="206.0" text="Close date">
+                      <cellValueFactory>
+                          <PropertyValueFactory property="closeDate" />
+                      </cellValueFactory>
+                  </TableColumn>
+              </columns>
+            </TableView>
+            <ToolBar layoutY="711.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="43.0" prefWidth="1024.0">
+              <items>
+                <Button mnemonicParsing="false" text="View transactions">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-default" />
+                     </styleClass>
+                  </Button>
+              </items>
+            </ToolBar>
          </children>
       </AnchorPane>
    </content>

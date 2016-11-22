@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import ui.employeeMain.CustomerI;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +30,9 @@ public class LoginController extends ViewController{
                 transitionTo("employeeMain");
             }
             else {
-                transitionTo("customerMain");
+                ArrayList<Integer> personId = new ArrayList<>();
+                personId.add(login.getUser_id());
+                transitionTo("customerMain", personId);
             }
         }
         catch (SQLException sqle){

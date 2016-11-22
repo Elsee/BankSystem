@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -20,15 +21,8 @@ public class CustomerMainController extends ViewController {
 	private ObservableList<Transaction> transactionsCollection;
 
 	@FXML
-	Accordion accountsAccordion;
-	@FXML
-	TitledPane account_pane;
-	@FXML
-	Text transaction_date;
-	@FXML
-	Text transaction_description;
-	@FXML
-	Text transaction_sum;
+	TableView accountsTable;
+
 
 	@FXML
 	protected void init() {
