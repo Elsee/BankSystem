@@ -37,6 +37,9 @@ public class EmployeeMainController extends ViewController{
     private Text actiontarget;
 
     @FXML
+    private Text actiontarget1; //For organizations
+
+    @FXML
     TextField firstnameField;
 
     public TextField getFirstnameField() {
@@ -51,6 +54,9 @@ public class EmployeeMainController extends ViewController{
     }
 
     @FXML
+    TextField orgNumField;
+
+    @FXML
     TableView customerSearchTable;
     @FXML
     TableColumn<CustomerI, String> firstNameColumn;
@@ -58,6 +64,12 @@ public class EmployeeMainController extends ViewController{
     TableColumn<CustomerI, String> lastNameColumn;
     @FXML
     TableColumn<CustomerI, String> passportColumn;
+
+    @FXML
+    TableView organizationSearchTable;
+
+    @FXML
+    TableColumn orgNumColumn;
 
     @FXML
     public void transition()  throws SQLException {

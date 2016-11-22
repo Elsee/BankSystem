@@ -146,7 +146,7 @@
                 </Tab>
                 <Tab text="Organization">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
                            <children>
                               <GridPane alignment="TOP_LEFT" hgap="10.0" prefWidth="1024.0" styleClass="panel-body" stylesheets="@bootstrap.css" vgap="10.0">
                                  <children>
@@ -162,6 +162,65 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </Button>
+                                     <Text fx:id="actiontarget1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                                     <ScrollPane prefHeight="355.0" prefWidth="994.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                                         <content>
+                                             <GridPane hgap="10.0" prefHeight="133.0" prefWidth="992.0" vgap="10.0">
+                                                 <columnConstraints>
+                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                 </columnConstraints>
+                                                 <rowConstraints>
+                                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                 </rowConstraints>
+                                                 <children>
+                                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Search results" />
+                                                     <Button mnemonicParsing="false" onAction="#personCreate" text="+ new organization" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                                         <styleClass>
+                                                             <String fx:value="btn" />
+                                                             <String fx:value="btn-lg" />
+                                                             <String fx:value="btn-success" />
+                                                         </styleClass>
+                                                     </Button>
+                                                     <TableView fx:id="organizationSearchTable" prefHeight="60.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                                                         <columns>
+                                                             <TableColumn prefWidth="88.0" text="Id">
+                                                                 <cellValueFactory>
+                                                                     <PropertyValueFactory property="cOrgid" />
+                                                                 </cellValueFactory>
+                                                             </TableColumn>
+                                                              <TableColumn fx:id="orgNumColumn" prefWidth="291.0" text="Orgnum" >
+                                                                  <cellValueFactory>
+                                                                      <PropertyValueFactory property="Orgnum" />
+                                                                  </cellValueFactory>
+                                                              </TableColumn>
+                                                         </columns>
+                                                     </TableView>
+                                                 </children>
+                                                 <padding>
+                                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                 </padding>
+                                             </GridPane>
+                                         </content>
+                                     </ScrollPane>
+                                     <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="1024.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                                         <items>
+                                             <Button mnemonicParsing="false" text="Edit">
+                                                 <styleClass>
+                                                     <String fx:value="btn" />
+                                                     <String fx:value="btn-default" />
+                                                 </styleClass>
+                                             </Button>
+                                             <Button mnemonicParsing="false" onAction="#viewAccounts" text="View accounts">
+                                                 <styleClass>
+                                                     <String fx:value="btn" />
+                                                     <String fx:value="btn-default" />
+                                                 </styleClass>
+                                             </Button>
+                                         </items>
+                                     </ToolBar>
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="233.0" />
@@ -172,6 +231,9 @@
                                     <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
                                  </rowConstraints>
                               </GridPane>
                            </children>
