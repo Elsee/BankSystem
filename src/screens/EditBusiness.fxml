@@ -33,19 +33,19 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new organization" GridPane.columnSpan="2" />
             <Label text="Vatin" GridPane.rowIndex="1" />
-            <TextField id="vatinField" styleClass="form-control" GridPane.rowIndex="2" />
+            <TextField fx:id="vatinField" styleClass="form-control" GridPane.rowIndex="2" />
             <Label text="Region" GridPane.rowIndex="3" />
             <Label text="City" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Street" GridPane.rowIndex="5" />
-            <TextField id="regionField" styleClass="form-control" GridPane.rowIndex="4" />
-            <TextField id="cityField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField id="streetField" styleClass="form-control" GridPane.rowIndex="6" />
+            <TextField fx:id="regionField" styleClass="form-control" GridPane.rowIndex="4" />
+            <TextField fx:id="cityField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="streetField" styleClass="form-control" GridPane.rowIndex="6" />
             <Label text="House" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField id="houseField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="houseField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Amount of money" GridPane.rowIndex="7" />
-            <TextField id="moneyField" styleClass="form-control" GridPane.rowIndex="8" />
+            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="8" />
             <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <Button mnemonicParsing="false" text="Update" GridPane.rowIndex="10">
                <styleClass>
                   <String fx:value="btn" />

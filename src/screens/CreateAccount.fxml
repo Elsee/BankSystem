@@ -27,7 +27,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new account" GridPane.columnSpan="2" />
             <Label text="Amount of money" GridPane.rowIndex="1" />
-            <TextField id="moneyField" styleClass="form-control" GridPane.rowIndex="2" />
+            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" text="Create" GridPane.rowIndex="4">
                <styleClass>
                   <String fx:value="btn" />
