@@ -1,8 +1,8 @@
 package environment;
 import login.Login;
-import ui.Administrator.CustomerI;
-import ui.userMain.Account;
-import ui.userMain.Transaction;
+import ui.employeeMain.CustomerI;
+import ui.customerMain.Account;
+import ui.customerMain.Transaction;
 
 import javax.sql.DataSource;
 import java.sql.*;

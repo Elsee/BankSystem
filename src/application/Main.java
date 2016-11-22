@@ -15,7 +15,7 @@ public class Main extends Application {
 
     static {
         SCREENS.put("login", "screens/Login.fxml");
-        SCREENS.put("customerMain", "screens/customerMain.fxml");
+        SCREENS.put("customerMain", "screens/CustomerMain.fxml");
         SCREENS.put("employeeMain", "screens/EmployeeMain.fxml");
         SCREENS.put("transactionForm", "screens/TransactionForm.fxml");
         SCREENS.put("peopleSearch", "screens/AdministratorSearchPeople.fxml");

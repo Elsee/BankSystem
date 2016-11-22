@@ -1,10 +1,7 @@
-package ui.userMain;
+package ui.customerMain;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
-
-import java.sql.Timestamp;
 
 /**
  * Created by svetl on 02.11.2016.

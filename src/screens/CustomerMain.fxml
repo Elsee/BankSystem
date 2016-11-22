@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<ScrollPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.userMain.UserMainController">
+<ScrollPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.customerMain.CustomerMainController">
    <content>
       <AnchorPane minHeight="400.0" minWidth="400.0" prefWidth="1024.0" stylesheets="@bootstrap.css">
          <children>

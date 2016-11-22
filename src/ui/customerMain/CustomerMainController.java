@@ -1,28 +1,19 @@
-package ui.userMain;
+package ui.customerMain;
 
-import environment.DataAccess;
-import environment.Screens.ScreenTransition;
 import environment.ViewController;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class UserMainController extends ViewController {
+public class CustomerMainController extends ViewController {
 
 //	private @FXML Button backButton;
 	private ObservableList<Account> accountsCollection;
@@ -78,7 +69,7 @@ public class UserMainController extends ViewController {
 
 	@FXML
 	void back() {
-		transitionTo("screen1");
+		transitionTo("login");
 	}
 
 	@FXML

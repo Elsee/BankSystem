@@ -1,4 +1,4 @@
-package ui.userMain;
+package ui.customerMain;
 
 import javafx.beans.property.*;
 

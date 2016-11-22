@@ -1,4 +1,4 @@
-package ui.Administrator;
+package ui.employeeMain;
 
 import environment.ViewController;
 import javafx.collections.FXCollections;
@@ -48,7 +48,7 @@ public class EmployeeMainController extends ViewController{
 
     @FXML
     void back() {
-        transitionTo("screen1");
+        transitionTo("login");
     }
 
     @FXML

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<AnchorPane prefHeight="768.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Administrator.AdmSearchPeopleController">
+<AnchorPane prefHeight="768.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.employeeMain.AdmSearchPeopleController">
    <children>
       <MenuBar prefHeight="32.0" prefWidth="1024.0">
         <menus>
