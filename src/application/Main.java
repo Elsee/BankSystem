@@ -24,6 +24,7 @@ public class Main extends Application {
         SCREENS.put("createBusiness", "screens/CreateBusiness.fxml");
         SCREENS.put("editBusiness", "screens/EditBusiness.fxml");
         SCREENS.put("viewCustomerAccounts", "screens/ViewAccounts.fxml");
+        SCREENS.put("transactionsList", "screens/TransactionsList.fxml");
     }
 
     @Override

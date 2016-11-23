@@ -68,4 +68,9 @@ public class CustomerMainController extends ViewController {
 		transitionTo("transactionForm");
 	}
 
+	@FXML
+	void viewTransactions() {
+		transitionTo("transactionsList");
+	}
+
 }

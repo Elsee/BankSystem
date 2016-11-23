@@ -56,7 +56,7 @@
             </TableView>
             <ToolBar layoutY="711.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="43.0" prefWidth="1024.0">
               <items>
-                <Button mnemonicParsing="false" text="View transactions">
+                <Button mnemonicParsing="false" onAction="#viewTransactions" text="View transactions">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-default" />
