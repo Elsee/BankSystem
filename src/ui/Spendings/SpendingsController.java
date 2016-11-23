@@ -28,4 +28,6 @@ public class SpendingsController extends ViewController {
     void logout() {
         transitionTo("login");
     }
+
+
 }

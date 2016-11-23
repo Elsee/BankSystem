@@ -75,22 +75,7 @@ $$ LANGUAGE plpgsql;
 /*SELECT (update_customer_address(17, 'Udmurt Republic', 'Izhevsk', 'Pushkina', '20', '10'));*/
 
 
-/*Creates busines customer*/
-CREATE OR REPLACE FUNCTION CustomerBCreator(orgvatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount NUMERIC, phone NUMERIC)
-RETURNS void AS $$
-BEGIN
-    INSERT INTO bs_organization(org_vatin)
-    VALUES ($1);
-    INSERT INTO bs_customer(type_customer, address_id)
-    VALUES ('B', (SELECT addresscreator FROM AddressCreator($2, $3, $4, $5, NULL)));
-    INSERT INTO bs_business(customer_id, org_id)
-    VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))),(SELECT currval(pg_get_serial_sequence('bs_organization','org_id'))));
-    INSERT INTO bs_account(account_num, customer_id, open_date, close_date, active, balance)
-    VALUES ((random_account_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $6);
-	INSERT INTO bs_phone(customer_id, phone_num)
-	VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $7);
-END;
-$$ LANGUAGE plpgsql;
+
 
 /*Creates accounts*/
 CREATE OR REPLACE FUNCTION account_creator(cid INT, amount NUMERIC)

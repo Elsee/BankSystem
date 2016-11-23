@@ -60,5 +60,43 @@ INSERT INTO bs_db_errors VALUES ('E0012', 'Incorrect login'),
 INSERT INTO bs_db_errors VALUES ('E0014', 'No such person');
 INSERT INTO bs_db_errors VALUES ('E0015', 'Person already exists');
 INSERT INTO bs_db_errors VALUES ('E0016', 'Transaction failed');
+INSERT INTO bs_db_errors VALUES ('E0017', 'Organisation already exists');
+INSERT INTO bs_db_errors VALUES ('E0018', 'Unable to create transaction pattern');
+
 
 SELECT (customer_individual_creator('kek', 'kek', '1121111111', 'F', '1992-01-01', '112111111111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'kek1', 'kek1', '2000', '1111111121'));
+
+INSERT INTO bs_transaction_category VALUES (DEFAULT, 1, 'food'),
+(DEFAULT, 1, 'clothes'),
+(DEFAULT, 1, 'entertainment'),
+(DEFAULT, 1, 'medicine'),
+(DEFAULT, 1, 'utilities'),
+(DEFAULT, 1, 'travels'),
+(DEFAULT, 1, 'booking'),
+(DEFAULT, 1, 'service'),
+(DEFAULT, 1, 'other');
+
+INSERT INTO bs_transaction_category VALUES (DEFAULT, 11, 'CAVA cafeteria');
+
+SELECT customer_business_creator('3698521477', 'Tatarstan', 'Innopolis', 'Universitetskaya St', '1', '150000', '789526436');
+
+
+SELECT make_transaction('2931297219618678', '9520778928211512', '329');
+SELECT make_transaction('2931297219618678', '9520778928211512', '500');
+SELECT make_transaction('2931297219618678', '9520778928211512', '100');
+SELECT make_transaction('2931297219618678', '9520778928211512', '700');
+SELECT make_transaction('2931297219618678', '9520778928211512', '150');
+SELECT make_transaction('2931297219618678', '9520778928211512', '299');
+SELECT make_transaction('2931297219618678', '9520778928211512', '139');
+
+SELECT make_transaction('2931297219618678', '4526365745298643', '500');
+SELECT make_transaction('2931297219618678', '4526365745298643', '400');
+SELECT make_transaction('2931297219618678', '5124339687606929', '100');
+SELECT make_transaction('2931297219618678', '5124339687606929', '150');
+
+
+SELECT creation_transaction_pattern('11', '2931297219618678', '9520778928211512', 'CAVA cafeteria');
+SELECT select_customer_transactions_by_pattern('2931297219618678');
+
+
+

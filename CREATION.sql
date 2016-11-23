@@ -438,7 +438,7 @@ CREATE FUNCTION select_customer_categories(int)
 $func$
 BEGIN
   RETURN QUERY
-  SELECT * FROM bs_transaction_category AS bstc WHERE bstc.customer_id = $1 OR bstc.customer_id = 1;
+  SELECT bstc.txn_cat_id, bstc.txn_type FROM bs_transaction_category AS bstc WHERE bstc.customer_id = $1 OR bstc.customer_id IN (SELECT bsc.customer_id FROM bs_customer AS bsc WHERE bsc.type_customer = 'S');
 END;
 $func$  LANGUAGE plpgsql;
 
@@ -561,3 +561,71 @@ BEGIN
                  WHERE person_id = $1::INTEGER;
 END;
 $BODY$ LANGUAGE plpgsql;
+
+/*Creates busines customer*/
+CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR)
+  RETURNS void AS $$
+BEGIN
+  INSERT INTO bs_organization(org_vatin)
+  VALUES ($1);
+  INSERT INTO bs_customer(type_customer, address_id)
+  VALUES ('B', (SELECT address_creator FROM address_creator($2, $3, $4, $5, '0')));
+  INSERT INTO bs_business(customer_id, org_id)
+  VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))),(SELECT currval(pg_get_serial_sequence('bs_organization','org_id'))));
+  INSERT INTO bs_account(account_num, customer_id, open_date, close_date, active, balance)
+  VALUES ((random_account_num_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $6::NUMERIC);
+  INSERT INTO bs_phone(customer_id, phone_num)
+  VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $7);
+  exception when others then
+  RAISE EXCEPTION 'E0017';
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION creation_transaction_pattern(VARCHAR, VARCHAR, VARCHAR, VARCHAR)
+  RETURNS VOID AS $$
+DECLARE cat_id int;
+  acc_id_from int;
+  acc_id_to int;
+  BEGIN
+    IF EXISTS (SELECT * FROM bs_transaction_category AS bstc WHERE bstc.customer_id = $1::INT AND bstc.txn_type = $4) THEN
+      cat_id := (SELECT bstc1.txn_cat_id FROM bs_transaction_category AS bstc1 WHERE bstc1.customer_id = $1::INT AND bstc1.txn_type = $4);
+    ELSE INSERT INTO bs_transaction_category VALUES (DEFAULT, $1::INT, $4);
+    END IF;
+    acc_id_from := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
+    acc_id_to := (SELECT bsa1.account_id  FROM bs_account AS bsa1 WHERE bsa1.account_num = $3);
+    INSERT INTO bs_customer_transaction_pattern VALUES ($1::INT, acc_id_from, acc_id_to, cat_id);
+  exception when others then
+  RAISE EXCEPTION 'E0018';
+  END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION select_customer_transactions_by_pattern(VARCHAR)
+  RETURNS TABLE(
+    txntype VARCHAR,
+    summ NUMERIC,
+    accout VARCHAR
+  ) AS $BODY$
+  BEGIN
+    RETURN QUERY
+    SELECT
+      CASE bstc.txn_type IS NULL
+      WHEN TRUE
+        THEN 'others'
+      ELSE bstc.txn_type END
+                      AS txntype,
+      sum(bst.amount) AS summ,
+      bsa.account_num AS account
+    FROM bs_account AS bsa1
+      NATURAL JOIN bs_transaction AS bst
+      LEFT JOIN (bs_transaction_category AS bstc
+        NATURAL JOIN bs_customer_transaction_pattern AS bstp)
+        ON bst.account_from_id = bstp.account_from_id AND bst.account_to_id = bstp.account_to_id
+      LEFT JOIN bs_account AS bsa ON bst.account_to_id = bsa.account_id
+    WHERE bsa1.account_num = $1
+    GROUP BY bst.account_to_id,  txntype, account
+    ORDER BY txntype;
+  END;
+  $BODY$ LANGUAGE plpgsql;
+
+
+
