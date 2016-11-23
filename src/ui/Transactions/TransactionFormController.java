@@ -44,18 +44,15 @@ public class TransactionFormController extends ViewController {
     }
 
     @FXML
-    protected void createTransaction() {
+    protected void createTransaction() throws SQLException {
         try{
-
-           if( this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText())) {
-               actiontarget.setText("Transaction successfully finished");
-           }
-           else {
-               actiontarget.setText("Errors have occured during transaction performing");
-           }
+            actiontarget.setText(" ");
+            this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText());
+            actiontarget.setText("Successfull");
         }
-        catch (SQLException e){
-            e.printStackTrace();
+        catch (SQLException sqle){
+            String errmes = this.data.getErrorMessage(sqle);
+            actiontarget.setText(errmes);
         }
     }
 

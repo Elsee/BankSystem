@@ -59,5 +59,6 @@ INSERT INTO bs_db_errors VALUES ('E0012', 'Incorrect login'),
 
 INSERT INTO bs_db_errors VALUES ('E0014', 'No such person');
 INSERT INTO bs_db_errors VALUES ('E0015', 'Person already exists');
+INSERT INTO bs_db_errors VALUES ('E0016', 'Transaction failed');
 
 SELECT (customer_individual_creator('kek', 'kek', '1121111111', 'F', '1992-01-01', '112111111111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'kek1', 'kek1', '2000', '1111111121'));
