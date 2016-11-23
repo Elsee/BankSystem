@@ -57,7 +57,7 @@ public class TransactionFormController extends ViewController {
 
     @FXML
     void back() {
-        transitionTo("screen1");
+        transitionTo("login");
     }
 
     @FXML
