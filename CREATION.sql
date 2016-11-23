@@ -415,7 +415,7 @@ DECLARE
 BEGIN
   from_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
   to_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
-  IF (to_id = NULL ) THEN
+  IF (to_id IS NOT NULL ) THEN
   INSERT INTO bs_transaction VALUES (DEFAULT, from_id, to_id, $3::NUMERIC, clock_timestamp());
   UPDATE bs_account SET balance = balance - $3::NUMERIC WHERE account_num = $1;
   UPDATE bs_account SET balance = balance + $3::NUMERIC WHERE account_num = $2;
@@ -543,7 +543,7 @@ END;
 $function$ LANGUAGE plpgsql;
 
 /*Get customers account*/
-CREATE OR REPLACE FUNCTION select_customer_accounts(cid INT)
+CREATE OR REPLACE FUNCTION select_customer_accounts(INT)
     RETURNS TABLE(aid INTEGER, accnum VARCHAR(16), cust_id INTEGER, opendate DATE, closedate DATE, act BOOLEAN, bal NUMERIC) AS $$
 BEGIN
     RETURN QUERY SELECT account_id, account_num, customer_id, open_date, close_date, active, balance
@@ -553,11 +553,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 /*Get customer id by person id*/
-CREATE OR REPLACE FUNCTION get_customer_id(pid VARCHAR)
+CREATE OR REPLACE FUNCTION get_customer_id(VARCHAR)
     RETURNS SETOF int AS $BODY$
 BEGIN
     RETURN QUERY SELECT customer_id
                  FROM bs_person NATURAL JOIN bs_individual NATURAL JOIN bs_customer
-                 WHERE person_id = pid::INTEGER ;
+                 WHERE person_id = $1::INTEGER;
 END;
 $BODY$ LANGUAGE plpgsql;

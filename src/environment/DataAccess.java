@@ -1,7 +1,6 @@
 package environment;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import login.Login;
-import ui.employeeMain.CustomerAccounts;
+import ui.employeeMain.CustomerAccount;
 import ui.employeeMain.CustomerI;
 import ui.customerMain.Account;
 import ui.customerMain.Transaction;
@@ -106,13 +105,13 @@ public class DataAccess {
     }
 
     public ArrayList getAccounts(int cid) throws SQLException{
-        ArrayList<CustomerAccounts> accounts = new ArrayList<>();
+        ArrayList<CustomerAccount> accounts = new ArrayList<>();
         Connection connection = getConnection();
         CallableStatement statement = connection.prepareCall(" { call  select_customer_accounts(?) } ");
         statement.setInt(1, cid);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            accounts.add(new CustomerAccounts(rs.getInt("aid"), rs.getString("accnum"), rs.getInt("cust_id"), rs.getString("opendate"), rs.getString("closedate"), rs.getBoolean("act"), rs.getString("bal")));
+            accounts.add(new CustomerAccount(rs.getInt("aid"), rs.getString("accnum"), rs.getInt("cust_id"), rs.getString("opendate"), rs.getString("closedate"), rs.getBoolean("act"), rs.getString("bal")));
         }
         rs.close();
         statement.close();

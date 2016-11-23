@@ -2,14 +2,12 @@ package ui.Transactions;
 
 import environment.ViewController;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import ui.employeeMain.CustomerAccounts;
+import ui.employeeMain.CustomerAccount;
 
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -35,7 +33,7 @@ public class TransactionFormController extends ViewController {
         if (this.getParam() != null) {
             accountsList = this.getParam();
             for (int i = 0; i < accountsList.size(); ++i) {
-                CustomerAccounts curAcc = (CustomerAccounts) accountsList.get(i);
+                CustomerAccount curAcc = (CustomerAccount) accountsList.get(i);
                 accountsNumbers.add(curAcc.getAccountNum());
             }
             cb.setValue(accountsNumbers.get(0));

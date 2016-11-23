@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-import ui.employeeMain.CustomerAccounts;
+import ui.employeeMain.CustomerAccount;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ViewCustomerAccountsController extends ViewController {
         try {
             if (this.getParam() != null) {
                 int custId = (int)this.getParam().get(0);
-                ArrayList<CustomerAccounts> accounts = this.data.getAccounts(custId);
+                ArrayList<CustomerAccount> accounts = this.data.getAccounts(custId);
                 ObservableList searchedAccounts = FXCollections.observableArrayList(accounts);
                 accountsTable.setItems(searchedAccounts);
             }

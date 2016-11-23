@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class CustomerAccounts {
+public class CustomerAccount {
     private final SimpleIntegerProperty aid = new SimpleIntegerProperty();
     private final SimpleStringProperty accountNum = new SimpleStringProperty();
     private final SimpleIntegerProperty customerId = new SimpleIntegerProperty();
@@ -13,7 +13,7 @@ public class CustomerAccounts {
     private final SimpleBooleanProperty activation = new SimpleBooleanProperty();
     private final SimpleStringProperty balance = new SimpleStringProperty();
 
-    public CustomerAccounts(int id, String accnum, int cid, String open_date, String close_date, boolean activ, String bal) {
+    public CustomerAccount(int id, String accnum, int cid, String open_date, String close_date, boolean activ, String bal) {
         setId(id);
         setAccNum(accnum);
         setCId(cid);

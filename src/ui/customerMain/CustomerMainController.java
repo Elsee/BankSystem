@@ -4,17 +4,11 @@ import environment.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import ui.employeeMain.CustomerAccounts;
+import ui.employeeMain.CustomerAccount;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomerMainController extends ViewController {
 
@@ -22,7 +16,7 @@ public class CustomerMainController extends ViewController {
 	private ObservableList<Account> accountsCollection;
 	private ObservableList<Transaction> transactionsCollection;
 
-	ArrayList<CustomerAccounts> accounts;
+	ArrayList<CustomerAccount> accounts = new ArrayList<>();
 
 	@FXML
 	TableView accountsTable;
@@ -92,5 +86,4 @@ public class CustomerMainController extends ViewController {
 	void spendings() {
 		transitionTo("spendings");
 	}
-
 }
