@@ -28,10 +28,11 @@ public class TransactionFormController extends ViewController {
     Text actiontarget;
 
     ArrayList accountsList;
-    ArrayList<String> accountsNumbers = new ArrayList<>();
+    ArrayList<String> accountsNumbers;
 
     @FXML
     protected void init() {
+        accountsNumbers = new ArrayList<>();
         if (this.getParam() != null) {
             accountsList = this.getParam();
             for (int i = 0; i < accountsList.size(); ++i) {
