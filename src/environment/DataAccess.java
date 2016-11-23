@@ -1,4 +1,5 @@
 package environment;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import login.Login;
 import ui.employeeMain.CustomerAccounts;
 import ui.employeeMain.CustomerI;
@@ -155,14 +156,14 @@ public class DataAccess {
         return rs;
     }
 
-    public void makeTransaction(String accFrom, String accTo, String transSum) throws SQLException {
+    public boolean makeTransaction(String accFrom, String accTo, String transSum) throws SQLException {
         Connection connection = getConnection();
         CallableStatement statement = connection.prepareCall(" { call make_transaction(?, ?, ?) } ");
         statement.setString(1, accFrom);
         statement.setString(2, accTo);
         statement.setString(3, transSum);
-        ResultSet rs = statement.executeQuery();
-        rs.close();
+        Boolean rs = statement.execute();
         statement.close();
+        return rs;
     }
 }
