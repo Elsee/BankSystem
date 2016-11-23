@@ -562,10 +562,23 @@ BEGIN
 END;
 $BODY$ LANGUAGE plpgsql;
 
+/*View transactions*/
+CREATE OR REPLACE FUNCTION get_account_transactions(accid Int)
+  RETURNS TABLE(t TIMESTAMP,acc_from_num VARCHAR, acc_to_num VARCHAR, val NUMERIC) AS $$
+BEGIN
+  RETURN QUERY SELECT txn_timestamp, b.account_num, c.account_num, amount FROM
+    (SELECT * FROM bs_transaction WHERE account_from_id = accid OR account_to_id = accid) AS a,
+    (SELECT * FROM bs_account) AS b,
+    (SELECT * FROM bs_account) AS c
+  WHERE b.account_id = a.account_from_id AND c.account_id = a.account_to_id
+               ORDER BY txn_timestamp DESC;
+
+END;
 /*Creates busines customer*/
 CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR)
   RETURNS void AS $$
 BEGIN
+$$ LANGUAGE plpgsql;
   INSERT INTO bs_organization(org_vatin)
   VALUES ($1);
   INSERT INTO bs_customer(type_customer, address_id)

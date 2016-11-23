@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import ui.employeeMain.CustomerAccount;
+import ui.employeeMain.CustomerI;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -79,7 +80,11 @@ public class CustomerMainController extends ViewController {
 
 	@FXML
 	void viewTransactions() {
-		transitionTo("transactionsList");
+		int ix = accountsTable.getSelectionModel().getSelectedIndex();
+		CustomerAccount selesctedAccount = accounts.get(ix);
+		ArrayList<Integer> selectedAccId = new ArrayList<>();
+		selectedAccId.add(selesctedAccount.getAid());
+		transitionTo("transactionsList", selectedAccId);
 	}
 
 	@FXML

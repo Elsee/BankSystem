@@ -74,4 +74,6 @@ DROP TABLE bs_db_errors;
 DROP FUNCTION alphanumeric_only(VARCHAR);
 DROP FUNCTION alphabets_only(VARCHAR);
 DROP FUNCTION numeric_only(VARCHAR);
+
+DROP FUNCTION get_account_transactions(INT);
 /* DROPPERS END */

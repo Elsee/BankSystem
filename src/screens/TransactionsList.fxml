@@ -17,7 +17,7 @@
                <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions" />
                <MenuButton mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" styleClass="nav-item" text="Personal">
                    <items>
-                       <MenuItem mnemonicParsing="false" onAction="#spendings" styleClass=".menu-item" text="Spendings" />
+                       <MenuItem mnemonicParsing="false" onAction="#spendings" text="Spendings" />
                        <MenuItem mnemonicParsing="false" text="Templates" />
                        <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
                    </items>
@@ -27,26 +27,26 @@
       <Text layoutX="13.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Transactions" />
       <ScrollPane layoutX="13.0" layoutY="121.0" prefHeight="628.0" prefViewportHeight="200.0" prefViewportWidth="996.0" prefWidth="998.0">
          <content>
-            <TableView fx:id="transactionTable" layoutX="14.0" layoutY="97.0" prefHeight="200.0" prefWidth="996.0">
+            <TableView fx:id="transactionTable" layoutX="14.0" layoutY="97.0" prefWidth="996.0">
               <columns>
                 <TableColumn prefWidth="203.0" text="Date">
                     <cellValueFactory>
-                        <PropertyValueFactory property="date" />
+                        <PropertyValueFactory property="time" />
                     </cellValueFactory>
                 </TableColumn>
+                  <TableColumn prefWidth="226.0" text="From account">
+                      <cellValueFactory>
+                          <PropertyValueFactory property="from" />
+                      </cellValueFactory>
+                  </TableColumn>
                 <TableColumn prefWidth="350.0" text="To account">
                     <cellValueFactory>
-                        <PropertyValueFactory property="toAccount" />
+                        <PropertyValueFactory property="to" />
                     </cellValueFactory>
                 </TableColumn>
                   <TableColumn prefWidth="216.0" text="Amount">
                       <cellValueFactory>
                           <PropertyValueFactory property="amount" />
-                      </cellValueFactory>
-                  </TableColumn>
-                  <TableColumn prefWidth="226.0" text="Category">
-                      <cellValueFactory>
-                          <PropertyValueFactory property="category" />
                       </cellValueFactory>
                   </TableColumn>
               </columns>

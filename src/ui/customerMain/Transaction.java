@@ -1,5 +1,6 @@
 package ui.customerMain;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -8,10 +9,10 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Transaction {
     private final SimpleStringProperty time = new SimpleStringProperty();
-    private final SimpleLongProperty from = new SimpleLongProperty();
-    private final SimpleLongProperty to = new SimpleLongProperty();
+    private final SimpleStringProperty from = new SimpleStringProperty();
+    private final SimpleStringProperty to = new SimpleStringProperty();
     private final SimpleStringProperty amount = new SimpleStringProperty();
-    public Transaction(String pTime, Long pFrom, Long pTo, String pAmount) {
+    public Transaction(String pTime, String pFrom, String pTo, String pAmount) {
         setTime(pTime);
         setFrom(pFrom);
         setTo(pTo);
@@ -22,10 +23,23 @@ public class Transaction {
         return time.get();
     }
 
-    public void setFrom(long pFrom) {
+    public String getFrom() {
+        return from.get();
+    }
+
+    public String getTo() {
+        return to.get();
+    }
+
+    public String getAmount() {
+        return amount.get();
+    }
+
+
+    public void setFrom(String pFrom) {
         this.from.set(pFrom);
     }
-    public void setTo(long pTo) {
+    public void setTo(String pTo) {
         this.to.set(pTo);
     }
     public void setTime(String pTime) {

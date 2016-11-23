@@ -165,4 +165,18 @@ public class DataAccess {
         rs.close();
         statement.close();
     }
+
+    public ArrayList getTransactions(int accId) throws SQLException{
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call  get_account_transactions(?) } ");
+        statement.setInt(1, accId);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            transactions.add(new Transaction(rs.getString("t"), rs.getString("acc_from_num"), rs.getString("acc_to_num"), rs.getString("val")));
+        }
+        rs.close();
+        statement.close();
+        return transactions;
+    }
 }
