@@ -7,8 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import ui.employeeMain.CustomerAccounts;
 
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by svetl on 01.11.2016.
@@ -24,12 +27,31 @@ public class TransactionFormController extends ViewController {
     @FXML
     Text actiontarget;
 
-    ObservableList<String> accountsList = FXCollections.observableArrayList("account1", "account2");
+    ArrayList accountsList;
+    ArrayList<String> accountsNumbers = new ArrayList<>();
 
     @FXML
     protected void init() {
-        cb.setValue("account1");
-        cb.setItems(accountsList);
+        if (this.getParam() != null) {
+            accountsList = this.getParam();
+            for (int i = 0; i < accountsList.size(); ++i) {
+                CustomerAccounts curAcc = (CustomerAccounts) accountsList.get(i);
+                accountsNumbers.add(curAcc.getAccountNum());
+            }
+            cb.setValue(accountsNumbers.get(0));
+            cb.setItems(FXCollections.observableArrayList(accountsNumbers));
+        }
+    }
+
+    @FXML
+    protected void createTransaction() {
+        try{
+
+            this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText());
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

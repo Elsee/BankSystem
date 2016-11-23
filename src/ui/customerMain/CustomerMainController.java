@@ -22,6 +22,8 @@ public class CustomerMainController extends ViewController {
 	private ObservableList<Account> accountsCollection;
 	private ObservableList<Transaction> transactionsCollection;
 
+	ArrayList<CustomerAccounts> accounts;
+
 	@FXML
 	TableView accountsTable;
 
@@ -32,7 +34,7 @@ public class CustomerMainController extends ViewController {
 			if (this.getParam() != null) {
 				String personId = (int)this.getParam().get(0) + "";
 				int custId = this.data.getCustomerId(personId);
-				ArrayList<CustomerAccounts> accounts = this.data.getAccounts(custId);
+				accounts = this.data.getAccounts(custId);
 				ObservableList searchedAccounts = FXCollections.observableArrayList(accounts);
 				accountsTable.setItems(searchedAccounts);
 			}
@@ -78,7 +80,7 @@ public class CustomerMainController extends ViewController {
 
 	@FXML
 	void transactionForm() {
-		transitionTo("transactionForm");
+		transitionTo("transactionForm", accounts);
 	}
 
 	@FXML

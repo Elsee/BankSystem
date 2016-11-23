@@ -33,8 +33,6 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -44,18 +42,16 @@
             <Label text="From account" GridPane.rowIndex="1" />
             <ChoiceBox fx:id="cb" prefHeight="27.0" prefWidth="358.0" GridPane.rowIndex="2" />
             <Label text="To account" GridPane.rowIndex="3" />
-            <TextField prefWidth="565.0" styleClass="form-control" GridPane.rowIndex="4" fx:id="toAccountField" />
+            <TextField fx:id="toAccountField" prefWidth="565.0" styleClass="form-control" GridPane.rowIndex="4" />
             <Label text="Amount" GridPane.rowIndex="5" />
-            <TextField styleClass="form-control" GridPane.rowIndex="6" fx:id="amountField"/>
-            <Button mnemonicParsing="false" text="Create" GridPane.rowIndex="10">
+            <TextField fx:id="amountField" styleClass="form-control" GridPane.rowIndex="6" />
+            <Button mnemonicParsing="false" onAction="#createTransaction" text="Create" GridPane.rowIndex="8">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-primary" />
                </styleClass>
             </Button>
-            <Label text="Transaction category" GridPane.rowIndex="7" />
-            <TextField styleClass="form-control" GridPane.rowIndex="8" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="11" fx:id="actiontarget" />
+            <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="9" />
          </children>
          <padding>
             <Insets bottom="20.0" left="10.0" right="10.0" top="15.0" />

@@ -407,17 +407,17 @@ BEFORE UPDATE ON bs_transaction FOR each ROW
 EXECUTE PROCEDURE transaction_checker();
 
 /*  SQL Transaction method for Transaction table */
-CREATE FUNCTION make_transaction(VARCHAR, VARCHAR, NUMERIC)
-  RETURNS BOOLEAN AS $$
+CREATE FUNCTION make_transaction(VARCHAR, VARCHAR, VARCHAR)
+  RETURNS void AS $$
 DECLARE
   from_id int;
   to_id int;
 BEGIN
   from_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
   to_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
-  INSERT INTO bs_transaction VALUES (DEFAULT, from_id, to_id, $3, clock_timestamp());
-  UPDATE bs_account SET balance = balance - $3 WHERE account_num = $1;
-  UPDATE bs_account SET balance = balance + $3 WHERE account_num = $2;
+  INSERT INTO bs_transaction VALUES (DEFAULT, from_id, to_id, $3::NUMERIC, clock_timestamp());
+  UPDATE bs_account SET balance = balance - $3::NUMERIC WHERE account_num = $1;
+  UPDATE bs_account SET balance = balance + $3::NUMERIC WHERE account_num = $2;
 END;
 $$ LANGUAGE plpgsql;
 
