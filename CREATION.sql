@@ -574,11 +574,11 @@ BEGIN
                ORDER BY txn_timestamp DESC;
 
 END;
+$$ LANGUAGE plpgsql;
 /*Creates busines customer*/
 CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR)
   RETURNS void AS $$
 BEGIN
-$$ LANGUAGE plpgsql;
   INSERT INTO bs_organization(org_vatin)
   VALUES ($1);
   INSERT INTO bs_customer(type_customer, address_id)

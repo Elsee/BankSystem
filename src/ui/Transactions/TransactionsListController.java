@@ -53,8 +53,4 @@ public class TransactionsListController extends ViewController {
         transitionTo("spendings");
     }
 
-    protected void init(){
-
-    }
-
 }
