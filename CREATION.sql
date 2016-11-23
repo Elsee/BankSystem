@@ -373,8 +373,8 @@ EXECUTE PROCEDURE account_checker();
 /* Transaction entity table creation */
 CREATE TABLE bs_transaction(
   txn_id serial PRIMARY KEY,
-  account_from_id int REFERENCES bs_account(account_id),
-  account_to_id int REFERENCES bs_account(account_id),
+  account_from_id int REFERENCES bs_account(account_id) NOT NULL,
+  account_to_id int REFERENCES bs_account(account_id) NOT NULL,
   amount NUMERIC NOT NULL,
   txn_timestamp TIMESTAMP NOT NULL,
   CHECK (bs_transaction.account_to_id <> bs_transaction.account_from_id)
