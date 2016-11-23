@@ -1,15 +1,18 @@
-package ui.Transactions;
+package ui.Spendings;
 
 import environment.ViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 
 /**
  * Created by svetl on 23.11.2016.
  */
-public class TransactionsListController extends ViewController {
+public class SpendingsController extends ViewController {
     @FXML
-    TableView transactionTable;
+    TableView spendingsTable;
+    @FXML
+    Text total;
 
     @FXML
     void mainScreen() {
@@ -24,10 +27,5 @@ public class TransactionsListController extends ViewController {
     @FXML
     void logout() {
         transitionTo("login");
-    }
-
-    @FXML
-    void spendings() {
-        transitionTo("spendings");
     }
 }

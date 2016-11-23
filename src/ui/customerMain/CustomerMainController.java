@@ -73,4 +73,9 @@ public class CustomerMainController extends ViewController {
 		transitionTo("transactionsList");
 	}
 
+	@FXML
+	void spendings() {
+		transitionTo("spendings");
+	}
+
 }

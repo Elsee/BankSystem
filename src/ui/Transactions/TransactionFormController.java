@@ -41,4 +41,9 @@ public class TransactionFormController extends ViewController {
     void mainScreen() {
         transitionTo("customerMain");
     }
+
+    @FXML
+    void spendings() {
+        transitionTo("spendings");
+    }
 }

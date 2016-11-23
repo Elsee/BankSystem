@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane minHeight="400.0" minWidth="400.0" prefHeight="768.0" prefWidth="1024.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Spendings.SpendingsController">
+   <children>
+       <HBox prefHeight="58.0" prefWidth="1024.0" styleClass="nav">
+           <children>
+               <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#mainScreen" prefHeight="59.0" prefWidth="70.0" styleClass="nav-item" text="Main" />
+               <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions" />
+               <MenuButton mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" styleClass="nav-item" text="Personal">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="Spendings" />
+                       <MenuItem mnemonicParsing="false" text="Templates" />
+                       <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
+                   </items>
+               </MenuButton>
+           </children>
+       </HBox>
+      <Text layoutX="13.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Spendings" />
+       <Text layoutX="14.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="Total amount: " />
+       <Text fx:id="total" layoutX="167.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" />
+
+       <ScrollPane layoutX="13.0" layoutY="172.0" prefHeight="577.0" prefViewportHeight="200.0" prefViewportWidth="996.0" prefWidth="998.0">
+         <content>
+            <TableView fx:id="spendingsTable" layoutX="14.0" layoutY="97.0" prefHeight="200.0" prefWidth="996.0">
+               <columns>
+                  <TableColumn prefWidth="236.0" text="Category" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="category" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="205.0" text="Sum" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="sum" />
+                      </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="191.0" text="Percent of total" >
+                      <cellValueFactory>
+                          <PropertyValueFactory property="percent" />
+                      </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
