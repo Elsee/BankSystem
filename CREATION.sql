@@ -549,3 +549,13 @@ BEGIN
                  WHERE customer_id = $1;
 END;
 $$ LANGUAGE plpgsql;
+
+/*Get customer id by person id*/
+CREATE OR REPLACE FUNCTION get_customer_id(pid VARCHAR)
+    RETURNS SETOF int AS $BODY$
+BEGIN
+    RETURN QUERY SELECT customer_id
+                 FROM bs_person NATURAL JOIN bs_individual NATURAL JOIN bs_customer
+                 WHERE person_id = pid::INTEGER ;
+END;
+$BODY$ LANGUAGE plpgsql;

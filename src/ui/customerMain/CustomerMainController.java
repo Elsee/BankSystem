@@ -10,8 +10,10 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import ui.employeeMain.CustomerAccounts;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerMainController extends ViewController {
@@ -26,6 +28,17 @@ public class CustomerMainController extends ViewController {
 
 	@FXML
 	protected void init() {
+		try {
+			if (this.getParam() != null) {
+				String personId = (int)this.getParam().get(0) + "";
+				int custId = this.data.getCustomerId(personId);
+				ArrayList<CustomerAccounts> accounts = this.data.getAccounts(custId);
+				ObservableList searchedAccounts = FXCollections.observableArrayList(accounts);
+				accountsTable.setItems(searchedAccounts);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 /*		try {
 			List<Account> accounts = data.getAllAccounts();
 			accountsCollection = FXCollections.observableArrayList(accounts);

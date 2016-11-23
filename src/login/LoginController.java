@@ -1,6 +1,8 @@
 package login;
 
 import environment.ViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -27,12 +29,13 @@ public class LoginController extends ViewController{
             Login login = (Login) arrayList.get(0);
 
             if(login.getUser_type().equals("E")){
+
                 transitionTo("employeeMain");
             }
             else {
-                ArrayList<Integer> personId = new ArrayList<>();
-                personId.add(login.getUser_id());
-                transitionTo("customerMain", personId);
+                ArrayList<Integer> listPersonId = new ArrayList<>();
+                listPersonId.add(login.getPerson_id());
+                transitionTo("customerMain", listPersonId);
             }
         }
         catch (SQLException sqle){

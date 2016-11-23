@@ -58,6 +58,20 @@ public class DataAccess {
         return logins;
     }
 
+    public int getCustomerId(String personId) throws SQLException {
+        Connection connection = getConnection();
+        ArrayList<Integer> cid = new ArrayList<>();
+        CallableStatement statement = connection.prepareCall(" { call get_customer_id(?) } ");
+        statement.setString(1, personId);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            cid.add(rs.getInt(1));
+        }
+        rs.close();
+        statement.close();
+        return cid.get(0);
+    }
+
     public String getErrorMessage(SQLException error) throws SQLException {
         String errno = error.toString();
         Pattern p = Pattern.compile("E[0-9]{4}");

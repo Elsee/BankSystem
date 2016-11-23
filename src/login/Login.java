@@ -32,7 +32,7 @@ public class Login {
     public String getUser_type(){
         return this.user_type.get();
     }
-    public int getUser_id(){
-        return this.user_id.get();
+    public int getPerson_id(){
+        return this.user_person_id.get();
     }
 }
