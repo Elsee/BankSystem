@@ -155,14 +155,14 @@ public class DataAccess {
         return rs;
     }
 
-    public boolean makeTransaction(String accFrom, String accTo, String transSum) throws SQLException {
+    public void makeTransaction(String accFrom, String accTo, String transSum) throws SQLException {
         Connection connection = getConnection();
         CallableStatement statement = connection.prepareCall(" { call make_transaction(?, ?, ?) } ");
         statement.setString(1, accFrom);
         statement.setString(2, accTo);
         statement.setString(3, transSum);
-        Boolean rs = statement.execute();
+        ResultSet rs = statement.executeQuery();
+        rs.close();
         statement.close();
-        return rs;
     }
 }

@@ -11,7 +11,7 @@ DROP TABLE bs_customer_transaction_pattern;
 DROP FUNCTION select_customer_categories(int);
 DROP TABLE bs_transaction_category;
 
-DROP FUNCTION make_transaction(VARCHAR, VARCHAR, NUMERIC);
+DROP FUNCTION make_transaction(VARCHAR, VARCHAR, VARCHAR);
 
 DROP TRIGGER check_transaction_update ON bs_transaction;
 DROP TRIGGER check_transaction_insert ON bs_transaction;

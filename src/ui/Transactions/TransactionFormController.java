@@ -26,10 +26,11 @@ public class TransactionFormController extends ViewController {
     Text actiontarget;
 
     ArrayList accountsList;
-    ArrayList<String> accountsNumbers = new ArrayList<>();
+    ArrayList<String> accountsNumbers;
 
     @FXML
     protected void init() {
+        accountsNumbers = new ArrayList<>();
         if (this.getParam() != null) {
             accountsList = this.getParam();
             for (int i = 0; i < accountsList.size(); ++i) {
@@ -42,18 +43,15 @@ public class TransactionFormController extends ViewController {
     }
 
     @FXML
-    protected void createTransaction() {
+    protected void createTransaction() throws SQLException {
         try{
-
-           if( this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText())) {
-               actiontarget.setText("Transaction successfully finished");
-           }
-           else {
-               actiontarget.setText("Errors have occured during transaction performing");
-           }
+            actiontarget.setText(" ");
+            this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText());
+            actiontarget.setText("Successfull");
         }
-        catch (SQLException e){
-            e.printStackTrace();
+        catch (SQLException sqle){
+            String errmes = this.data.getErrorMessage(sqle);
+            actiontarget.setText(errmes);
         }
     }
 
