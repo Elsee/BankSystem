@@ -27,19 +27,19 @@
       <Text layoutX="13.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Transactions" />
       <ScrollPane layoutX="13.0" layoutY="121.0" prefHeight="628.0" prefViewportHeight="200.0" prefViewportWidth="996.0" prefWidth="998.0">
          <content>
-            <TableView fx:id="transactionTable" layoutX="14.0" layoutY="97.0" prefWidth="996.0">
+            <TableView fx:id="transactionTable" layoutX="14.0" layoutY="97.0" prefHeight="400.0" prefWidth="992.0">
               <columns>
-                <TableColumn prefWidth="203.0" text="Date">
+                <TableColumn prefWidth="263.0" text="Date">
                     <cellValueFactory>
                         <PropertyValueFactory property="time" />
                     </cellValueFactory>
                 </TableColumn>
-                  <TableColumn prefWidth="226.0" text="From account">
+                  <TableColumn prefWidth="248.0" text="From account">
                       <cellValueFactory>
                           <PropertyValueFactory property="from" />
                       </cellValueFactory>
                   </TableColumn>
-                <TableColumn prefWidth="350.0" text="To account">
+                <TableColumn prefWidth="268.0" text="To account">
                     <cellValueFactory>
                         <PropertyValueFactory property="to" />
                     </cellValueFactory>
