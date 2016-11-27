@@ -69,7 +69,7 @@
                                              <Insets />
                                          </GridPane.margin>
                                      </Button>
-                                    <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                                    <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alert-danger" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                                     <ScrollPane prefHeight="355.0" prefWidth="994.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
                                        <content>
                                           <GridPane hgap="10.0" prefHeight="339.0" prefWidth="984.0" vgap="10.0">
@@ -153,7 +153,7 @@
                                     <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
                                     <Label text="Org. num" GridPane.rowIndex="1" />
                                      <TextField fx:id="orgNumField" styleClass="form-control" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                                     <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                     <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#organizationSearch">
                                        <styleClass>
                                           <String fx:value="btn" />
                                           <String fx:value="btn-primary" />
@@ -162,7 +162,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </Button>
-                                     <Text fx:id="actiontarget1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                                     <Text fx:id="actiontarget1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alert-danger" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                                      <ScrollPane prefHeight="355.0" prefWidth="994.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
                                          <content>
                                              <GridPane hgap="10.0" prefWidth="992.0" vgap="10.0">
@@ -177,7 +177,7 @@
                                                  </rowConstraints>
                                                  <children>
                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Search results" />
-                                                     <Button mnemonicParsing="false" onAction="#personCreate" text="+ new organization" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                                     <Button mnemonicParsing="false" onAction="#organizationCreate" text="+ new organization" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                                                          <styleClass>
                                                              <String fx:value="btn" />
                                                              <String fx:value="btn-lg" />
@@ -188,12 +188,12 @@
                                                          <columns>
                                                              <TableColumn prefWidth="88.0" text="Id">
                                                                  <cellValueFactory>
-                                                                     <PropertyValueFactory property="cOrgid" />
+                                                                     <PropertyValueFactory property="cid" />
                                                                  </cellValueFactory>
                                                              </TableColumn>
                                                               <TableColumn fx:id="orgNumColumn" prefWidth="291.0" text="Orgnum">
                                                                   <cellValueFactory>
-                                                                      <PropertyValueFactory property="Orgnum" />
+                                                                      <PropertyValueFactory property="orgNum" />
                                                                   </cellValueFactory>
                                                               </TableColumn>
                                                          </columns>
@@ -213,7 +213,7 @@
                                                      <String fx:value="btn-default" />
                                                  </styleClass>
                                              </Button>
-                                             <Button mnemonicParsing="false" onAction="#viewAccounts" text="View accounts">
+                                             <Button mnemonicParsing="false" onAction="#viewBAccounts" text="View accounts">
                                                  <styleClass>
                                                      <String fx:value="btn" />
                                                      <String fx:value="btn-default" />

@@ -16,8 +16,8 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="644.0" minHeight="10.0" prefHeight="623.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="644.0" minHeight="10.0" prefHeight="574.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="644.0" minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="202.0" minHeight="0.0" prefHeight="68.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -28,7 +28,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Customer accounts" />
             <ScrollPane fitToWidth="true" prefHeight="615.0" prefViewportHeight="634.0" prefViewportWidth="1002.0" prefWidth="1002.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <content>
-                  <TableView fx:id="accountsTable" prefHeight="607.0" prefWidth="1000.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                  <TableView fx:id="accountsTable" prefHeight="563.0" prefWidth="1000.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn prefWidth="252.0" text="Account number">
                           <cellValueFactory>

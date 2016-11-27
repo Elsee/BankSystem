@@ -542,6 +542,22 @@ BEGIN
 END;
 $function$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION select_organizations(orgNum VARCHAR)
+  RETURNS TABLE(cid INT, reg VARCHAR(20), ci VARCHAR(20), str VARCHAR(20), hou VARCHAR(20), apart VARCHAR(20), custy customer_type, oid INT, ovatin VARCHAR(10)) AS $function$
+BEGIN
+  IF EXISTS (SELECT bso.org_vatin
+             FROM bs_organization AS bso
+             WHERE bso.org_vatin = $1) THEN
+    RETURN QUERY
+    SELECT bsc.customer_id AS cid, bsa.region AS reg, bsa.city AS ci, bsa.street AS str, bsa.house AS hou, bsa.apartment AS apart, bsc.type_customer AS custy, bso.org_id AS oid, bso.org_vatin AS ovatin
+    FROM bs_customer AS bsc NATURAL JOIN bs_business AS bsb NATURAL JOIN bs_organization AS bso NATURAL JOIN bs_address AS bsa
+    WHERE bso.org_vatin = $1;
+  ELSE RAISE EXCEPTION 'E0019';
+  END IF;
+END;
+$function$ LANGUAGE plpgsql;
+
+
 /*Get customers account*/
 CREATE OR REPLACE FUNCTION select_customer_accounts(INT)
     RETURNS TABLE(aid INTEGER, accnum VARCHAR(16), cust_id INTEGER, opendate DATE, closedate DATE, act BOOLEAN, bal NUMERIC) AS $$
@@ -576,7 +592,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 /*Creates busines customer*/
-CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR)
+CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(10), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR)
   RETURNS void AS $$
 BEGIN
   INSERT INTO bs_organization(org_vatin)

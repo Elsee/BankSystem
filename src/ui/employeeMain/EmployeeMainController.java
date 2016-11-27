@@ -17,6 +17,7 @@ import java.util.List;
 
 public class EmployeeMainController extends ViewController{
     static private ArrayList individualsList;
+    static private ArrayList organizationsList;
 
     @FXML
     protected void init() {
@@ -106,5 +107,33 @@ public class EmployeeMainController extends ViewController{
         ArrayList<Integer> selectedCustomerId = new ArrayList<>();
         selectedCustomerId.add(selesctedCustomer.getCid());
         transitionTo("viewCustomerAccounts", selectedCustomerId);
+    }
+
+    @FXML
+    void organizationSearch() throws SQLException {
+        try{
+            actiontarget1.setText("");
+            ArrayList arrayListOrg = this.data.searchOrganizations(orgNumField.getText());
+            organizationsList = arrayListOrg;
+            ObservableList searchedOrg = FXCollections.observableArrayList(arrayListOrg);
+            organizationSearchTable.setItems(searchedOrg);
+        }
+        catch (SQLException sqle){
+            String errmes = this.data.getErrorMessage(sqle);
+            actiontarget1.setText(errmes);
+        }
+    }
+
+    @FXML
+    public void viewBAccounts(ActionEvent actionEvent) {
+        int ix = organizationSearchTable.getSelectionModel().getSelectedIndex();
+        CustomerB selesctedCustomer = (CustomerB) organizationsList.get(ix);
+        ArrayList<Integer> selectedCustomerId = new ArrayList<>();
+        selectedCustomerId.add(selesctedCustomer.getCid());
+        transitionTo("viewCustomerAccounts", selectedCustomerId);
+    }
+
+    public void organizationCreate(ActionEvent actionEvent) {
+        transitionTo("createBusiness");
     }
 }

@@ -1,6 +1,7 @@
 package environment;
 import login.Login;
 import ui.employeeMain.CustomerAccount;
+import ui.employeeMain.CustomerB;
 import ui.employeeMain.CustomerI;
 import ui.customerMain.Account;
 import ui.customerMain.Transaction;
@@ -40,8 +41,6 @@ public class DataAccess {
         statement.close();
         return customers;
     }
-
-
 
     public ArrayList login(String inputLogin, String inputPass) throws SQLException {
         ArrayList<Login> logins = new ArrayList<>();
@@ -209,7 +208,6 @@ public class DataAccess {
     }
 
     public void createNewAccount(int custID, Double money) throws SQLException {
-        ArrayList<CustomerAccount> accounts = new ArrayList<>();
         try (Connection connection = getConnection();
              CallableStatement statement = connection.prepareCall(" { call account_creator(?, ?) } ")) {
             statement.setInt(1, custID);
@@ -217,5 +215,40 @@ public class DataAccess {
             statement.executeQuery();
             statement.close();
         }
+    }
+
+    public ArrayList searchOrganizations(String orgNum) throws SQLException{
+        ArrayList<CustomerB> customersB = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call select_organizations(?) } ");
+        statement.setString(1, orgNum);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            customersB.add(new CustomerB(rs.getInt("cid"), rs.getString("ovatin")));
+        }
+        rs.close();
+        statement.close();
+        return customersB;
+    }
+
+    public boolean createBusiness(String vatinField,
+                                    String regionField,
+                                    String cityField,
+                                    String streetField,
+                                    String houseField,
+                                    String moneyField,
+                                    String phoneField) throws SQLException {
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call customer_business_creator(?, ?, ?, ?, ?, ?, ?) } ");
+        statement.setString(1, vatinField);
+        statement.setString(2, regionField);
+        statement.setString(3, cityField);
+        statement.setString(4, streetField);
+        statement.setString(5, houseField);
+        statement.setString(6, moneyField);
+        statement.setString(7, phoneField);
+        Boolean rs = statement.execute();
+        statement.close();
+        return rs;
     }
 }

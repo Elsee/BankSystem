@@ -4,9 +4,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- * Created by svetl on 14.11.2016.
- */
 public class CustomerI {
     private final SimpleIntegerProperty cid = new SimpleIntegerProperty();
     private final SimpleStringProperty firstname = new SimpleStringProperty();

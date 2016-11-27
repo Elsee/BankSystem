@@ -58,6 +58,7 @@
                   <String fx:value="btn-default" />
                </styleClass>
             </Button>
+             <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alert-danger" GridPane.columnSpan="3" GridPane.rowIndex="11" />
          </children>
       </GridPane>
    </content>
