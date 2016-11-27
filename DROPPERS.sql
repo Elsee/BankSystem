@@ -76,4 +76,7 @@ DROP FUNCTION alphabets_only(VARCHAR);
 DROP FUNCTION numeric_only(VARCHAR);
 
 DROP FUNCTION get_account_transactions(INT);
+
+DROP FUNCTION change_account_activity(VARCHAR(16));
+DROP FUNCTION get_close_date(VARCHAR(16));
 /* DROPPERS END */

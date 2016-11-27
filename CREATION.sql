@@ -640,5 +640,35 @@ CREATE OR REPLACE FUNCTION select_customer_transactions_by_pattern(VARCHAR)
   END;
   $BODY$ LANGUAGE plpgsql;
 
+/*Account block*/
+CREATE OR REPLACE FUNCTION change_account_activity(ac_num VARCHAR(16))
+  RETURNS BOOLEAN AS $$
+BEGIN
+  IF ((SELECT active
+  FROM bs_account
+  WHERE account_num = $1) = FALSE) THEN
+    UPDATE bs_account SET active = TRUE WHERE account_num = ac_num;
+    UPDATE bs_account SET close_date = NULL WHERE account_num = ac_num;
+    RETURN TRUE;
+  ELSE
+    UPDATE bs_account SET active = FALSE WHERE account_num = ac_num;
+    UPDATE bs_account SET close_date = current_date WHERE account_num = ac_num;
+    RETURN FALSE;
+  END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+/*Account close date*/
+CREATE OR REPLACE FUNCTION get_close_date(ac_num VARCHAR(16))
+  RETURNS DATE AS $$
+
+DECLARE closeDate DATE;
+BEGIN
+   SELECT close_date INTO closeDate
+  FROM bs_account
+  WHERE account_num = ac_num;
+  RETURN closeDate;
+END;
+$$ LANGUAGE plpgsql;
 
 

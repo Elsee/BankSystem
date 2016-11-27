@@ -3,6 +3,7 @@ package ui.ViewCustomerAccounts;
 import environment.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import ui.employeeMain.CustomerAccount;
@@ -10,10 +11,8 @@ import ui.employeeMain.CustomerAccount;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by svetl on 22.11.2016.
- */
 public class ViewCustomerAccountsController extends ViewController {
+    ObservableList<CustomerAccount> searchedAccounts;
     @FXML
     TableView accountsTable;
 
@@ -23,7 +22,7 @@ public class ViewCustomerAccountsController extends ViewController {
             if (this.getParam() != null) {
                 int custId = (int)this.getParam().get(0);
                 ArrayList<CustomerAccount> accounts = this.data.getAccounts(custId);
-                ObservableList searchedAccounts = FXCollections.observableArrayList(accounts);
+                searchedAccounts = FXCollections.observableArrayList(accounts);
                 accountsTable.setItems(searchedAccounts);
             }
         }
@@ -35,5 +34,20 @@ public class ViewCustomerAccountsController extends ViewController {
     @FXML
     void back() {
         transitionTo("employeeMain");
+    }
+
+    public void changeActivity(ActionEvent actionEvent) throws SQLException {
+        try {
+            int ix = accountsTable.getSelectionModel().getSelectedIndex();
+            CustomerAccount curAcc = searchedAccounts.get(ix);
+            String accountNum = curAcc.getAccountNum();
+            this.data.changeAccActivity(accountNum);
+            curAcc.setActivation(!curAcc.getActivation());
+            curAcc.setCDate(this.data.getCloseDate(accountNum));
+            accountsTable.refresh();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

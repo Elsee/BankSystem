@@ -7,8 +7,8 @@ import ui.customerMain.Transaction;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -178,5 +178,33 @@ public class DataAccess {
         rs.close();
         statement.close();
         return transactions;
+    }
+
+    public void changeAccActivity(String accNum) throws SQLException{
+        try (Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call change_account_activity(?) } ")) {
+            statement.setString(1, accNum);
+            statement.executeUpdate();
+            statement.close();
+        }
+    }
+
+    public String getCloseDate(String accNum) throws SQLException {
+        Date closeDate = null;
+        try (Connection connection = getConnection();
+             CallableStatement statement = connection.prepareCall(" { call get_close_date(?) } ")) {
+            statement.setString(1, accNum);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                closeDate = rs.getDate(1);
+            }
+            statement.close();
+        }
+        if (closeDate == null) {
+            return "";
+        }
+        else {
+            return closeDate.toString();
+        }
     }
 }
