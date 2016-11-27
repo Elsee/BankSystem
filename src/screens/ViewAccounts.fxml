@@ -18,6 +18,7 @@
         <rowConstraints>
           <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="644.0" minHeight="10.0" prefHeight="623.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="644.0" minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="202.0" minHeight="0.0" prefHeight="68.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <padding>
@@ -27,7 +28,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Customer accounts" />
             <ScrollPane fitToWidth="true" prefHeight="615.0" prefViewportHeight="634.0" prefViewportWidth="1002.0" prefWidth="1002.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <content>
-                  <TableView fx:id="accountsTable" prefWidth="991.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                  <TableView fx:id="accountsTable" prefHeight="607.0" prefWidth="1000.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn prefWidth="252.0" text="Account number">
                           <cellValueFactory>
@@ -49,6 +50,7 @@
                                 <PropertyValueFactory property="closeDate" />
                             </cellValueFactory>
                         </TableColumn>
+                        <TableColumn prefWidth="174.0" text="Activity">
                             <cellValueFactory>
                                 <PropertyValueFactory property="activation" />
                             </cellValueFactory>
@@ -60,21 +62,21 @@
                   </TableView>
                </content>
             </ScrollPane>
-            <Button mnemonicParsing="false" text="+ new account" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+            <Button mnemonicParsing="false" onAction="#addAccount" text="+ new account" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-success" />
                </styleClass>
             </Button>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
               <items>
-                  <Button mnemonicParsing="false" text="Back" onAction="#back">
+                  <Button mnemonicParsing="false" onAction="#back" text="Back">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-default" />
                      </styleClass>
                   </Button>
-                <Button mnemonicParsing="false" text="Change activity" translateX="786.0" onAction="#changeActivity">
+                <Button mnemonicParsing="false" onAction="#changeActivity" text="Change activity" translateX="786.0">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-default" />
@@ -82,6 +84,11 @@
                   </Button>
               </items>
             </ToolBar>
+            <Text fx:id="actionTarget" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alert-danger" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </GridPane.margin>
+            </Text>
          </children>
       </GridPane>
    </content>

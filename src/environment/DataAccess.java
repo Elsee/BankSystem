@@ -207,4 +207,15 @@ public class DataAccess {
             return closeDate.toString();
         }
     }
+
+    public void createNewAccount(int custID, Double money) throws SQLException {
+        ArrayList<CustomerAccount> accounts = new ArrayList<>();
+        try (Connection connection = getConnection();
+             CallableStatement statement = connection.prepareCall(" { call account_creator(?, ?) } ")) {
+            statement.setInt(1, custID);
+            statement.setDouble(2, money);
+            statement.executeQuery();
+            statement.close();
+        }
+    }
 }
