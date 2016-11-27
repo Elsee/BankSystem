@@ -237,9 +237,10 @@ public class DataAccess {
                                     String streetField,
                                     String houseField,
                                     String moneyField,
-                                    String phoneField) throws SQLException {
+                                    String phoneField,
+                                    String category) throws SQLException {
         Connection connection = getConnection();
-        CallableStatement statement = connection.prepareCall(" { call customer_business_creator(?, ?, ?, ?, ?, ?, ?) } ");
+        CallableStatement statement = connection.prepareCall(" { call customer_business_creator(?, ?, ?, ?, ?, ?, ?, ?) } ");
         statement.setString(1, vatinField);
         statement.setString(2, regionField);
         statement.setString(3, cityField);
@@ -247,8 +248,22 @@ public class DataAccess {
         statement.setString(5, houseField);
         statement.setString(6, moneyField);
         statement.setString(7, phoneField);
+        statement.setString(8, category);
         Boolean rs = statement.execute();
         statement.close();
         return rs;
+    }
+
+    public ArrayList getCategories() throws SQLException{
+        ArrayList<String> categories = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call  get_categories() } ");
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            categories.add(rs.getString(1));
+        }
+        rs.close();
+        statement.close();
+        return categories;
     }
 }

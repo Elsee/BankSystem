@@ -592,7 +592,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 /*Creates busines customer*/
-CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(10), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR)
+CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(10), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR, cat VARCHAR)
   RETURNS void AS $$
 BEGIN
   INSERT INTO bs_organization(org_vatin)
@@ -605,6 +605,10 @@ BEGIN
   VALUES ((random_account_num_creator()), (SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), current_date, NULL, true, $6::NUMERIC);
   INSERT INTO bs_phone(customer_id, phone_num)
   VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $7);
+  IF (cat <> '') THEN
+    INSERT INTO bs_transaction_category(customer_id, txn_type)
+    VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), cat);
+  END IF;
   exception when others then
   RAISE EXCEPTION 'E0017';
 END;
@@ -695,4 +699,15 @@ BEGIN
   VALUES ((random_account_creator()), cid, current_date, TRUE, amount::NUMERIC);
 END;
 $$ LANGUAGE plpgsql;
+
+/*Returns transaction categories*/
+CREATE OR REPLACE FUNCTION get_categories()
+  RETURNS SETOF VARCHAR AS $BODY$
+BEGIN
+  RETURN QUERY SELECT txn_type
+               FROM bs_transaction_category;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+SELECT get_categories();
 

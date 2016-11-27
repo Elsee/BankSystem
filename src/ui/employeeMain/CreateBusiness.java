@@ -1,8 +1,10 @@
 package ui.employeeMain;
 
 import environment.ViewController;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -29,6 +31,17 @@ public class CreateBusiness  extends ViewController {
     public TextField phoneField;
     @FXML
     private Text actiontarget;
+    @FXML
+    ChoiceBox cb;
+
+    protected void init() {
+        try {
+            cb.setItems(FXCollections.observableArrayList(this.data.getCategories()));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void back(ActionEvent actionEvent) {
         transitionTo("employeeMain");
@@ -37,6 +50,11 @@ public class CreateBusiness  extends ViewController {
     public void createBusiness(ActionEvent actionEvent) throws SQLException {
         try{
             actiontarget.setText("");
+            String cat="";
+            if (cb.getSelectionModel().getSelectedItem() !=null) {
+                cat = cb.getSelectionModel().getSelectedItem().toString();
+            }
+            System.out.println(cat);
             if(this.data.createBusiness(
                     vatinField.getText(),
                     regionField.getText(),
@@ -44,7 +62,8 @@ public class CreateBusiness  extends ViewController {
                     streetField.getText(),
                     houseField.getText(),
                     moneyField.getText(),
-                    phoneField.getText())){
+                    phoneField.getText(),
+                    cat)){
                 transitionTo("employeeMain");
             }
             else {

@@ -22,12 +22,6 @@
                         <String fx:value="btn-default" />
                     </styleClass>
                 </Button>
-                <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" text="Reports">
-                    <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn-primary" />
-                    </styleClass>
-                </Button>
             </children>
         </AnchorPane>
     </top>
@@ -153,7 +147,7 @@
                                     <Label styleClass="h1" text="Client Search" GridPane.columnSpan="3" />
                                     <Label text="Org. num" GridPane.rowIndex="1" />
                                      <TextField fx:id="orgNumField" styleClass="form-control" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                                     <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#organizationSearch">
+                                     <Button mnemonicParsing="false" onAction="#organizationSearch" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <styleClass>
                                           <String fx:value="btn" />
                                           <String fx:value="btn-primary" />
