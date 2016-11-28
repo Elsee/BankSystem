@@ -57,10 +57,11 @@ public class CustomerMainController extends ViewController {
 	}
 
 	@FXML
-	void spendings()
-	{
+	void spendings() {
+		int ix = accountsTable.getSelectionModel().getSelectedIndex();
+		CustomerAccount selesctedAccount = accounts.get(ix);
 		ArrayList<String> accountNum = new ArrayList<>();
-		accountNum.add("2931297219618678");
+		accountNum.add(selesctedAccount.getAccountNum());
 		transitionTo("spendings", accountNum);
 	}
 }

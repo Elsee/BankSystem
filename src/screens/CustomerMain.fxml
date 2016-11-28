@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
 <ScrollPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.customerMain.CustomerMainController">
    <content>
       <AnchorPane minHeight="400.0" minWidth="400.0" prefWidth="1021.0" stylesheets="@bootstrap.css">
@@ -18,7 +19,6 @@
                   <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions" />
                   <MenuButton mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" styleClass="nav-item" text="Personal">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#spendings" styleClass=".menu-item" text="Spendings" />
                       <MenuItem mnemonicParsing="false" text="Templates" />
                         <MenuItem mnemonicParsing="false" onAction="#back" text="Logout" />
                     </items>
@@ -30,7 +30,7 @@
                   <Text layoutX="14.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Accounts" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <TableView layoutX="9.0" layoutY="131.0" prefWidth="1006.0" fx:id="accountsTable">
+            <TableView fx:id="accountsTable" layoutX="9.0" layoutY="131.0" prefWidth="1006.0">
               <columns>
                 <TableColumn prefWidth="212.0" text="Account number">
                     <cellValueFactory>
@@ -60,6 +60,12 @@
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-default" />
+                     </styleClass>
+                  </Button>
+                  <Button onAction="#spendings" mnemonicParsing="false" text="Spendings report">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
                      </styleClass>
                   </Button>
               </items>
