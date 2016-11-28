@@ -118,7 +118,7 @@
                                     </ScrollPane>
                                     <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="48.0" prefWidth="1024.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
                                       <items>
-                                        <Button mnemonicParsing="false" text="Edit">
+                                        <Button mnemonicParsing="false" onAction="#updateIndividuals" text="Edit">
                                              <styleClass>
                                                 <String fx:value="btn" />
                                                 <String fx:value="btn-default" />

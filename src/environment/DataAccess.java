@@ -36,7 +36,22 @@ public class DataAccess {
         statement.setString(2, lname);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            customers.add(new CustomerI(rs.getInt("cid"), rs.getString("fname"), rs.getString("lname"), rs.getString("passnum")));
+            customers.add(new CustomerI(
+                    rs.getInt("cid"),
+                    rs.getString("fname"),
+                    rs.getString("lname"),
+                    rs.getString("passnum"),
+                    rs.getString("sekas"),
+                    rs.getString("bdate"),
+                    rs.getString("pvatin"),
+                    rs.getString("reg"),
+                    rs.getString("ci"),
+                    rs.getString("str"),
+                    rs.getString("hou"),
+                    rs.getString("apart"),
+                    rs.getString("log"),
+                    rs.getString("passw"),
+                    rs.getString("phonen")));
         }
         rs.close();
         statement.close();
@@ -285,5 +300,41 @@ public class DataAccess {
         rs.close();
         statement.close();
         return spendings;
+    }
+        public boolean updateIndividual(int custID,
+                                    String firstNameField,
+                                    String lastNameField,
+                                    String passportField,
+                                    String sexField,
+                                    String bdateField,
+                                    String vatinField,
+                                    String regionField,
+                                    String cityField,
+                                    String streetField,
+                                    String houseField,
+                                    String apartmentField,
+                                    String loginField,
+                                    String passField,
+                                    String phoneField) throws SQLException {
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call customer_individual_updator(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ");
+        statement.setInt(1, custID);
+        statement.setString(2, firstNameField);
+        statement.setString(3, lastNameField);
+        statement.setString(4, passportField);
+        statement.setString(5, sexField);
+        statement.setString(6, bdateField);
+        statement.setString(7, vatinField);
+        statement.setString(8, regionField);
+        statement.setString(9, cityField);
+        statement.setString(10, streetField);
+        statement.setString(11, houseField);
+        statement.setString(12, apartmentField);
+        statement.setString(13, loginField);
+        statement.setString(14, passField);
+        statement.setString(15, phoneField);
+        Boolean rs = statement.execute();
+        statement.close();
+        return rs;
     }
 }

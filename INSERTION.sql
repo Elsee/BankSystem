@@ -63,6 +63,7 @@ INSERT INTO bs_db_errors VALUES ('E0016', 'Transaction failed');
 INSERT INTO bs_db_errors VALUES ('E0017', 'Organisation already exists');
 INSERT INTO bs_db_errors VALUES ('E0018', 'Unable to create transaction pattern');
 INSERT INTO bs_db_errors VALUES ('E0019', 'No such orgnization');
+INSERT INTO bs_db_errors VALUES ('E0020', 'Wrong inputs');
 
 
 SELECT (customer_individual_creator('kek', 'kek', '1121111111', 'F', '1992-01-01', '112111111111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'kek1', 'kek1', '2000', '1111111121'));

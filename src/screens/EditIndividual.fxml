@@ -64,10 +64,8 @@
             <Label text="Password" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <TextField fx:id="loginField" styleClass="form-control" GridPane.rowIndex="12" />
             <TextField fx:id="passField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <Label text="Amount of money" GridPane.rowIndex="13" />
-            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="14" />
-            <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-            <TextField fx:id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <Label text="Phone" GridPane.rowIndex="13" />
+            <TextField fx:id="phoneField" styleClass="form-control" GridPane.rowIndex="14" />
             <Button mnemonicParsing="false" onAction="#updateIndividual" text="Update" GridPane.rowIndex="16">
                <styleClass>
                   <String fx:value="btn" />
@@ -80,6 +78,7 @@
                   <String fx:value="btn-default" />
                </styleClass>
             </Button>
+             <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alert-danger" GridPane.columnSpan="3" GridPane.rowIndex="17" />
          </children>
       </GridPane>
    </content>

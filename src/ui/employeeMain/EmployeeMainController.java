@@ -136,4 +136,13 @@ public class EmployeeMainController extends ViewController{
     public void organizationCreate(ActionEvent actionEvent) {
         transitionTo("createBusiness");
     }
+
+    @FXML
+    public void updateIndividuals(ActionEvent actionEvent) {
+        int ix = customerSearchTable.getSelectionModel().getSelectedIndex();
+        CustomerI selesctedCustomer = (CustomerI) individualsList.get(ix);
+        ArrayList<CustomerI> selectedCustomerInfo = new ArrayList<>();
+        selectedCustomerInfo.add(selesctedCustomer);
+        transitionTo("editIndividual", selectedCustomerInfo);
+    }
 }

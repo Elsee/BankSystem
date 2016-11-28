@@ -528,14 +528,14 @@ END;
 $function$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION select_individuals(VARCHAR, VARCHAR)
-  RETURNS TABLE(cid INT, reg VARCHAR(20), ci VARCHAR(20), str VARCHAR(20), hou VARCHAR(20), apart VARCHAR(20), custy customer_type, pid INT, fname VARCHAR(30), lname VARCHAR(30), passnum VARCHAR(10), sekas person_sex, bdate DATE, pvatin VARCHAR(12)) AS $function$
+  RETURNS TABLE(cid INT, reg VARCHAR(20), ci VARCHAR(20), str VARCHAR(20), hou VARCHAR(20), apart VARCHAR(20), custy customer_type, pid INT, fname VARCHAR(30), lname VARCHAR(30), passnum VARCHAR(10), sekas person_sex, bdate DATE, pvatin VARCHAR(12), log VARCHAR, passw VARCHAR, phonen VARCHAR) AS $function$
 BEGIN
   IF EXISTS (SELECT bsp.first_name, bsp.last_name
              FROM bs_person AS bsp
              WHERE bsp.first_name = $1 AND bsp.last_name = $2) THEN
     RETURN QUERY
-    SELECT bsc.customer_id AS cid, bsa.region AS reg, bsa.city AS ci, bsa.street AS str, bsa.house AS hou, bsa.apartment AS apart, bsc.type_customer AS custy, bsp.person_id AS pid, bsp.first_name AS fname, bsp.last_name AS lname, bsp.passport_number AS passnum, bsp.sex AS sekas, bsp.birth_date AS bdate, bsp.person_vatin AS pvatin
-    FROM bs_customer AS bsc NATURAL JOIN bs_individual AS bsi NATURAL JOIN bs_person AS bsp NATURAL JOIN bs_address AS bsa
+    SELECT bsc.customer_id AS cid, bsa.region AS reg, bsa.city AS ci, bsa.street AS str, bsa.house AS hou, bsa.apartment AS apart, bsc.type_customer AS custy, bsp.person_id AS pid, bsp.first_name AS fname, bsp.last_name AS lname, bsp.passport_number AS passnum, bsp.sex AS sekas, bsp.birth_date AS bdate, bsp.person_vatin AS pvatin, bsu.user_login AS login, bsu.user_pass AS pass, bsph.phone_num AS phone
+    FROM bs_customer AS bsc NATURAL JOIN bs_individual AS bsi NATURAL JOIN bs_person AS bsp NATURAL JOIN bs_address AS bsa NATURAL JOIN bs_user AS bsu NATURAL JOIN bs_phone AS bsph
     WHERE bsp.first_name = $1 AND bsp.last_name = $2;
   ELSE RAISE EXCEPTION 'E0014';
   END IF;
@@ -736,3 +736,47 @@ GROUP BY bst.account_to_id,  txntype, account
 ORDER BY txntype;
 END;
 $BODY$ LANGUAGE plpgsql;
+
+/*Updates customers (people)*/
+CREATE OR REPLACE FUNCTION customer_individual_updator(cid INTEGER, fname VARCHAR(30), lname VARCHAR(30), paspnum VARCHAR(10), s VARCHAR(1), bdate VARCHAR, vatin VARCHAR(12), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), apartment VARCHAR(20), log VARCHAR(20), pass VARCHAR(30), phone VARCHAR(20))
+  RETURNS void AS $function$
+DECLARE
+  personid INTEGER;
+BEGIN
+  SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid INTO personid;
+
+  UPDATE bs_person
+    SET first_name=fname, last_name=lname, passport_number=paspnum, sex=s::person_sex, birth_date=bdate::DATE, person_vatin=vatin
+    WHERE person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid);
+
+  UPDATE bs_customer
+    SET address_id = (SELECT address_creator FROM address_creator(region, city, street, house, apartment))
+    WHERE customer_id = cid;
+
+  UPDATE bs_user
+    SET user_login = log, user_pass = pass
+    WHERE  person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid);
+
+  UPDATE bs_phone
+    SET phone_num = phone
+    WHERE customer_id = cid;
+--   exception when others then
+--   RAISE EXCEPTION 'E0020';
+END;
+$function$ LANGUAGE plpgsql;
+
+UPDATE bs_person
+SET first_name='Client', last_name='Client', passport_number='3219512348', sex='M', birth_date='1890-03-08'::DATE, person_vatin='321951234812'
+WHERE person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = 16);
+
+UPDATE bs_customer
+SET address_id = (SELECT address_creator FROM address_creator('Moscow', 'Moscow', 'Moscow', '10', '10'))
+WHERE customer_id = 16;
+
+UPDATE bs_user
+SET user_login = 'qwerty1', user_pass = 'qwerty1'
+WHERE  person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = 16);
+
+UPDATE bs_phone
+SET phone_num = '3215'
+WHERE customer_id = 16;
