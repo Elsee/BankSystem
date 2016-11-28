@@ -704,10 +704,35 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION get_categories()
   RETURNS SETOF VARCHAR AS $BODY$
 BEGIN
-  RETURN QUERY SELECT txn_type
-               FROM bs_transaction_category;
+  RETURN QUERY SELECT bstc.txn_type
+               FROM bs_transaction_category AS bstc WHERE bstc.customer_id = 1;
 END;
 $BODY$ LANGUAGE plpgsql;
 
-SELECT get_categories();
-
+CREATE OR REPLACE FUNCTION select_customer_transactions_by_outgoing(VARCHAR)
+  RETURNS TABLE(
+    txntype VARCHAR,
+    summ NUMERIC,
+    accout VARCHAR
+  ) AS $BODY$
+  BEGIN
+    RETURN QUERY
+SELECT
+  CASE bstc.txn_type IS NULL
+  WHEN TRUE
+    THEN 'others'
+  ELSE bstc.txn_type END
+    AS txntype,
+  sum(bst.amount) AS summ,
+  bsa1.account_num AS account
+FROM bs_account AS bsa
+  LEFT JOIN (bs_transaction AS bst
+    LEFT JOIN bs_account AS bsa1
+      ON bst.account_to_id = bsa1.account_id)
+    LEFT JOIN bs_transaction_category AS bstc ON bstc.customer_id = bsa1.customer_id AND bstc.customer_id <> 1
+    ON bsa.account_id = bst.account_from_id
+WHERE bsa.account_num = $1
+GROUP BY bst.account_to_id,  txntype, account
+ORDER BY txntype;
+END;
+$BODY$ LANGUAGE plpgsql;

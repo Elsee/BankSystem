@@ -1,5 +1,6 @@
 package environment;
 import login.Login;
+import ui.Spendings.Spending;
 import ui.employeeMain.CustomerAccount;
 import ui.employeeMain.CustomerB;
 import ui.employeeMain.CustomerI;
@@ -265,5 +266,24 @@ public class DataAccess {
         rs.close();
         statement.close();
         return categories;
+    }
+
+    public ArrayList<Spending> getCustomerSpendings(String accountNum) throws SQLException{
+        ArrayList<Spending> spendings = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call  select_customer_transactions_by_outgoing(?) } ");
+        statement.setString(1, accountNum);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            spendings.add(new Spending(rs.getString("txntype"), rs.getDouble("summ"), rs.getString("accout")));
+            for (Spending s: spendings) {
+                Spending spending = s;
+                spending.setPercent();
+                s = spending;
+            }
+        }
+        rs.close();
+        statement.close();
+        return spendings;
     }
 }

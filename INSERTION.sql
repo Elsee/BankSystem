@@ -98,6 +98,7 @@ SELECT make_transaction('2931297219618678', '5124339687606929', '150');
 
 SELECT creation_transaction_pattern('11', '2931297219618678', '9520778928211512', 'CAVA cafeteria');
 SELECT select_customer_transactions_by_pattern('2931297219618678');
+SELECT select_customer_transactions_by_outgoing('2931297219618678');
 
 
 

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class CustomerMainController extends ViewController {
 
-//	private @FXML Button backButton;
 	private ObservableList<Account> accountsCollection;
 	private ObservableList<Transaction> transactionsCollection;
 
@@ -58,7 +57,10 @@ public class CustomerMainController extends ViewController {
 	}
 
 	@FXML
-	void spendings() {
-		transitionTo("spendings");
+	void spendings()
+	{
+		ArrayList<String> accountNum = new ArrayList<>();
+		accountNum.add("2931297219618678");
+		transitionTo("spendings", accountNum);
 	}
 }

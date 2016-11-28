@@ -35,7 +35,7 @@
                   </TableColumn>
                   <TableColumn prefWidth="205.0" text="Sum" >
                       <cellValueFactory>
-                          <PropertyValueFactory property="sum" />
+                          <PropertyValueFactory property="summ" />
                       </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="191.0" text="Percent of total" >
