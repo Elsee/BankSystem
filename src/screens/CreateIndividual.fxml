@@ -43,13 +43,13 @@
             <TextField fx:id="firstNameField" styleClass="form-control" GridPane.rowIndex="2" />
             <Label text="Lastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="lastNameField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Passport number" GridPane.rowIndex="5" />
+            <Label text="Passport number (10 digits)" GridPane.rowIndex="5" />
             <TextField fx:id="passportField" styleClass="form-control" GridPane.rowIndex="6" />
-            <Label text="Sex" GridPane.rowIndex="3" />
+            <Label text="Sex (M or F)" GridPane.rowIndex="3" />
             <TextField fx:id="sexField" styleClass="form-control" GridPane.rowIndex="4" />
-            <Label text="Birth date" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Birth date (yyyy-mm-dd)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="bdateField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Vatin (12 numbers)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Vatin (12 digits)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="vatinField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Region" GridPane.rowIndex="7" />
             <Label text="City" GridPane.columnIndex="1" GridPane.rowIndex="7" />
