@@ -15,13 +15,22 @@
          <children>
             <HBox prefHeight="58.0" prefWidth="1024.0" styleClass="nav">
                <children>
-                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="70.0" styleClass="nav-item" text="Main" />
-                  <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions" />
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="70.0" styleClass="nav-item" text="Main">
+                     <font>
+                        <Font name="Tahoma" size="15.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions">
+                     <font>
+                        <Font name="Tahoma" size="15.0" />
+                     </font></Button>
                   <MenuButton mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" styleClass="nav-item" text="Personal">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#templates" text="Templates" />
                         <MenuItem mnemonicParsing="false" onAction="#back" text="Logout" />
                     </items>
+                     <font>
+                        <Font name="Tahoma" size="15.0" />
+                     </font>
                   </MenuButton>
                </children>
             </HBox>
@@ -62,7 +71,7 @@
                         <String fx:value="btn-default" />
                      </styleClass>
                   </Button>
-                  <Button onAction="#spendings" mnemonicParsing="false" text="Spendings report">
+                  <Button mnemonicParsing="false" onAction="#spendings" text="Spendings report">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-primary" />

@@ -25,20 +25,35 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new account" GridPane.columnSpan="2" />
-            <Label text="Amount of money" GridPane.rowIndex="1" />
-            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new account" GridPane.columnSpan="2">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font></Text>
+            <Label text="Amount of money" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font></Label>
+            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font></TextField>
             <Button mnemonicParsing="false" text="Create" GridPane.rowIndex="4">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-success" />
                </styleClass>
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
             </Button>
             <Button mnemonicParsing="false" text="Cancel" translateX="100.0" GridPane.rowIndex="4">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-default" />
                </styleClass>
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
             </Button>
          </children>
       </GridPane>
