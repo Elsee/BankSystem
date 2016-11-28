@@ -31,6 +31,12 @@ public abstract class ViewController {
 	 * Will be called when the initialization is done. You can access the @FXML injected values here for the first time.
 	 */
 	protected void init() {
+/*		System.out.println(Thread.currentThread().getStackTrace()[0].getClassName());
+		System.out.println(Thread.currentThread().getStackTrace()[1].getClassName());
+		System.out.println(Thread.currentThread().getStackTrace()[2].getClassName());
+		System.out.println(Thread.currentThread().getStackTrace()[3].getClassName());
+		System.out.println(Thread.currentThread().getStackTrace()[4].getClassName());*/
+
 	}
 
 	/**

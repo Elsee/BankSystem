@@ -17,9 +17,9 @@ INSERT INTO bs_db_errors VALUES ('ERRNO', 'Error Number must be like "E\d\d\d"')
    ('E0012', 'Incorrect login'),
  ('E0013', 'Incorrect pass'),
  ('E0014', 'No such person'),
- ('E0015', 'Person already exists'),
+ ('E0015', 'Person already exists or Wrong inputs'),
  ('E0016', 'Transaction failed'),
- ('E0017', 'Organisation already exists'),
+ ('E0017', 'Organisation already exists or Wrong inputs'),
  ('E0018', 'Unable to create transaction pattern'),
  ('E0019', 'No such orgnization'),
  ('E0020', 'Wrong inputs');
