@@ -237,8 +237,8 @@ CREATE TABLE bs_customer(
 /* Individual Customer entity table creation */
 CREATE TABLE bs_individual(
   customer_id int REFERENCES bs_customer(customer_id),
-  person_id int REFERENCES bs_person(person_id),
-  PRIMARY KEY (customer_id, person_id)
+  person_id int REFERENCES bs_person(person_id) UNIQUE,
+  PRIMARY KEY (customer_id)
 );
 
 /* Trigger function for Individual table */
@@ -272,8 +272,8 @@ EXECUTE PROCEDURE individual_checker();
 /* Business Customer entity table creation */
 CREATE TABLE bs_business(
   customer_id int REFERENCES bs_customer(customer_id),
-  org_id int REFERENCES bs_organization(org_id),
-  PRIMARY KEY (customer_id, org_id)
+  org_id int REFERENCES bs_organization(org_id) UNIQUE,
+  PRIMARY KEY (customer_id)
 );
 
 /* Trigger function for Business table */
