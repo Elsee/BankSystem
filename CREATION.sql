@@ -427,11 +427,6 @@ BEGIN
 END;
 $func$  LANGUAGE plpgsql;
 
-SELECT * FROM
-  (SELECT bstr.account_to_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = 11) AS a,
-  (SELECT bstr.account_from_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = 11) AS b,
-  (SELECT bstr.amount FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = 11) AS c;
-
 /*  SQL Transaction method for Transaction table */
 CREATE FUNCTION make_transaction(VARCHAR, VARCHAR, VARCHAR, BOOLEAN)
   RETURNS VOID AS $$

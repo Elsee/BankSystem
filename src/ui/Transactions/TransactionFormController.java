@@ -50,6 +50,7 @@ public class TransactionFormController extends ViewController {
             actiontarget.setText(" ");
             this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText(), saveFlag.selectedProperty().getValue());
             actiontarget.setText("Successfull");
+            transitionTo("customerMain");
         }
         catch (SQLException sqle){
             String errmes = this.data.getErrorMessage(sqle);
