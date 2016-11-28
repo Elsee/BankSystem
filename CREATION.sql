@@ -760,23 +760,7 @@ BEGIN
   UPDATE bs_phone
     SET phone_num = phone
     WHERE customer_id = cid;
---   exception when others then
---   RAISE EXCEPTION 'E0020';
+  exception when others then
+  RAISE EXCEPTION 'E0020';
 END;
 $function$ LANGUAGE plpgsql;
-
-UPDATE bs_person
-SET first_name='Client', last_name='Client', passport_number='3219512348', sex='M', birth_date='1890-03-08'::DATE, person_vatin='321951234812'
-WHERE person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = 16);
-
-UPDATE bs_customer
-SET address_id = (SELECT address_creator FROM address_creator('Moscow', 'Moscow', 'Moscow', '10', '10'))
-WHERE customer_id = 16;
-
-UPDATE bs_user
-SET user_login = 'qwerty1', user_pass = 'qwerty1'
-WHERE  person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = 16);
-
-UPDATE bs_phone
-SET phone_num = '3215'
-WHERE customer_id = 16;
