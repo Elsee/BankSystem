@@ -112,9 +112,9 @@ public class Screens extends StackPane {
 		handler.oldScreenRoot = activeScreen == null ? null : screens.get(activeScreen);
 
 		handler.newController = controllers.get(screenId);
-		handler.newController.init();
-		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
 
+		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
+		handler.newController.init();
 		// Start the transition.
 		handler.proceed();
 
@@ -123,7 +123,6 @@ public class Screens extends StackPane {
 	}
 
 	public void transitionTo(String screenId, ArrayList param) {
-
 		// Two transitions at the same time are not possible.
 		if (handler != null) {
 			return;
@@ -141,14 +140,11 @@ public class Screens extends StackPane {
 
 		handler.newController = controllers.get(screenId);
         handler.newController.setParam(param);
-		handler.newController.init();
 		handler.oldController = activeScreen == null ? null : controllers.get(activeScreen);
-
+		handler.newController.init();
 		// Start the transition.
 		handler.proceed();
-
 		activeScreen = screenId;
-
 	}
 
 	/**
