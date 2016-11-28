@@ -40,7 +40,6 @@ public class TemplatesController extends ViewController {
         try {
             if(this.getParam() != null){
                 Integer customerNum = (Integer) this.getParam().get(0);
-                System.out.println(customerNum);
                 ArrayList<Template> templates = this.data.getCustomerTemplates(customerNum);
                 ObservableList selectedSpendings = FXCollections.observableArrayList(templates);
                 templatesTable.setItems(selectedSpendings);
