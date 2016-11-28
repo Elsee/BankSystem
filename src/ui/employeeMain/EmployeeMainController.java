@@ -19,19 +19,6 @@ public class EmployeeMainController extends ViewController{
     static private ArrayList individualsList;
     static private ArrayList organizationsList;
 
-    @FXML
-    protected void init() {
-        if(this.getParam() != null){
-            for (Object o: (ArrayList)this.getParam()) {
-                System.out.println(o.toString());
-            }
-        }
-        else {
-            System.out.println("null");
-        }
-
-    }
-
     private ObservableList<CustomerI> customerIndividCollection;
 
     @FXML
@@ -78,6 +65,18 @@ public class EmployeeMainController extends ViewController{
     }
 
     @FXML
+    protected void init() {
+        firstnameField.setText("");
+        lastnameField.setText("");
+        orgNumField.setText("");
+        individualsList = new ArrayList();
+        organizationsList = new ArrayList();
+        ObservableList observableList = FXCollections.observableArrayList(individualsList);
+        organizationSearchTable.setItems(observableList);
+        customerSearchTable.setItems(observableList);
+    }
+
+    @FXML
     void back() {
         transitionTo("login");
     }
@@ -86,6 +85,7 @@ public class EmployeeMainController extends ViewController{
     @FXML
     void personSearch() throws SQLException {
         try{
+            actiontarget.setText("");
             ArrayList arrayList = this.data.searchIndividuals(firstnameField.getText(), lastnameField.getText());
             individualsList = arrayList;
             ObservableList searchedInd = FXCollections.observableArrayList(arrayList);
@@ -144,5 +144,14 @@ public class EmployeeMainController extends ViewController{
         ArrayList<CustomerI> selectedCustomerInfo = new ArrayList<>();
         selectedCustomerInfo.add(selesctedCustomer);
         transitionTo("editIndividual", selectedCustomerInfo);
+    }
+
+    @FXML
+    public void updateOrganizations(ActionEvent actionEvent) {
+        int ix = organizationSearchTable.getSelectionModel().getSelectedIndex();
+        CustomerB selesctedCustomer = (CustomerB) organizationsList.get(ix);
+        ArrayList<CustomerB> selectedCustomerInfo = new ArrayList<>();
+        selectedCustomerInfo.add(selesctedCustomer);
+        transitionTo("editBusiness", selectedCustomerInfo);
     }
 }

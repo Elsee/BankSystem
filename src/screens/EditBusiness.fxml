@@ -31,7 +31,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Create new organization" GridPane.columnSpan="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Edit organization" GridPane.columnSpan="2" />
             <Label text="Vatin" GridPane.rowIndex="1" />
             <TextField fx:id="vatinField" styleClass="form-control" GridPane.rowIndex="2" />
             <Label text="Region" GridPane.rowIndex="3" />
@@ -42,22 +42,21 @@
             <TextField fx:id="streetField" styleClass="form-control" GridPane.rowIndex="6" />
             <Label text="House" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="houseField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="Amount of money" GridPane.rowIndex="7" />
-            <TextField fx:id="moneyField" styleClass="form-control" GridPane.rowIndex="8" />
-            <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField fx:id="phoneField" styleClass="form-control" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false"  onAction="#updateBusiness" text="Update" GridPane.rowIndex="10">
+            <Label text="Phone" GridPane.rowIndex="7" />
+            <TextField fx:id="phoneField" styleClass="form-control" GridPane.rowIndex="8" />
+            <Button mnemonicParsing="false" onAction="#updateBusiness" text="Update" GridPane.rowIndex="10">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-success" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false"  onAction="#back" text="Cancel" translateX="100.0" GridPane.rowIndex="10">
+            <Button mnemonicParsing="false" onAction="#back" text="Cancel" translateX="100.0" GridPane.rowIndex="10">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-default" />
                </styleClass>
             </Button>
+             <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alert-danger" GridPane.columnSpan="3" GridPane.rowIndex="11" />
          </children>
       </GridPane>
    </content>

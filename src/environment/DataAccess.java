@@ -242,7 +242,14 @@ public class DataAccess {
         statement.setString(1, orgNum);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            customersB.add(new CustomerB(rs.getInt("cid"), rs.getString("ovatin")));
+            customersB.add(new CustomerB(
+                    rs.getInt("cid"),
+                    rs.getString("ovatin"),
+                    rs.getString("reg"),
+                    rs.getString("ci"),
+                    rs.getString("str"),
+                    rs.getString("hou"),
+                    rs.getString("phonen")));
         }
         rs.close();
         statement.close();
@@ -351,6 +358,27 @@ public class DataAccess {
         statement.setString(13, loginField);
         statement.setString(14, passField);
         statement.setString(15, phoneField);
+        Boolean rs = statement.execute();
+        statement.close();
+        return rs;
+    }
+
+    public boolean updateBusiness(int custID,
+                                  String vatinField,
+                                  String regionField,
+                                  String cityField,
+                                  String streetField,
+                                  String houseField,
+                                  String phoneField) throws SQLException {
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call customer_business_updator(?, ?, ?, ?, ?, ?, ?) } ");
+        statement.setInt(1, custID);
+        statement.setString(2, vatinField);
+        statement.setString(3, regionField);
+        statement.setString(4, cityField);
+        statement.setString(5, streetField);
+        statement.setString(6, houseField);
+        statement.setString(7, phoneField);
         Boolean rs = statement.execute();
         statement.close();
         return rs;

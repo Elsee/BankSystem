@@ -567,14 +567,14 @@ END;
 $function$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION select_organizations(orgNum VARCHAR)
-  RETURNS TABLE(cid INT, reg VARCHAR(20), ci VARCHAR(20), str VARCHAR(20), hou VARCHAR(20), apart VARCHAR(20), custy customer_type, oid INT, ovatin VARCHAR(10)) AS $function$
+  RETURNS TABLE(cid INT, reg VARCHAR(20), ci VARCHAR(20), str VARCHAR(20), hou VARCHAR(20), apart VARCHAR(20), custy customer_type, oid INT, ovatin VARCHAR(10), phonen VARCHAR) AS $function$
 BEGIN
   IF EXISTS (SELECT bso.org_vatin
              FROM bs_organization AS bso
              WHERE bso.org_vatin = $1) THEN
     RETURN QUERY
-    SELECT bsc.customer_id AS cid, bsa.region AS reg, bsa.city AS ci, bsa.street AS str, bsa.house AS hou, bsa.apartment AS apart, bsc.type_customer AS custy, bso.org_id AS oid, bso.org_vatin AS ovatin
-    FROM bs_customer AS bsc NATURAL JOIN bs_business AS bsb NATURAL JOIN bs_organization AS bso NATURAL JOIN bs_address AS bsa
+    SELECT bsc.customer_id AS cid, bsa.region AS reg, bsa.city AS ci, bsa.street AS str, bsa.house AS hou, bsa.apartment AS apart, bsc.type_customer AS custy, bso.org_id AS oid, bso.org_vatin AS ovatin, bsph.phone_num AS phone
+    FROM bs_customer AS bsc NATURAL JOIN bs_business AS bsb NATURAL JOIN bs_organization AS bso NATURAL JOIN bs_address AS bsa NATURAL JOIN bs_phone AS bsph
     WHERE bso.org_vatin = $1;
   ELSE RAISE EXCEPTION 'E0019';
   END IF;
@@ -790,3 +790,23 @@ BEGIN
 END;
 $function$ LANGUAGE plpgsql;
 
+
+/*Updates busines customer*/
+CREATE OR REPLACE FUNCTION customer_business_updator(custid INT, orgvatin VARCHAR(10), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), phone VARCHAR)
+  RETURNS void AS $$
+BEGIN
+  UPDATE bs_organization
+    SET org_vatin = orgvatin
+    WHERE org_id = (SELECT org_id FROM bs_customer NATURAL JOIN bs_business WHERE customer_id=custid);
+
+  UPDATE bs_customer
+    SET address_id = (SELECT address_creator FROM address_creator(region, city, street, house, '0'))
+    WHERE customer_id = custid;
+
+  UPDATE bs_phone
+    SET phone_num = phone
+    WHERE customer_id = custid;
+  exception when others then
+  RAISE EXCEPTION 'E0020';
+END;
+$$ LANGUAGE plpgsql;

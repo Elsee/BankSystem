@@ -35,6 +35,13 @@ public class CreateBusiness  extends ViewController {
     ChoiceBox cb;
 
     protected void init() {
+        vatinField.setText("");
+        regionField.setText("");
+        cityField.setText("");
+        streetField.setText("");
+        houseField.setText("");
+        moneyField.setText("");
+        phoneField.setText("");
         try {
             cb.setItems(FXCollections.observableArrayList(this.data.getCategories()));
         }
