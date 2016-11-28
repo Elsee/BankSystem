@@ -716,7 +716,7 @@ CREATE OR REPLACE FUNCTION account_creator(cid INT, amount DOUBLE PRECISION)
   RETURNS void AS $$
 BEGIN
   INSERT INTO bs_account(account_num, customer_id, open_date, active, balance)
-  VALUES ((random_account_creator()), cid, current_date, TRUE, amount::NUMERIC);
+  VALUES ((random_account_num_creator()), cid, current_date, TRUE, amount::NUMERIC);
 END;
 $$ LANGUAGE plpgsql;
 
