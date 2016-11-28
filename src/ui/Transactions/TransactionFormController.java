@@ -23,6 +23,8 @@ public class TransactionFormController extends ViewController {
     @FXML
     TextField amountField;
     @FXML
+    CheckBox saveFlag;
+    @FXML
     Text actiontarget;
 
     ArrayList accountsList;

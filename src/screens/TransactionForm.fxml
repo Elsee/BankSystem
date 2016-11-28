@@ -33,7 +33,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -52,6 +52,7 @@
                </styleClass>
             </Button>
             <Text fx:id="actiontarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="9" />
+            <CheckBox fx:id="saveFlag" mnemonicParsing="false" text="Save as template" GridPane.rowIndex="7" />
          </children>
          <padding>
             <Insets bottom="20.0" left="10.0" right="10.0" top="15.0" />
