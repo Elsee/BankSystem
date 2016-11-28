@@ -18,6 +18,8 @@ public class CustomerMainController extends ViewController {
 
 	ArrayList<CustomerAccount> accounts = new ArrayList<>();
 
+	protected static int customerId;
+
 	@FXML
 	TableView accountsTable;
 
@@ -28,6 +30,7 @@ public class CustomerMainController extends ViewController {
 			if (this.getParam() != null) {
 				String personId = (int)this.getParam().get(0) + "";
 				int custId = this.data.getCustomerId(personId);
+				customerId = custId;
 				accounts = this.data.getAccounts(custId);
 				ObservableList searchedAccounts = FXCollections.observableArrayList(accounts);
 				accountsTable.setItems(searchedAccounts);
@@ -63,5 +66,12 @@ public class CustomerMainController extends ViewController {
 		ArrayList<String> accountNum = new ArrayList<>();
 		accountNum.add(selesctedAccount.getAccountNum());
 		transitionTo("spendings", accountNum);
+	}
+
+	@FXML
+	void templates() throws SQLException {
+		ArrayList<Integer> customer = new ArrayList<>();
+		customer.add(customerId);
+		transitionTo("templates", customer);
 	}
 }

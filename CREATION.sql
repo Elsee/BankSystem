@@ -406,18 +406,49 @@ CREATE TRIGGER check_transaction_update
 BEFORE UPDATE ON bs_transaction FOR each ROW
 EXECUTE PROCEDURE transaction_checker();
 
+CREATE TABLE bs_template(
+  customer_id int REFERENCES bs_customer(customer_id),
+  txn_id int REFERENCES bs_transaction(txn_id),
+  amount NUMERIC NOT NULL,
+  PRIMARY KEY (customer_id, txn_id)
+);
+
+CREATE OR REPLACE FUNCTION select_customer_templates(int)
+  RETURNS TABLE (
+    account_from VARCHAR, account_to VARCHAR, amount VARCHAR
+  ) AS
+$func$
+BEGIN
+  RETURN QUERY
+    SELECT * FROM
+      (SELECT bsa.account_num FROM bs_account AS bsa WHERE bsa.account_id IN (SELECT bstr.account_to_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1)) AS a,
+  (SELECT bsa.account_num FROM bs_account AS bsa WHERE bsa.account_id IN (SELECT bstr.account_from_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1)) AS b,
+  (SELECT bstr.amount::VARCHAR FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1) AS c;
+END;
+$func$  LANGUAGE plpgsql;
+
+SELECT * FROM
+  (SELECT bstr.account_to_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = 11) AS a,
+  (SELECT bstr.account_from_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = 11) AS b,
+  (SELECT bstr.amount FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = 11) AS c;
+
 /*  SQL Transaction method for Transaction table */
-CREATE FUNCTION make_transaction(VARCHAR, VARCHAR, VARCHAR)
+CREATE FUNCTION make_transaction(VARCHAR, VARCHAR, VARCHAR, BOOLEAN)
   RETURNS VOID AS $$
 DECLARE
   from_id int;
   to_id int;
+  customer int;
 BEGIN
   from_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
   to_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
     INSERT INTO bs_transaction VALUES (DEFAULT, from_id, to_id, $3::NUMERIC, clock_timestamp());
     UPDATE bs_account SET balance = balance - $3::NUMERIC WHERE account_num = $1;
     UPDATE bs_account SET balance = balance + $3::NUMERIC WHERE account_num = $2;
+  IF ($4) THEN
+  customer := (SELECT bsa.customer_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
+    INSERT INTO bs_template VALUES (customer, (SELECT currval(pg_get_serial_sequence('bs_transaction','txn_id'))), $3::NUMERIC);
+  END IF;
   exception when others then
   RAISE EXCEPTION 'E0016';
 END;
@@ -449,13 +480,6 @@ CREATE TABLE bs_customer_transaction_pattern(
   account_to_id int REFERENCES bs_account(account_id),
   txn_cat_id int REFERENCES bs_transaction_category(txn_cat_id),
   PRIMARY KEY (account_from_id, account_to_id)
-);
-
-CREATE TABLE bs_template(
-  customer_id int REFERENCES bs_customer(customer_id),
-  txn_id int REFERENCES bs_transaction(txn_id),
-  amount NUMERIC NOT NULL,
-  PRIMARY KEY (customer_id, txn_id)
 );
 
 /* Make Login */
@@ -591,6 +615,7 @@ BEGIN
 
 END;
 $$ LANGUAGE plpgsql;
+
 /*Creates busines customer*/
 CREATE OR REPLACE FUNCTION customer_business_creator(orgvatin VARCHAR(10), region VARCHAR(20), city VARCHAR(20), street VARCHAR(20), house VARCHAR(20), amount VARCHAR, phone VARCHAR, cat VARCHAR)
   RETURNS void AS $$
@@ -764,3 +789,4 @@ BEGIN
   RAISE EXCEPTION 'E0020';
 END;
 $function$ LANGUAGE plpgsql;
+

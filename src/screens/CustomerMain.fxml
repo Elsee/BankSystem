@@ -19,7 +19,7 @@
                   <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions" />
                   <MenuButton mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" styleClass="nav-item" text="Personal">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Templates" />
+                      <MenuItem mnemonicParsing="false" onAction="#templates" text="Templates" />
                         <MenuItem mnemonicParsing="false" onAction="#back" text="Logout" />
                     </items>
                   </MenuButton>

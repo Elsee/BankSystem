@@ -1,6 +1,7 @@
 package environment;
 import login.Login;
 import ui.Spendings.Spending;
+import ui.Template.Template;
 import ui.employeeMain.CustomerAccount;
 import ui.employeeMain.CustomerB;
 import ui.employeeMain.CustomerI;
@@ -170,12 +171,13 @@ public class DataAccess {
         return rs;
     }
 
-    public void makeTransaction(String accFrom, String accTo, String transSum) throws SQLException {
+    public void makeTransaction(String accFrom, String accTo, String transSum, Boolean isTemplate ) throws SQLException {
         Connection connection = getConnection();
-        CallableStatement statement = connection.prepareCall(" { call make_transaction(?, ?, ?) } ");
+        CallableStatement statement = connection.prepareCall(" { call make_transaction(?, ?, ?, ?) } ");
         statement.setString(1, accFrom);
         statement.setString(2, accTo);
         statement.setString(3, transSum);
+        statement.setBoolean(4, isTemplate);
         ResultSet rs = statement.executeQuery();
         rs.close();
         statement.close();
@@ -301,6 +303,22 @@ public class DataAccess {
         statement.close();
         return spendings;
     }
+
+    public ArrayList<Template> getCustomerTemplates(Integer customerNum) throws SQLException {
+        ArrayList<Template> templates = new ArrayList<>();
+        Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall(" { call  select_customer_templates(?) } ");
+        statement.setInt(1, customerNum);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            //System.out.println(rs.getString("account_from")+" "+rs.getString("account_to")+" "+rs.getString("amount"));
+            templates.add(new Template(rs.getString("account_from"), rs.getString("account_to"), rs.getString("amount")));
+        }
+        rs.close();
+        statement.close();
+        return templates;
+    }
+
         public boolean updateIndividual(int custID,
                                     String firstNameField,
                                     String lastNameField,

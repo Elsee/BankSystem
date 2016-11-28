@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-import ui.customerMain.Transaction;
+import javafx.scene.text.Text;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +16,9 @@ import java.util.ArrayList;
 public class TemplatesController extends ViewController {
     @FXML
     TableView templatesTable;
+
+    @FXML
+    private Text actiontarget;
 
     @FXML
     void mainScreen() {
@@ -32,4 +35,26 @@ public class TemplatesController extends ViewController {
         transitionTo("login");
     }
 
+
+    protected void init() {
+        try {
+            if(this.getParam() != null){
+                Integer customerNum = (Integer) this.getParam().get(0);
+                System.out.println(customerNum);
+                ArrayList<Template> templates = this.data.getCustomerTemplates(customerNum);
+                ObservableList selectedSpendings = FXCollections.observableArrayList(templates);
+                templatesTable.setItems(selectedSpendings);
+            }
+
+        }
+        catch (SQLException sqle){
+            String errmes = null;
+            try {
+                errmes = this.data.getErrorMessage(sqle);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            actiontarget.setText(errmes);
+        }
+    }
 }

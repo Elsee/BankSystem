@@ -48,7 +48,7 @@ public class TransactionFormController extends ViewController {
     protected void createTransaction() throws SQLException {
         try{
             actiontarget.setText(" ");
-            this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText());
+            this.data.makeTransaction(cb.getSelectionModel().getSelectedItem().toString(), toAccountField.getText(), amountField.getText(), saveFlag.selectedProperty().getValue());
             actiontarget.setText("Successfull");
         }
         catch (SQLException sqle){
