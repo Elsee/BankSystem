@@ -38,7 +38,7 @@
                <font>
                   <Font name="Tahoma" size="15.0" />
                </font></Text>
-            <Label text="Vatin" GridPane.rowIndex="1">
+            <Label text="Vatin (10 numbers)" GridPane.rowIndex="1">
                <font>
                   <Font name="Tahoma" size="15.0" />
                </font></Label>
