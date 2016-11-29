@@ -28,15 +28,15 @@ INSERT INTO bs_person VALUES (DEFAULT, 'Admin', 'Adminovich', '4270456978', 'M',
 INSERT INTO bs_user VALUES (DEFAULT, 1, 'admin', 'admin', 'E');
 INSERT INTO bs_address VALUES (DEFAULT, 'Tatarstan', 'Innopolis', 'Universitetskaya St', '1', DEFAULT);
 INSERT INTO bs_customer VALUES (DEFAULT, 'S', 1);
-INSERT INTO bs_transaction_category VALUES (DEFAULT, 1, 'food'),
-  (DEFAULT, 1, 'clothes'),
-  (DEFAULT, 1, 'entertainment'),
-  (DEFAULT, 1, 'medicine'),
-  (DEFAULT, 1, 'utilities'),
-  (DEFAULT, 1, 'travels'),
-  (DEFAULT, 1, 'booking'),
-  (DEFAULT, 1, 'service'),
-  (DEFAULT, 1, 'other');
+INSERT INTO bs_txn_type VALUES (DEFAULT, 'food'),
+  (DEFAULT, 'clothes'),
+  (DEFAULT, 'entertainment'),
+  (DEFAULT, 'medicine'),
+  (DEFAULT, 'utilities'),
+  (DEFAULT, 'travels'),
+  (DEFAULT, 'booking'),
+  (DEFAULT, 'service'),
+  (DEFAULT, 'other');
 
 SELECT (customer_individual_creator('Tester', 'Testirovkin', '1121111111', 'F', '1992-01-01', '112111111111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'test', 'test', '2000', '1111111121'));
 SELECT customer_business_creator('3698521477', 'Tatarstan', 'Innopolis', 'Universitetskaya St', '1', '150000', '789526436', 'food');

@@ -449,11 +449,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE TABLE bs_txn_type (
+  txn_type_id SERIAL,
+  txn_type VARCHAR(20),
+  PRIMARY KEY (txn_type_id)
+);
+
 /* Transaction category entity table creation */
 CREATE TABLE bs_transaction_category(
   txn_cat_id serial PRIMARY KEY,
   customer_id int REFERENCES bs_customer(customer_id),
-  txn_type VARCHAR(20) NOT NULL
+  txn_type_id int REFERENCES bs_txn_type
 );
 
 /* Selection of customer categories */
@@ -464,7 +470,7 @@ CREATE FUNCTION select_customer_categories(int)
 $func$
 BEGIN
   RETURN QUERY
-  SELECT bstc.txn_cat_id, bstc.txn_type FROM bs_transaction_category AS bstc WHERE bstc.customer_id = $1 OR bstc.customer_id IN (SELECT bsc.customer_id FROM bs_customer AS bsc WHERE bsc.type_customer = 'S');
+  SELECT bstc.txn_cat_id, bsttype.txn_type FROM bs_transaction_category AS bstc NATURAL JOIN bs_txn_type bsttype WHERE bstc.customer_id = $1 OR bstc.customer_id IN (SELECT bsc.customer_id FROM bs_customer AS bsc WHERE bsc.type_customer = 'S');
 END;
 $func$  LANGUAGE plpgsql;
 
@@ -626,8 +632,8 @@ BEGIN
   INSERT INTO bs_phone(customer_id, phone_num)
   VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $7);
   IF (cat <> '') THEN
-    INSERT INTO bs_transaction_category(customer_id, txn_type)
-    VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), cat);
+    INSERT INTO bs_transaction_category(customer_id, txn_type_id)
+    VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), (SELECT txn_type_id FROM bs_txn_type WHERE txn_type = cat));
   END IF;
   exception when others then
   RAISE EXCEPTION 'E0017';
@@ -640,9 +646,11 @@ DECLARE cat_id int;
   acc_id_from int;
   acc_id_to int;
   BEGIN
-    IF EXISTS (SELECT * FROM bs_transaction_category AS bstc WHERE bstc.customer_id = $1::INT AND bstc.txn_type = $4) THEN
-      cat_id := (SELECT bstc1.txn_cat_id FROM bs_transaction_category AS bstc1 WHERE bstc1.customer_id = $1::INT AND bstc1.txn_type = $4);
-    ELSE INSERT INTO bs_transaction_category VALUES (DEFAULT, $1::INT, $4);
+    IF EXISTS (SELECT * FROM (bs_transaction_category AS bstc NATURAL JOIN bs_txn_type AS bsttype) WHERE bstc.customer_id = $1::INT AND bsttype.txn_type = $4) THEN
+      cat_id := (SELECT bstc1.txn_cat_id FROM (bs_transaction_category AS bstc1 NATURAL JOIN bs_txn_type AS bsttype1) WHERE bstc1.customer_id = $1::INT AND bsttype1.txn_type = $4);
+    ELSE
+      INSERT INTO bs_txn_type VALUES(DEFAULT, $4);
+      INSERT INTO bs_transaction_category VALUES (DEFAULT, $1::INT, (SELECT currval(pg_get_serial_sequence('bs_txn_type','txn_type_id'))));
     END IF;
     acc_id_from := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
     acc_id_to := (SELECT bsa1.account_id  FROM bs_account AS bsa1 WHERE bsa1.account_num = $3);
@@ -661,17 +669,17 @@ CREATE OR REPLACE FUNCTION select_customer_transactions_by_pattern(VARCHAR)
   BEGIN
     RETURN QUERY
     SELECT
-      CASE bstc.txn_type IS NULL
+      CASE bsttype.txn_type IS NULL
       WHEN TRUE
         THEN 'others'
-      ELSE bstc.txn_type END
+      ELSE bsttype.txn_type END
                       AS txntype,
       sum(bst.amount) AS summ,
       bsa.account_num AS account
     FROM bs_account AS bsa1
       NATURAL JOIN bs_transaction AS bst
       LEFT JOIN (bs_transaction_category AS bstc
-        NATURAL JOIN bs_customer_transaction_pattern AS bstp)
+        NATURAL JOIN bs_customer_transaction_pattern AS bstp NATURAL JOIN bs_txn_type AS bsttype)
         ON bst.account_from_id = bstp.account_from_id AND bst.account_to_id = bstp.account_to_id
       LEFT JOIN bs_account AS bsa ON bst.account_to_id = bsa.account_id
     WHERE bsa1.account_num = $1
@@ -724,8 +732,8 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION get_categories()
   RETURNS SETOF VARCHAR AS $BODY$
 BEGIN
-  RETURN QUERY SELECT bstc.txn_type
-               FROM bs_transaction_category AS bstc WHERE bstc.customer_id = 1;
+  RETURN QUERY SELECT txn_type
+               FROM bs_txn_type;
 END;
 $BODY$ LANGUAGE plpgsql;
 
@@ -738,10 +746,10 @@ CREATE OR REPLACE FUNCTION select_customer_transactions_by_outgoing(VARCHAR)
   BEGIN
     RETURN QUERY
 SELECT
-  CASE bstc.txn_type IS NULL
+  CASE bsttype.txn_type IS NULL
   WHEN TRUE
     THEN 'others'
-  ELSE bstc.txn_type END
+  ELSE bsttype.txn_type END
     AS txntype,
   sum(bst.amount) AS summ,
   bsa1.account_num AS account
@@ -749,7 +757,7 @@ FROM bs_account AS bsa
   LEFT JOIN (bs_transaction AS bst
     LEFT JOIN bs_account AS bsa1
       ON bst.account_to_id = bsa1.account_id)
-    LEFT JOIN bs_transaction_category AS bstc ON bstc.customer_id = bsa1.customer_id AND bstc.customer_id <> 1
+    LEFT JOIN (bs_transaction_category AS bstc NATURAL JOIN bs_txn_type AS bsttype) ON bstc.customer_id = bsa1.customer_id
     ON bsa.account_id = bst.account_from_id
 WHERE bsa.account_num = $1
 GROUP BY bst.account_to_id,  txntype, account
