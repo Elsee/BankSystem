@@ -27,7 +27,7 @@ INSERT INTO bs_db_errors VALUES ('ERRNO', 'Error Number must be like "E\d\d\d"')
 INSERT INTO bs_person VALUES (DEFAULT, 'Admin', 'Adminovich', '4270456978', 'M', '1992-03-07', '427045697823');
 INSERT INTO bs_user VALUES (DEFAULT, 1, 'admin', 'admin', 'E');
 INSERT INTO bs_address VALUES (DEFAULT, 'Tatarstan', 'Innopolis', 'Universitetskaya St', '1', DEFAULT);
-INSERT INTO bs_customer VALUES (DEFAULT, 'S', 1);
+
 INSERT INTO bs_txn_type VALUES (DEFAULT, 'food'),
   (DEFAULT, 'clothes'),
   (DEFAULT, 'entertainment'),

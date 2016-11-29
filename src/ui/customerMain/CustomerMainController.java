@@ -47,7 +47,13 @@ public class CustomerMainController extends ViewController {
 
 	@FXML
 	void transactionForm() {
-		transitionTo("transactionForm", accounts);
+		ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
+		for (CustomerAccount a: accounts) {
+			if(a.getActivation()){
+				customerAccounts.add(a);
+			}
+		}
+		transitionTo("transactionForm", customerAccounts);
 	}
 
 	@FXML

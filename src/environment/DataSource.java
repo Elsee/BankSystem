@@ -13,7 +13,7 @@ public abstract class DataSource {
         source.setDatabaseName("bankdb");
         source.setUser("postgres");
         source.setPassword("pass");
-        source.setMaxConnections(10);
+        source.setMaxConnections(5000);
         return source;
     }
 }
