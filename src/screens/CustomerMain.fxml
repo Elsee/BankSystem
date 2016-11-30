@@ -19,7 +19,7 @@
                      <font>
                         <Font name="Tahoma" size="15.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Payments and transactions">
+                  <Button mnemonicParsing="false" onAction="#transactionForm" prefHeight="59.0" prefWidth="248.0" styleClass="nav-item" text="Transactions">
                      <font>
                         <Font name="Tahoma" size="15.0" />
                      </font></Button>
