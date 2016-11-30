@@ -408,10 +408,10 @@ CREATE OR REPLACE FUNCTION select_customer_templates(int)
 $func$
 BEGIN
   RETURN QUERY
-    SELECT * FROM
-      (SELECT bsa.account_num FROM bs_account AS bsa WHERE bsa.account_id IN (SELECT bstr.account_to_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1)) AS a,
-  (SELECT bsa.account_num FROM bs_account AS bsa WHERE bsa.account_id IN (SELECT bstr.account_from_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1)) AS b,
-  (SELECT bstr.amount::VARCHAR FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1) AS c;
+  SELECT * FROM
+    (SELECT bsa.account_num FROM bs_account AS bsa WHERE bsa.account_id IN (SELECT bstr.account_to_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1)) AS a,
+    (SELECT bsa.account_num FROM bs_account AS bsa WHERE bsa.account_id IN (SELECT bstr.account_from_id FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1)) AS b,
+    (SELECT bstr.amount::VARCHAR FROM bs_template AS bste LEFT JOIN bs_transaction AS bstr ON bste.txn_id = bstr.txn_id WHERE customer_id = $1) AS c;
 END;
 $func$  LANGUAGE plpgsql;
 
@@ -426,16 +426,16 @@ DECLARE
 BEGIN
   active := (SELECT bsa.active FROM bs_account AS bsa WHERE  bsa.account_num = $2);
   IF (active) THEN
-  from_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
-  to_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
+    from_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
+    to_id := (SELECT bsa.account_id FROM bs_account AS bsa WHERE bsa.account_num = $2);
     INSERT INTO bs_transaction VALUES (DEFAULT, from_id, to_id, $3::NUMERIC, clock_timestamp());
     UPDATE bs_account SET balance = balance - $3::NUMERIC WHERE account_num = $1;
     UPDATE bs_account SET balance = balance + $3::NUMERIC WHERE account_num = $2;
-  IF ($4) THEN
-  customer := (SELECT bsa.customer_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
-    INSERT INTO bs_template VALUES (customer, (SELECT currval(pg_get_serial_sequence('bs_transaction','txn_id'))), $3::NUMERIC);
-  END IF;
+    IF ($4) THEN
+      customer := (SELECT bsa.customer_id FROM bs_account AS bsa WHERE bsa.account_num = $1);
+      INSERT INTO bs_template VALUES (customer, (SELECT currval(pg_get_serial_sequence('bs_transaction','txn_id'))), $3::NUMERIC);
     END IF;
+  END IF;
   exception when others then
   RAISE EXCEPTION 'E0016';
 END;
@@ -531,7 +531,7 @@ BEGIN
   INSERT INTO bs_phone(customer_id, phone_num)
   VALUES ((SELECT currval(pg_get_serial_sequence('bs_customer','customer_id'))), $15);
   exception when others then
-    RAISE EXCEPTION 'E0015';
+  RAISE EXCEPTION 'E0015';
 END;
 $function$ LANGUAGE plpgsql;
 
@@ -568,21 +568,21 @@ $function$ LANGUAGE plpgsql;
 
 /*Get customers account*/
 CREATE OR REPLACE FUNCTION select_customer_accounts(INT)
-    RETURNS TABLE(aid INTEGER, accnum VARCHAR(16), cust_id INTEGER, opendate DATE, closedate DATE, act BOOLEAN, bal NUMERIC) AS $$
+  RETURNS TABLE(aid INTEGER, accnum VARCHAR(16), cust_id INTEGER, opendate DATE, closedate DATE, act BOOLEAN, bal NUMERIC) AS $$
 BEGIN
-    RETURN QUERY SELECT account_id, account_num, customer_id, open_date, close_date, active, balance
-                 FROM bs_account
-                 WHERE customer_id = $1;
+  RETURN QUERY SELECT account_id, account_num, customer_id, open_date, close_date, active, balance
+               FROM bs_account
+               WHERE customer_id = $1;
 END;
 $$ LANGUAGE plpgsql;
 
 /*Get customer id by person id*/
 CREATE OR REPLACE FUNCTION get_customer_id(VARCHAR)
-    RETURNS SETOF int AS $BODY$
+  RETURNS SETOF int AS $BODY$
 BEGIN
-    RETURN QUERY SELECT customer_id
-                 FROM bs_person NATURAL JOIN bs_individual NATURAL JOIN bs_customer
-                 WHERE person_id = $1::INTEGER;
+  RETURN QUERY SELECT customer_id
+               FROM bs_person NATURAL JOIN bs_individual NATURAL JOIN bs_customer
+               WHERE person_id = $1::INTEGER;
 END;
 $BODY$ LANGUAGE plpgsql;
 
@@ -628,8 +628,8 @@ CREATE OR REPLACE FUNCTION change_account_activity(ac_num VARCHAR(16))
   RETURNS BOOLEAN AS $$
 BEGIN
   IF ((SELECT active
-  FROM bs_account
-  WHERE account_num = $1) = FALSE) THEN
+       FROM bs_account
+       WHERE account_num = $1) = FALSE) THEN
     UPDATE bs_account SET active = TRUE WHERE account_num = ac_num;
     UPDATE bs_account SET close_date = NULL WHERE account_num = ac_num;
     RETURN TRUE;
@@ -647,7 +647,7 @@ CREATE OR REPLACE FUNCTION get_close_date(ac_num VARCHAR(16))
 
 DECLARE closeDate DATE;
 BEGIN
-   SELECT close_date INTO closeDate
+  SELECT close_date INTO closeDate
   FROM bs_account
   WHERE account_num = ac_num;
   RETURN closeDate;
@@ -678,25 +678,25 @@ CREATE OR REPLACE FUNCTION select_customer_transactions_by_outgoing(VARCHAR)
     summ NUMERIC,
     accout VARCHAR
   ) AS $BODY$
-  BEGIN
-    RETURN QUERY
-SELECT
-  CASE bsttype.txn_type IS NULL
-  WHEN TRUE
-    THEN 'others'
-  ELSE bsttype.txn_type END
-    AS txntype,
-  sum(bst.amount) AS summ,
-  bsa1.account_num AS account
-FROM bs_account AS bsa
-  LEFT JOIN (bs_transaction AS bst
+BEGIN
+  RETURN QUERY
+  SELECT
+    CASE bsttype.txn_type IS NULL
+    WHEN TRUE
+      THEN 'others'
+    ELSE bsttype.txn_type END
+                     AS txntype,
+    sum(bst.amount) AS summ,
+    bsa1.account_num AS account
+  FROM bs_account AS bsa
+    LEFT JOIN (bs_transaction AS bst
     LEFT JOIN bs_account AS bsa1
       ON bst.account_to_id = bsa1.account_id)
     LEFT JOIN (bs_transaction_category AS bstc NATURAL JOIN bs_txn_type AS bsttype) ON bstc.customer_id = bsa1.customer_id
-    ON bsa.account_id = bst.account_from_id
-WHERE bsa.account_num = $1
-GROUP BY bst.account_to_id,  txntype, account
-ORDER BY txntype;
+      ON bsa.account_id = bst.account_from_id
+  WHERE bsa.account_num = $1
+  GROUP BY bst.account_to_id,  txntype, account
+  ORDER BY txntype;
 END;
 $BODY$ LANGUAGE plpgsql;
 
@@ -709,20 +709,20 @@ BEGIN
   SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid INTO personid;
 
   UPDATE bs_person
-    SET first_name=fname, last_name=lname, passport_number=paspnum, sex=s::person_sex, birth_date=bdate::DATE, person_vatin=vatin
-    WHERE person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid);
+  SET first_name=fname, last_name=lname, passport_number=paspnum, sex=s::person_sex, birth_date=bdate::DATE, person_vatin=vatin
+  WHERE person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid);
 
   UPDATE bs_customer
-    SET address_id = (SELECT address_creator FROM address_creator(region, city, street, house, apartment))
-    WHERE customer_id = cid;
+  SET address_id = (SELECT address_creator FROM address_creator(region, city, street, house, apartment))
+  WHERE customer_id = cid;
 
   UPDATE bs_user
-    SET user_login = log, user_pass = pass
-    WHERE  person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid);
+  SET user_login = log, user_pass = pass
+  WHERE  person_id = (SELECT person_id FROM bs_customer NATURAL JOIN bs_individual WHERE customer_id = cid);
 
   UPDATE bs_phone
-    SET phone_num = phone
-    WHERE customer_id = cid;
+  SET phone_num = phone
+  WHERE customer_id = cid;
   exception when others then
   RAISE EXCEPTION 'E0020';
 END;
@@ -734,17 +734,60 @@ CREATE OR REPLACE FUNCTION customer_business_updator(custid INT, orgvatin VARCHA
   RETURNS void AS $$
 BEGIN
   UPDATE bs_organization
-    SET org_vatin = orgvatin
-    WHERE org_id = (SELECT org_id FROM bs_customer NATURAL JOIN bs_business WHERE customer_id=custid);
+  SET org_vatin = orgvatin
+  WHERE org_id = (SELECT org_id FROM bs_customer NATURAL JOIN bs_business WHERE customer_id=custid);
 
   UPDATE bs_customer
-    SET address_id = (SELECT address_creator FROM address_creator(region, city, street, house, '0'))
-    WHERE customer_id = custid;
+  SET address_id = (SELECT address_creator FROM address_creator(region, city, street, house, '0'))
+  WHERE customer_id = custid;
 
   UPDATE bs_phone
-    SET phone_num = phone
-    WHERE customer_id = custid;
+  SET phone_num = phone
+  WHERE customer_id = custid;
   exception when others then
   RAISE EXCEPTION 'E0020';
 END;
 $$ LANGUAGE plpgsql;
+
+/* INITIAL INSERTION */
+
+/* Insertion in DB Errors */
+INSERT INTO bs_db_errors VALUES ('ERRNO', 'Error Number must be like "E\d\d\d"'),
+  ('E0000', 'Passport Number must be numeric'),
+  ('E0001', 'VATIN must be numeric'),
+  ('E0002', 'First Name must be alphabetical'),
+  ('E0003', 'Last Name must be alphabetical'),
+  ('E0004', 'Organization VATIN must be numeric'),
+  ('E0005', 'Login must be alphanumeric'),
+  ('E0006', 'Password must be alphanumeric'),
+  ('E0007', 'Unavailable to write business customer into individuals'),
+  ('E0008', 'Unavailable to write individual customer into business'),
+  ('E0009', 'Phone must be numeric'),
+  ('E0010', 'Account number must be numeric'),
+  ('E0011', 'Insufficient funds'),
+  ('E0012', 'Incorrect login'),
+  ('E0013', 'Incorrect pass'),
+  ('E0014', 'No such person'),
+  ('E0015', 'Person already exists or Wrong inputs'),
+  ('E0016', 'Transaction failed'),
+  ('E0017', 'Organisation already exists or Wrong inputs'),
+  ('E0018', 'Unable to create transaction pattern'),
+  ('E0019', 'No such orgnization'),
+  ('E0020', 'Wrong inputs');
+
+INSERT INTO bs_person VALUES (DEFAULT, 'Admin', 'Adminovich', '4270456978', 'M', '1992-03-07', '427045697823');
+INSERT INTO bs_user VALUES (DEFAULT, 1, 'admin', 'admin', 'E');
+INSERT INTO bs_address VALUES (DEFAULT, 'Tatarstan', 'Innopolis', 'Universitetskaya St', '1', DEFAULT);
+
+INSERT INTO bs_txn_type VALUES (DEFAULT, 'food'),
+  (DEFAULT, 'clothes'),
+  (DEFAULT, 'entertainment'),
+  (DEFAULT, 'medicine'),
+  (DEFAULT, 'utilities'),
+  (DEFAULT, 'travels'),
+  (DEFAULT, 'booking'),
+  (DEFAULT, 'service'),
+  (DEFAULT, 'other');
+
+SELECT (customer_individual_creator('Tester', 'Testirovkin', '1121111111', 'F', '1992-01-01', '112111111111', 'Tatarstan', 'Innopolis', 'Sportivnaya St', '108', '25', 'test', 'test', '2000', '1111111121'));
+SELECT customer_business_creator('3698521477', 'Tatarstan', 'Innopolis', 'Universitetskaya St', '1', '150000', '789526436', 'food');
