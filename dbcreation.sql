@@ -224,7 +224,7 @@ CREATE TABLE bs_customer(
 
 /* Individual Customer entity table creation */
 CREATE TABLE bs_individual(
-  customer_id int REFERENCES bs_customer(customer_id) NOT NULL ,
+  customer_id int REFERENCES bs_customer(customer_id),
   person_id int REFERENCES bs_person(person_id) NOT NULL UNIQUE,
   PRIMARY KEY (customer_id)
 );
@@ -259,7 +259,7 @@ EXECUTE PROCEDURE individual_checker();
 
 /* Business Customer entity table creation */
 CREATE TABLE bs_business(
-  customer_id int REFERENCES bs_customer(customer_id) NOT NULL ,
+  customer_id int REFERENCES bs_customer(customer_id),
   org_id int REFERENCES bs_organization(org_id) NOT NULL UNIQUE,
   PRIMARY KEY (customer_id)
 );
